@@ -11,7 +11,7 @@ app.use(cors({origin: 'http://localhost:4200'}));
 app.use('/api/local', require('./routes/localRouter'));
 app.use('/api/propietario', require('./routes/propietario.route.js'));
 app.use('/api/alquiler', require('./routes/alquiler.route.js'));
-
+app.use('/api/novedades', require('./routes/novedadesRouter'));
 //setting
 app.set('port', process.env.PORT || 3000);
 
