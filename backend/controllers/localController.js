@@ -54,6 +54,11 @@ localCtrl.deleteLocal = async (req, res)=>{
         'msg': 'Error procesando la operacion delete'
         });
     }
+
+    localCtrl.getLocalesNoAlquilados = async (req, res) => {
+        var locales = await Local.find({alquilado : false});
+        res.json(locales);
+    };
 }
 
 

@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-header">
+        Formulario de Usuarios
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="mb-3">
+                <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
+                <input name="nombreUsuario" type="text" class="form-control" id="nombreUsuario" [(ngModel)]="usuario.usuario">
+            </div>
+            <div class="mb-3">
+                <label class="col-sm-12 col-md-4" for="password">Contraseña</label>
+                <input class="form-control col-sm-12 col-md-8" id="password" type="password" name="password" [(ngModel)]="usuario.password"/>
+            </div>
+            <div class="mb-3">
+                <label class="col-sm-12 col-md-4" for="email">Email</label>
+                <input class="form-control col-sm-12 col-md-8" id="email" type="email" name="email" [(ngModel)]="usuario.email"/>
+            </div>
+            <div class="mb-3">
+                <label class="col-sm-12 col-md-4" for="perfil">Perfil</label>
+                <select class="form-select" aria-label="Default select example" id="perfil" name="perfil" [(ngModel)]="usuario.perfil">
+                    <option selected value="">Seleccione el perfil del usuario</option>
+                    <option value="administrador">Administrativo</option>
+                    <option value="dueño">Dueño</option>
+                    <option value="propietario">Propietario</option>
+                </select>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="activo" (change)="cambiarActivo($event)">
+                <label class="form-check-label" for="destacado">Activo?</label>
+              </div>
+            <div class="row form-group">
+            <button type="button" class="btn btn-primary mb-3" (click)="registrarUsuario()" *ngIf="accion=='new'">Registrar</button>
+            <button type="button" class="btn btn-primary mb-3" *ngIf="accion=='update'" (click)="modificarUsuario()">Modificar</button>
+            <button type="button" class="btn btn-secondary mb-3" (click)="atras()">Atras</button>
+</div>
+        </form>
+    </div>
+</div>
