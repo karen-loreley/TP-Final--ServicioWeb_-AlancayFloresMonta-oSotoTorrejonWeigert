@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const {mongoose} = require('./database');
+const {mongoose} = require('./database.js');
 var app = express();
 
 //middlewares
