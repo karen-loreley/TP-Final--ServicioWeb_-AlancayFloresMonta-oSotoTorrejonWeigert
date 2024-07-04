@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Local = require('../models/local');
 const localCtrl = {}
 
@@ -23,8 +24,21 @@ localCtrl.createlocal = async (req, res) => {
 }
 
 localCtrl.getLocal = async (req, res) => {
-    const local = await Local.findById(req.params.id);
-    res.json(local);
+    try {
+        const local = await Local.findById(req.params.id);
+        if (!local) {
+            return res.status(404).json({
+                status: '0',
+                msg: 'Local no encontrado.'
+            });
+        }
+        res.json(local);
+    } catch (error) {
+        res.status(400).json({
+            status: '0',
+            msg: 'Error al buscar el local.'
+        });
+    }
 }
 
 localCtrl.editLocal = async (req, res) => {

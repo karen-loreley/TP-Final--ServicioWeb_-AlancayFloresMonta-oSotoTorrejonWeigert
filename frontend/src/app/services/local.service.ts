@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Local } from '../models/local';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -79,4 +79,14 @@ export class LocalService {
     return this._http.delete(`http://localhost:3000/api/local/${_id}`, httpOption);
   }
   
+  getLocalesNoAlquilados(): Observable<any>{
+    let httpOption = {
+      headers: new HttpHeaders({
+
+      }),
+      params: new HttpParams()
+    }
+
+    return this._http.get('http://localhost:3000/api/local/noAlquilados', httpOption);
+  }
 }

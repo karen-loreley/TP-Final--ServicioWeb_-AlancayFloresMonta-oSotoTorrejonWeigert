@@ -1,0 +1,26 @@
+nav{    
+    background: linear-gradient(0deg, #ff7f08, #da0606, #000000);
+}
+.navbar-brand, .nav-link {
+    color: #ffffff !important; 
+}
+ 
+.navbar-brand{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: italic;
+    font-size: 25px;    
+}
+.nav-link{
+    font-weight: bold;
+    margin-left: auto;
+}
+.nav-link:hover {
+    color: #ffffff !important;
+}
+.btn-outline-light:hover {
+    background: linear-gradient(0deg, #ff0808, #000000);
+    color: #fff0f0; 
+}
+.navbar-nav {
+    margin-left: auto; 
+}

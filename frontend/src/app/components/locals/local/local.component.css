@@ -1,9 +1,9 @@
 .card {
-    --font-color: #323232;
-    --font-color-sub: #666;
-    --bg-color: #fff;
-    --main-color: #323232;
-    --main-focus: #2d8cf0;
+    --font-color: #ffffff;
+    --font-color-sub: #ffffff;
+    --bg-color: #0e010180;
+    --main-color: #090101;
+    --main-focus: #ff6200;
     width: 230px;
     background: var(--bg-color);
     border: 2px solid var(--main-color);
@@ -37,9 +37,14 @@
     text-align: center;
     color: var(--font-color);
   }
+  p{
+    font-weight: 500;
+    text-align: center;
+    color: var(--font-color);
+  }
   
   .card-subtitle {
-    font-size: 14px;
+    font-size: 14.3px;
     font-weight: 400;
     color: var(--font-color-sub);
   }
@@ -60,7 +65,7 @@
   .card-btn {
     height: 35px;
     background: var(--bg-color);
-    border: 2px solid var(--main-color);
+    border: 2px solid var(--font-color-sub);
     border-radius: 5px;
     padding: 0 15px;
     transition: all 0.3s;
@@ -69,7 +74,7 @@
   .card-btn svg {
     width: 100%;
     height: 100%;
-    fill: var(--main-color);
+    fill: var(--font-color-sub);
     transition: all 0.3s;
   }
   

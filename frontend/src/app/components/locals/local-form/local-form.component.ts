@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Local } from '../../models/local';
+import { Local } from '../../../models/local';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocalService } from '../../services/local.service';
+import { LocalService } from '../../../services/local.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

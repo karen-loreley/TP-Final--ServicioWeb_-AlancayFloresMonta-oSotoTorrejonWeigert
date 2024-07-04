@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Local } from '../../models/local';
-import { LocalService } from '../../services/local.service';
+import { Local } from '../../../models/local';
+import { LocalService } from '../../../services/local.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';

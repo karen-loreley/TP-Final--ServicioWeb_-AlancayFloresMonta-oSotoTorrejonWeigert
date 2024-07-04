@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Usuario = require('../models/usuario');
 const usuarioCtrl = {}
 usuarioCtrl.getUsuarios = async (req, res) => {
@@ -20,8 +21,23 @@ usuarioCtrl.createUsuario = async (req, res) => {
     }
 }
 usuarioCtrl.getUsuario = async (req, res) => {
-    const usuario = await Usuario.findById(req.params.id);
-    res.json(usuario);
+    try {
+        const userId = req.params.id;
+
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
+            return res.status(400).send('Invalid ID');
+        }
+
+        const usuario = await Usuario.findById(userId);
+        if (!usuario) {
+            return res.status(404).send('User not found');
+        }
+
+        res.json(usuario);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server Error');
+    }
 }
 usuarioCtrl.editUsuario = async (req, res) => {
     const vusuario = new Usuario(req.body);
