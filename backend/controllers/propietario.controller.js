@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Propietario = require('../models/propietario');
 const propietarioCtrl = {}
 

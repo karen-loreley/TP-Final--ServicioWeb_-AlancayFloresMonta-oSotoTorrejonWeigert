@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../../models/usuario';
+import { Usuario } from '../../../models/usuario';
 import { CommonModule } from '@angular/common';
-import { UsuarioService } from '../../services/usuario.service';
+import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
 
 @Component({
