@@ -11,5 +11,5 @@ import { FooterComponent } from './components/layouts/footer/footer.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'Galeria';
+  title = 'Galeriia';
 }
