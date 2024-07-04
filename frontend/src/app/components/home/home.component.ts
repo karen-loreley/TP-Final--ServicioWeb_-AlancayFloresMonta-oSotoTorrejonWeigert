@@ -8,7 +8,7 @@ import { LocalComponent } from '../locals/local/local.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, LocalComponent],
+  imports: [CommonModule,LocalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

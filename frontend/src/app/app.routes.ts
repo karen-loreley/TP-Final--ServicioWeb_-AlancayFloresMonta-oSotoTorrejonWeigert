@@ -9,7 +9,7 @@ import { LocalFormComponent } from './components/locals/local-form/local-form.co
 
 export const routes: Routes = [
         //inicio/home
-        {path: '', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inia
+        {path: '', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia
         {path: 'home', component: HomeComponent},
     
         //alquileres
@@ -17,7 +17,7 @@ export const routes: Routes = [
     
         //usuarios
         {path: 'crud-usuarios', component: CrudUsuariosComponent,},
-        {path: 'usuario-form', component: UsuarioFormComponent},
+        {path: 'registro', component: UsuarioFormComponent},
     
         //local
         {path: 'local', component: LocalComponent},
