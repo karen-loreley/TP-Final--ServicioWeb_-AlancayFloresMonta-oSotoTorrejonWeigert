@@ -9,13 +9,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" [routerLink]="['alquiler']">alquiler</a></li>
-                <li class="nav-item">
-                    <a class="nav-link active" [routerLink]="['home']">Home</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['crud-usuarios']">Listado de Usuarios</a>
-                  </li>
+                
+                <!--No se puede acceder a 'alquiler' desde la navbar, se debe acceder desde la imagen del local-->
+                <!--<li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['alquiler']">alquiler</a></li>-->
+
+                <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['home']">Home</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['crud-usuarios']">Listado de Usuarios</a></li>
+
+                <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/']">Iniciar Sesion</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['registro']">Crear Cuenta</a></li>
             </ul>
         </div>
     </div>

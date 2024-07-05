@@ -1,9 +1,34 @@
 const Local = require('../models/local');
 const localCtrl = {}
 
-localCtrl.getlocales = async (req, res) => {
-    var local = await Local.find();
-    res.status(200).json(local);
+localCtrl.getlocales = async (req, res) => 
+{
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 6;
+
+    const skip = (page - 1) * limit;
+
+    try 
+    {
+        const locales = await Local.find().skip(skip).limit(limit);
+        const count = await Local.countDocuments();
+        
+        res.status(200).json
+        ({
+        //array para por ejemplo: data.locales, data.totalPages, etc...
+            locales,
+            totalPages: Math.ceil(count / limit),
+            currentPage: page
+        });
+    } 
+    catch (error) 
+    {
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando operacion.'
+        });
+    }
 }
 
 localCtrl.createlocal = async (req, res) => {
@@ -56,13 +81,40 @@ localCtrl.deleteLocal = async (req, res) => {
             'msg': 'Error procesando la operacion delete'
         });
     }
-
-    
 }
-localCtrl.getLocalesNoAlquilados = async (req, res) => {
-    var locales = await Local.find({ alquilado: false });
-    res.json(locales);
-};
 
+localCtrl.getlocalesAlquilados = async (req, res) => 
+{
+    try
+    {
+        var locales = await Local.find({ alquilado: true });
+        res.json(locales);
+    }
+    catch (error)
+    {
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando operacion.'
+        })
+    }
+}
+
+localCtrl.getLocalesNoAlquilados = async (req, res) => 
+{
+    try
+    {
+        var locales = await Local.find({ alquilado: false });
+        res.json(locales);
+    }
+    catch (error)
+    {
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando operacion.'
+        })
+    }
+};
 
 module.exports = localCtrl;

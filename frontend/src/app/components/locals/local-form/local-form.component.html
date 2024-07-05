@@ -1,0 +1,148 @@
+<div class="d-flex flex-lg-row flex-column-reverse">
+  <div class="col-lg-6 col-12 form">
+      <div class="titulo3">
+        <br>
+          <h3>Formulario Local</h3>
+          <br>
+      </div>
+      <form class="p-3" #productoForm="ngForm">
+          <div class="form-group">
+              <label for="nombre" class="form-label" style="font-weight: bold;">Nombre:</label>
+              <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" [(ngModel)]="local.nombre" name="nombre"
+                  required #nombre="ngModel">
+
+              <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                  <div *ngIf="nombre.errors?.['required']">
+                       El Nombre es requerido.
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3">
+              <label for="superficie" class="form-label" style="font-weight: bold;">Superficie</label>
+              <input type="number" class="form-control" id="superficie" name="superficie" [(ngModel)]="local.superficie" class="form-control" placeholder="Ingrese la superficie"
+              required #superficie="ngModel"> 
+              
+              <div *ngIf="superficie.invalid && (superficie.dirty || superficie.touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="superficie.errors?.['required']">
+                      La superficie es requerida.
+                  </div>
+              </div>
+            </div>    
+          </div>
+
+        <div class="mb-3">
+            <label for="imagenFile" class="form-label">Cargar Imagen (Archivo)</label>
+            <input type="file" class="form-control" id="imagenFile" name="imagenFile" (change)="onFileChange($event)" multiple>
+        </div>
+
+          <div class="form-group">
+              <label for="imagen" class="form-label" style="font-weight: bold;">Imagen Url:</label>
+              <input id="imagen" type="text" class="form-control" placeholder="Ingrese URL de Imagen" [(ngModel)]="local.pathimagen" name="imagen"
+                  required #imagen="ngModel">
+
+              <div *ngIf="imagen.invalid && (imagen.dirty || imagen.touched)" class="alert alert-danger">
+                  <div *ngIf="imagen.errors?.['required']">
+                      Url de Imagen es requerido.
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label for="precio" class="form-label" style="font-weight: bold;">Precio: </label>
+              <input id="precio" type="number" class="form-control" placeholder="Ingrese Precio" [(ngModel)]="local.costomes" name="precio"
+                  required #precio="ngModel">
+
+              <div *ngIf="precio.invalid && (precio.dirty || precio.touched)" class="alert alert-danger">
+                  <div *ngIf="precio.errors?.['required']">
+                      Precio es requerido.
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="destacado" [(ngModel)]="local.alquilado">
+                <label class="form-check-label" for="exampleCheck1" style="font-weight: bold;">Alquilado?</label>
+              </div>
+
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="destacado" [(ngModel)]="local.habilitado">
+                <label class="form-check-label" for="exampleCheck1" style="font-weight: bold;">Habilitado?</label>
+              </div>
+          </div>
+
+        <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarLocal()">Agregar</button>
+        <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarLocal()">Actualizar</button>
+      </form>
+  </div>
+
+   <!-- Tarjeta de detalle del Local -->
+  <div class="col-lg-6 col-12 card">
+    <br>
+      <div class="card-header">
+          <div *ngIf="local.nombre; else sinNombre">
+              <h3>{{local.nombre | titlecase}}</h3>
+          </div>
+          <ng-template #sinNombre>
+              <h3>Nombre del Producto</h3>
+          </ng-template>
+      </div>
+      
+      <div class="card-body p-0">
+          <div class="d-flex justify-content-center" *ngIf="local.pathimagen; else sinFoto">
+              <img [src]="local.pathimagen" alt="" class="card-img img-fluid">
+          </div>
+          <ng-template #sinFoto>
+              <div class="d-flex justify-content-center">
+                  <img class="card-img img-fluid" src="../../../assets/imagen/logo-no-disponible.jpg" alt="">
+              </div>
+          </ng-template>
+      </div>
+
+      <div class="card-footer">
+          <div class="m-1">
+              <h5>Superficie:</h5>
+              <div *ngIf="local.superficie; else sinDescripcion">
+                  <p>{{local.superficie}}</p>
+              </div>
+              <ng-template #sinDescripcion>
+                  <p>Descripcion del Producto</p>
+              </ng-template>
+          </div>
+
+          <div class="m-1">
+              <h5>Precio del Producto:</h5>
+              <div *ngIf="local.costomes; else sinPrecio">
+                  <p>{{local.costomes| currency:'ARS':'symbol-narrow'}}</p>
+              </div>
+              <ng-template #sinPrecio>
+                  <p>$ 0 pesos</p>
+              </ng-template>
+          </div>
+         
+          <div class="m-1">
+            <h5>Alquilado:</h5>
+            <div *ngIf="local.alquilado; else noAlquilado">
+              <p>Sí</p>
+            </div>
+            <ng-template #noAlquilado>
+              <p>No</p>
+            </ng-template>
+          </div>
+
+          <div class="m-1">
+            <h5>Habilitado:</h5>
+            <div *ngIf="local.habilitado; else noHabilitado">
+              <p>Sí</p>
+            </div>
+            <ng-template #noHabilitado>
+              <p>No</p>
+            </ng-template>
+          </div>
+      </div>
+  </div>
+</div>
+
