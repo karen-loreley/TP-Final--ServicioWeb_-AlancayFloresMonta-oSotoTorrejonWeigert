@@ -6,38 +6,49 @@ import { LocalService } from '../../../services/local.service';
 import { Router } from '@angular/router';
 import { Alquiler } from '../../../models/alquiler';
 import { AlquilerService } from '../../../services/alquiler.service';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Alquiler } from '../../../models/alquiler';
+import { AlquilerService } from '../../../services/alquiler.service';
+import { LocalService } from '../../../services/local.service';
 
 @Component({
   selector: 'app-alquiler',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule, RouterLink],
   templateUrl: './alquiler.component.html',
   styleUrl: './alquiler.component.css'
 })
 export class AlquilerComponent {
-  alquileres: Alquiler[] = [];
 
-  constructor(private alquilerService: AlquilerService) {}
+  alquiler!: Alquiler;
 
-  ngOnInit(): void {
-    this.loadAlquileres();
+  constructor(private route: ActivatedRoute,
+              private alquilerService: AlquilerService,
+              private localService: LocalService,
+              private router: Router) {}
+
+  ngOnInit(): void 
+  {
+    const localId = this.route.snapshot.paramMap.get('id');
+    if (localId) 
+      {
+      this.alquilerService.getAlquilerByLocalId(localId).subscribe
+      (
+        (result) => 
+        {
+          this.alquiler = result;
+        },
+        (error: any) => 
+        {
+          console.error(error);
+        }
+      );
+    }
   }
 
-  loadAlquileres(): void {
-    this.alquilerService.getAlquileres().subscribe(data => {
-      this.alquileres = data;
-    });
+  regresar()
+  {
+    this.router.navigate(['home']);
   }
 
-  isAlquilerVencido(alquiler: Alquiler): boolean {
-    const now = new Date();
-    const alquilerFecha = new Date(alquiler.fechaAlquiler);
-    alquilerFecha.setMonth(alquilerFecha.getMonth() + alquiler.plazomes);
-    return now > alquilerFecha;
-  }
-
-  pagarAlquiler(alquiler: Alquiler): void {
-    // Aquí puedes añadir la lógica para manejar el pago del alquiler
-    console.log(`Pagando alquiler de ${alquiler.propietario}`);
-  }
 }

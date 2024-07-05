@@ -9,6 +9,32 @@ import { Alquiler } from '../models/alquiler';
 })
 export class AlquilerService {
 
+  getAlquiler(id: string): Observable<Alquiler> {
+    return this.http.get<Alquiler>(`${this.apiUrl}/${id}`);
+  }
+
+  createAlquiler(alquiler: Alquiler): Observable<any> {
+    return this.http.post<any>(this.apiUrl, alquiler, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  updateAlquiler(id: string, alquiler: Alquiler): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, alquiler, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    });
+  }
+
+  deleteAlquiler(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
+
+  getAlquileresPorAño(fechaAlquiler: string): Observable<Alquiler[]> {
+    return this.http.get<Alquiler[]>(`${this.apiUrl}/porAno/${fechaAlquiler}`);
   listaAlquileres!: Array<Alquiler>;
 
   constructor(private _http: HttpClient) { }
