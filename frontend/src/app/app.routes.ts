@@ -1,12 +1,17 @@
 import { Routes } from '@angular/router';
-import { AlquilerComponent } from './components/alquileres/alquiler/alquiler.component';
 import { Component } from '@angular/core';
+import { HomeComponent } from './components/home/home.component';
+//usuarios
 import { CrudUsuariosComponent } from './components/usuarios/crud-usuarios/crud-usuarios.component';
 import { UsuarioFormComponent } from './components/usuarios/usuario-form/usuario-form.component';
-import { HomeComponent } from './components/home/home.component';
+import { LoginComponent } from './components/usuarios/login/login.component';
+//locales
 import { LocalComponent } from './components/locals/local/local.component';
 import { LocalFormComponent } from './components/locals/local-form/local-form.component';
-import { LoginComponent } from './components/usuarios/login/login.component';
+//alquileres
+import { AlquilerComponent } from './components/alquileres/alquiler/alquiler.component';
+import { AlquilerFormComponent } from './components/alquileres/alquiler-form/alquiler-form.component';
+
 
 export const routes: Routes = [
         //inicio/home
@@ -25,5 +30,8 @@ export const routes: Routes = [
         {path: 'local', component: LocalComponent},
         {path: 'local-form/:id', component: LocalFormComponent},
 
-
+         //alquiler
+         {path: 'alquiler', component: AlquilerComponent,},
+         {path: 'alquiler/:id', component: AlquilerComponent,},
+         {path: 'alquiler-form', component: AlquilerFormComponent,},
 ];

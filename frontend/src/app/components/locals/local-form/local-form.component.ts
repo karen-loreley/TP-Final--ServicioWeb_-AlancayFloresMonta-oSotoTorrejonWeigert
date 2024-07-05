@@ -15,7 +15,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LocalFormComponent {
 
-  local!: Local;
+  local: Local = new Local();
+  //local!: Local;
   listaLocales!: Array<Local>;
   accion: string = "new";
   selectedFile: File | null = null;
@@ -46,54 +47,14 @@ export class LocalFormComponent {
       //this.cargarEspectadores();
   }/**/
 
-      /*async onSubmit() 
-      {
-        if (this.selectedFile) 
-        {
-          const formData = new FormData();
-          formData.append('file', this.selectedFile);
-    
-          try 
-          {
-            const response: any = await this.http.post('your-api-endpoint-to-upload-image', formData).toPromise();
-            this.local.pathimagen = response.filePath; // Asegúrate de que la respuesta del servidor incluya la URL del archivo subido
-          } 
-          catch (error) 
-          {
-            console.error('Error uploading file:', error);
-            return;
-          }
-        }
-    
-        /*this.activatedRoute.params.subscribe(params => 
-          {
-            if (params['id'] == "0")
-              {
-                this.accion = "new"; 
-                this.iniciarVariable();
-              }
-            else
-            {
-              this.accion = "update"; 
-              this.cargarLocal(params['id']);
-            }
-          });
-      }/**/
-
-  /*onFileChange(event: any) 
+  onFileChange(event: any) 
   {
     const file = event.target.files[0];
     if (file) 
     {
-      this.selectedFile = file;
-    }
-  }/**/
-
-  onFileChange(event: any) {
-    const file = event.target.files[0];
-    if (file) {
       const reader = new FileReader();
-      reader.onload = (e: any) => {
+      reader.onload = (e: any) => 
+      {
         this.local.pathimagen = e.target.result;
       };
       reader.readAsDataURL(file);
@@ -140,6 +101,7 @@ export class LocalFormComponent {
 
   actualizarLocal():void
   {
+    console.log(this.local);
     this.localService.updateLocal(this.local).subscribe
     (
       (result) => 
@@ -147,7 +109,7 @@ export class LocalFormComponent {
         if(result.status == 1)
           {
             alert("Local actualizado");
-            this.router.navigate(['local']);
+            this.router.navigate(['home']);
           }
         
       },

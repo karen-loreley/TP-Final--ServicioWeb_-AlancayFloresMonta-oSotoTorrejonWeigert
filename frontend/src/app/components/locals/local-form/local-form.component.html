@@ -33,6 +33,14 @@
             </div>    
           </div>
 
+<<<<<<< HEAD
+=======
+        <div class="mb-3">
+            <label for="imagenFile" class="form-label">Cargar Imagen (Archivo)</label>
+            <input type="file" class="form-control" id="imagenFile" name="imagenFile" (change)="onFileChange($event)" multiple>
+        </div>
+
+>>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67
           <div class="form-group">
               <label for="imagen" class="form-label" style="font-weight: bold;">Imagen Url:</label>
               <input id="imagen" type="text" class="form-control" placeholder="Ingrese URL de Imagen" [(ngModel)]="local.pathimagen" name="imagen"
@@ -69,8 +77,13 @@
               </div>
           </div>
 
+<<<<<<< HEAD
           <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarLocal()">Agregar</button>
           <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarLocal()">Actualizar</button>
+=======
+        <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarLocal()">Agregar</button>
+        <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarLocal()">Actualizar</button>
+>>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67
       </form>
   </div>
 

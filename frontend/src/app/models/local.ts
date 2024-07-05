@@ -1,4 +1,5 @@
 export class Local {
+    
     _id!: string;
     nombre!: string;
     superficie: number;
