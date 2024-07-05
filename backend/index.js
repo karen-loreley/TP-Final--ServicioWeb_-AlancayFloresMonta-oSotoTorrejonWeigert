@@ -5,7 +5,8 @@ var app = express();
 
 //middlewares
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors());
+// app.use(cors({origin: 'http://localhost:4200'}));
 
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/local', require('./routes/localRouter'));

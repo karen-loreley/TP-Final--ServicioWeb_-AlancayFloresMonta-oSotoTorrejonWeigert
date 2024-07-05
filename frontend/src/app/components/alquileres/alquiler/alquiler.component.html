@@ -1,1 +1,29 @@
-<p>alquiler works!</p>
+<div class="container mt-4">
+  <h2 class="mb-4">Lista de Alquileres</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Propietario</th>
+        <th scope="col">Local</th>
+        <th scope="col">Plazo (meses)</th>
+        <th scope="col">Costo</th>
+        <th scope="col">Fecha de Alquiler</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alquiler of alquileres">
+        <td>{{ alquiler.propietario.nombres }} {{ alquiler.propietario.apellido }}</td>
+        <td>{{ alquiler.local.nombre }}</td>
+        <td>{{ alquiler.plazomes }}</td>
+        <td>{{ alquiler.costoAlquiler }}</td>
+        <td>{{ alquiler.fechaAlquiler | date: 'shortDate' }}</td>
+        <td>
+          <button *ngIf="isAlquilerVencido(alquiler)" class="btn btn-danger btn-sm" (click)="pagarAlquiler(alquiler)">
+            Pagar Alquiler Vencido
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
