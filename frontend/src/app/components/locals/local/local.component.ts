@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { Local } from '../../../models/local';
 import { LocalService } from '../../../services/local.service';
-<<<<<<< HEAD:frontend/src/app/components/locals/local/local.component.ts
-import { Router } from '@angular/router';
-=======
 import { Router, RouterLink } from '@angular/router';
->>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67:frontend/src/app/components/local/local.component.ts
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
