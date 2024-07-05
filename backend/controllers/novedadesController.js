@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Novedades = require('../models/novedades');
 const Usuario=require('../models/usuario');
 const novedadesCtrl = {}

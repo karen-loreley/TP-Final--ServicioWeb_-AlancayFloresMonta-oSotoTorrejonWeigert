@@ -1,7 +1,43 @@
+
+/*CARD*/
 .card{
     padding: 15px;
 }
 .card-img-top {
     width:1250px;
     height: 650px;
+}
+
+.carousel-item {
+  position: relative;
+    align-items: center;
+  justify-content: center;
+  height: 500px; 
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.562); 
+  pointer-events: none;
+}
+
+.btn-lg {
+  background-color: #a728288b; /* Color de fondo personalizado */
+  border-color: #a7282800; /* Color del borde personalizado */
+  color: white; /* Color del texto */
+}
+
+.btn-lg:hover {
+  background-color: #6f0000bf; /* Color de fondo al pasar el mouse */
+  border-color: #1e7e3400; /* Color del borde al pasar el mouse */
 }

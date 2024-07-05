@@ -1,5 +1,6 @@
 export class Local {
     _id!: string;
+    nombre!: string;
     superficie: number;
     habilitado: boolean;
     costomes: number;
@@ -7,6 +8,7 @@ export class Local {
     alquilado: boolean;
 
     constructor(){
+        this.nombre = "";
         this.superficie = 0;
         this.habilitado = false;
         this.costomes = 0;

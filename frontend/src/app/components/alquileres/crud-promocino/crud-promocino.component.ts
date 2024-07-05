@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Promocion } from '../../models/promocion';
-import { Local } from '../../models/local';
+import { Promocion } from '../../../models/promocion';
+import { Local } from '../../../models/local';
 import { ActivatedRoute } from '@angular/router';
-import { PromocionService } from '../../services/promocion.service';
-import { LocalService } from '../../services/local.service';
+import { PromocionService } from '../../../services/promocion.service';
+import { LocalService } from '../../../services/local.service';
 
 @Component({
   selector: 'app-crud-promocino',
