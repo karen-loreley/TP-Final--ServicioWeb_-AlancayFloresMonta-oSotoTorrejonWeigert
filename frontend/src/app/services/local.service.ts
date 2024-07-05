@@ -27,14 +27,15 @@ export class LocalService {
     return this._http.post("http://localhost:3000/api/local", body, httpOption);
   }
 
-  getLocales(): Observable<any>
+  getLocales(page: number, limit: number): Observable<any>
   {
     let httpOption = 
     {
       headers: new HttpHeaders
       ({
         'Content-Type': 'application/json'
-      })
+      }),
+      params: new HttpParams().set('page', page.toString()).set('limit', limit.toString())
     }
     return this._http.get("http://localhost:3000/api/local", httpOption);
   }
@@ -50,6 +51,30 @@ export class LocalService {
     }
     
     return this._http.get("http://localhost:3000/api/local/" +_id, httpOption);
+  }
+
+  getLocalesNoAlquilados(): Observable<any>
+  {
+    let httpOption = 
+    {
+      headers: new HttpHeaders
+      ({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this._http.get("http://localhost:3000/api/local/noAlquilados", httpOption);
+  }
+
+  getLocalesAlquilados(): Observable<any>
+  {
+    let httpOption = 
+    {
+      headers: new HttpHeaders
+      ({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this._http.get("http://localhost:3000/api/local/alquilados", httpOption);
   }
 
   updateLocal(local: Local): Observable<any> 
@@ -79,14 +104,4 @@ export class LocalService {
     return this._http.delete(`http://localhost:3000/api/local/${_id}`, httpOption);
   }
   
-  getLocalesNoAlquilados(): Observable<any>{
-    let httpOption = {
-      headers: new HttpHeaders({
-
-      }),
-      params: new HttpParams()
-    }
-
-    return this._http.get('http://localhost:3000/api/local/noAlquilados', httpOption);
-  }
 }

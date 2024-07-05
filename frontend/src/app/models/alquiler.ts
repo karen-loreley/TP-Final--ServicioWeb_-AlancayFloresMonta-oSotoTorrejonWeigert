@@ -1,10 +1,21 @@
 import { Local } from "./local";
 import { Propietario } from "./propietario";
 
-export interface Alquiler {
-  propietario: Propietario; // ObjectId
-  local: Local;       // ObjectId
-  plazomes: number;
-  costoAlquiler: number;
-  fechaAlquiler: Date;
+export class Alquiler {
+
+    _id!: string;
+    propietario: Propietario;
+    local: Local;
+    plazomes: number;
+    costoAlquiler: number;
+    fechaAlquiler: Date;
+
+    constructor()
+    {
+        this.propietario = new Propietario();
+        this.local = new Local();
+        this.plazomes = 0;
+        this.costoAlquiler = 0;
+        this.fechaAlquiler = new Date();
+    }
 }

@@ -1,0 +1,40 @@
+<div *ngIf="alquiler">
+    <h2 class="mt-4">Lote en Alquiler</h2>
+    <div class="row">
+      <p class="col-4">Nombre<br><strong>{{ alquiler.local.nombre }}</strong></p>
+      <p class="col-4">Costo de Alquiler<strong><br> ARS {{ alquiler.costoAlquiler | currency }}</strong></p>
+
+      <div class="row">
+        <div class="col-md-8 col-12">
+          <img [src]="alquiler.local.pathimagen" alt="Imagen del Local" height="550px" width="auto" class="local-image">
+        </div>
+        
+        <div class="col-md-4">
+          <div class="info-box" style="color: black;">
+            <h4>Datos de Contacto.</h4>
+            <p><strong>Propietario: </strong>{{alquiler.propietario.nombres}} {{ alquiler.propietario.apellido }}</p>
+            <p><strong>Contacto:</strong></p>
+            <p>Correo: {{ alquiler.propietario.email }} </p>
+            <p>Teléfono: +54 {{alquiler.propietario.telefono}}</p>
+          </div>
+        </div>
+  
+        <div class="col-8">
+          <div class="info-box" style="color: white;">
+            <h4>Descripción</h4>
+            <p><strong>Local: </strong>Cuenta con una superficie de {{ alquiler.local.superficie}} Metros Cuadrados
+                y un costo de ARS{{alquiler.local.costomes | currency}} por mes.
+            </p>
+            <p><strong>Habilitado: </strong>{{ alquiler.local.habilitado ? 'Sí' : 'No' }}</p>
+            <p><strong>Alquilado: </strong>{{ alquiler.local.alquilado ? 'Sí' : 'No' }}</p>
+            <p><strong>Plazo Mes:</strong> ARS {{ alquiler.plazomes | currency }}</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+  </div>
+
+  <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>

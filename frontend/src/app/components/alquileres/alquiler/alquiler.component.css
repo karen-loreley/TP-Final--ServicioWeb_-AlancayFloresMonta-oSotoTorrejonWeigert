@@ -1,0 +1,14 @@
+.local-image {
+    width: 100%;
+    height: auto;
+    max-height: 550px;
+    display: block;
+    margin: 0 auto;
+}
+
+.info-box {
+    background-color: rgba(0,0,0,0.4);
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}

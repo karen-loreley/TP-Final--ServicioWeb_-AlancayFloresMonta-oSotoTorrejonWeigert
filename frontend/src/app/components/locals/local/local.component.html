@@ -1,18 +1,30 @@
 
 <div class="text-center p-3 ">
   <h2>Nuestros Locales</h2>
-  <p>
   <button type="button" class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="agregarLocal()"> Agregar
   </button>
+  <div class="dropdown">
+    <button class="btn btn-dark dropdown-toggle mt-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">Aplicar Filtros</button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item btn" (click)="obtenerAlquilados()">Alquilados</a></li>
+      <li><a class="dropdown-item btn" (click)="obtenerNoAlquilados()">No Alquilados</a></li>
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item btn" (click)="obtenerLocales(currentPage)">Recuperar Todos</a></li>
+    </ul>
+  </div>
 </div>
+
 <div class="row">
     <div class="col-4" *ngFor="let l of listaLocales">
       <div class="card mt-5 card-costum" style="width: 22rem;" >
+
         <div class="card-img">
-          <img [src]="l.pathimagen" class="rounded-2" alt="Imagen del local">
+          <img [src]="l.pathimagen" class="rounded-2 btn" alt="Imagen del local" (click)="obtenerInfo(l._id)">
         </div>
-        <div class="card-title">{{ l.nombre }} </div>
-        <p>Superficie: {{ l.superficie }} m2</p>
+
+        <div class="card-title">{{ l.nombre }}</div>
+        <div class="card-subtitle">Superficie: {{ l.superficie }} m2</div>
+>>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67
         <div class="card-subtitle">
           <span *ngIf="l.alquilado; else notRented">Alquilado</span>
           <ng-template #notRented>No se puede Alquilar</ng-template>
@@ -34,10 +46,42 @@
           </button>
         </div>
         <div class="card-footer">
-          <button type="button" class="btn btn-danger" (click)="eliminarLocal(l._id)">Eliminar</button>
-          <button type="button" class="btn btn-warning" (click)="modificarLocal(l._id)">Modificar</button>
+          <button type="button" class="btn btn-danger" (click)="openConfirmModal('delete', l._id)">Eliminar</button>
+          <button type="button" class="btn btn-warning" (click)="openConfirmModal('modify', l._id)">Modificar</button>
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal($event)">
+      <div class="modal-content small-modal" (click)="$event.stopPropagation()">
+        
+          <h4 class="modal-title" style="font-style: italic; color: aliceblue;">Confirmación</h4>
+        
+        <div class="modal-body">
+          <p style="color: orangered;">{{ modalMessage }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" *ngIf="modalAction === 'delete'" (click)="confirmAction()">Eliminar</button>
+          <button type="button" class="btn btn-warning" *ngIf="modalAction === 'modify'" (click)="confirmAction()">Modificar</button>
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    <!-- Fin Modal -->
   </div>
   
+  <br><br>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <a class="page-link btn" (click)="cambiarPagina(currentPage - 1)">Previous</a>
+      </li>
+      <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index">
+        <a class="page-link btn" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <a class="page-link btn" (click)="cambiarPagina(currentPage + 1)">Next</a>
+      </li>
+    </ul>
+  </nav>
