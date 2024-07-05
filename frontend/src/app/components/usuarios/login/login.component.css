@@ -2,20 +2,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 96vh;
-    /*background-color: blue;*/
-    background: url('https://i.gifer.com/o6m.gif') no-repeat;
+    min-height: 70vh;
     background-size: cover;
     background-position: center;
-    /*filter: blur(20px)*/
 }
 
 .login{
     width: 460px;
-    background: transparent;
+    background-color: rgba(0, 0, 0, 0.227);
     border: 4px solid rgba(247, 124, 9, .5);
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.595);
     color: #fff;
     border-radius: 15px;
     padding: 30px 40px ;

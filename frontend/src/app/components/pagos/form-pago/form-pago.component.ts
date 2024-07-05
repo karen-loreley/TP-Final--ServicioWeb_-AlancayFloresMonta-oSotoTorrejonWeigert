@@ -20,10 +20,13 @@ export class FormPagoComponent {
   accion: string = "new"; //accion tendra los valores de new y update
 
   listaLocales!: Array<Local>;
+  currentPage: number = 1;
   
   constructor(private pagoService: PagoService, private localService: LocalService,private router: Router, private activatedRoute: ActivatedRoute){
     this.pagos = new Array<Pago>();
     this.iniciarVariable();
+    this.cargarLocales(this.currentPage);
+
   }
 
   ngOnInit(): void {
@@ -100,4 +103,19 @@ export class FormPagoComponent {
     }
 
 */
+cargarLocales(page: number): void 
+  {
+    this.localService.getLocales(page, 6).subscribe
+    (
+      (result) => 
+      {
+        console.log('Locales:', result);
+        this.listaLocales = result.locales;
+      },
+      (error: any) => 
+      {
+        console.log(error);
+      }
+    );
+  }
 }

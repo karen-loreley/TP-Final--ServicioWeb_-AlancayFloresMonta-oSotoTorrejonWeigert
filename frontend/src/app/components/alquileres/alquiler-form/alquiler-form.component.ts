@@ -147,4 +147,9 @@ export class AlquilerFormComponent {
     );
   }
 
+  cancelar()
+  {
+    this.router.navigate(['home']);
+  }
+
 }

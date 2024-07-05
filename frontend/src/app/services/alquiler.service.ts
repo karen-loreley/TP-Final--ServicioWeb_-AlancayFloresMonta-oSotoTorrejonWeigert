@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alquiler } from '../models/alquiler';
 
@@ -7,9 +7,6 @@ import { Alquiler } from '../models/alquiler';
   providedIn: 'root'
 })
 export class AlquilerService {
-
-  listaAlquileres!: Array<Alquiler>;
-
   constructor(private _http: HttpClient) { }
 
   addAlquiler(alquiler: Alquiler): Observable<any>

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { Component } from '@angular/core';
 import { HomeComponent } from './components/home/home.component';
 //usuarios
 import { CrudUsuariosComponent } from './components/usuarios/crud-usuarios/crud-usuarios.component';
@@ -10,6 +9,7 @@ import { LocalComponent } from './components/locals/local/local.component';
 import { LocalFormComponent } from './components/locals/local-form/local-form.component';
 import { AlquilerComponent } from './components/alquileres/alquiler/alquiler.component';
 import { PagoComponent } from './components/pagos/pago/pago.component';
+import { AlquilerFormComponent } from './components/alquileres/alquiler-form/alquiler-form.component';
 import { FormPagoComponent } from './components/pagos/form-pago/form-pago.component';
 
 export const routes: Routes = [
@@ -19,12 +19,15 @@ export const routes: Routes = [
     
         //alquileres
         {path: 'alquiler',component: AlquilerComponent},
+        {path: 'alquiler/:id', component: AlquilerComponent,},
+        {path: 'alquiler-form', component: AlquilerFormComponent,},
+        {path: 'alquiler-form/:id', component: AlquilerFormComponent,},
     
         //usuarios
         {path: 'crud-usuarios', component: CrudUsuariosComponent,},
+        {path: 'usuario-form', component: UsuarioFormComponent},
         {path: 'usuario-form/:id', component: UsuarioFormComponent},
-        {path: 'registro', component: UsuarioFormComponent},
-        {path: 'login',component: LoginComponent},
+        {path: 'login', component: LoginComponent},
     
         //local
         {path: 'local', component: LocalComponent},

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Local } from '../../../models/local';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Alquiler } from '../../../models/alquiler';
 import { AlquilerService } from '../../../services/alquiler.service';
 import { LocalService } from '../../../services/local.service';
+import { Alquiler } from '../../../models/alquiler';
 
 @Component({
   selector: 'app-alquiler',
@@ -39,6 +40,7 @@ export class AlquilerComponent {
         }
       );
     }
+    
   }
 
   regresar()
@@ -46,4 +48,8 @@ export class AlquilerComponent {
     this.router.navigate(['home']);
   }
 
+  agregarAlquiler()
+  {
+    this.router.navigate(['alquiler-form', 0]);
+  }
 }
