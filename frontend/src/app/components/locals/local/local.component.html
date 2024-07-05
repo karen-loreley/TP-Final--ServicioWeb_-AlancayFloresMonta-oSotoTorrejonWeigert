@@ -15,7 +15,7 @@
 </div>
 
 <div class="row">
-    <div class="col-4" *ngFor="let l of listaLocales">
+    <div class="col-12 col-md-6 col-xl-4 d-flex justify-content-center align-items-center" *ngFor="let l of listaLocales">
       <div class="card mt-5 card-costum" style="width: 22rem;" >
 
         <div class="card-img">
@@ -71,6 +71,7 @@
   </div>
   
   <br><br>
+<<<<<<< Updated upstream
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item" [class.disabled]="currentPage === 1">
@@ -84,3 +85,21 @@
       </li>
     </ul>
   </nav>
+=======
+  <div class="mt-4 d-flex justify-content-center align-items-center">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <a class="page-link btn" (click)="cambiarPagina(currentPage - 1)">Previous</a>
+        </li>
+        <li class="page-item" *ngFor="let page of [].constructor(totalPages); let i = index">
+          <a class="page-link btn" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <a class="page-link btn" (click)="cambiarPagina(currentPage + 1)">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+>>>>>>> Stashed changes

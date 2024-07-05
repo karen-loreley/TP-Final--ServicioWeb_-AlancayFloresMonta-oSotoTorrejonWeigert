@@ -4,6 +4,7 @@ import { LocalService } from '../../../services/local.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { AlquilerService } from '../../../services/alquiler.service';
 
 @Component({
   selector: 'app-local',
@@ -18,7 +19,7 @@ export class LocalComponent {
   totalPages: number = 1;
   currentPage: number = 1;
 
-  constructor(private localService: LocalService, private router: Router)
+  constructor(private localService: LocalService, private alquilerService: AlquilerService, private router: Router)
   {
     this.obtenerLocales(this.currentPage);
   }
@@ -127,15 +128,17 @@ export class LocalComponent {
   obtenerInfo(id: string | undefined)
   {
     console.log(id);
-    if (id)
+    if (id)  
       {
         this.router.navigate(['alquiler', id]);
       }
-      else
+    else
       {
         console.error('Local ID is undefined or null');
       }
   }
+
+
 
   //Ventana emergente para modificar/borrar
     isModalOpen = false;

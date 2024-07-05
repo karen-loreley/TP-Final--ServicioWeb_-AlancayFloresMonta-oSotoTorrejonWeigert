@@ -125,4 +125,8 @@ export class LocalFormComponent {
     this.local = new Local(); 
   }
 
+  cancelar()
+  {
+    this.router.navigate(['home']);
+  }
 }

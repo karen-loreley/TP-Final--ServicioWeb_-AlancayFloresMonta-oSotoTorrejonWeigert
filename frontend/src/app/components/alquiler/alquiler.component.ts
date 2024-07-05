@@ -39,6 +39,7 @@ export class AlquilerComponent {
         }
       );
     }
+    
   }
 
   regresar()
@@ -46,4 +47,8 @@ export class AlquilerComponent {
     this.router.navigate(['home']);
   }
 
+  agregarAlquiler()
+  {
+    this.router.navigate(['alquiler-form', 0]);
+  }
 }

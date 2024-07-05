@@ -69,13 +69,14 @@
               </div>
 
               <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" name="destacado" [(ngModel)]="local.habilitado">
-                <label class="form-check-label" for="exampleCheck1" style="font-weight: bold;">Habilitado?</label>
+                <input type="checkbox" class="form-check-input" id="exampleCheck2" name="destacado" [(ngModel)]="local.habilitado">
+                <label class="form-check-label" for="exampleCheck2" style="font-weight: bold;">Habilitado?</label>
               </div>
           </div>
 
         <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarLocal()">Agregar</button>
         <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarLocal()">Actualizar</button>
+        <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
       </form>
   </div>
 

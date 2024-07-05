@@ -1,5 +1,5 @@
-<h3 class="mt-5">Gestión de Alquiler</h3> 
-<form>
+<form class="container">
+  <h3 class="mt-5">Gestión de Alquiler</h3>
 
     <div class="mb-3">
         <label for="propietario" class="form-label">Propietario</label>
@@ -30,4 +30,5 @@
     
     <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarAlquiler()">Agregar</button>
     <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarAlquiler()">Actualizar</button>
+    <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
   </form>
