@@ -5,7 +5,7 @@
     <div class="card-body">
         <form>
             <div class="mb-3">
-                <label for="espectador" class="form-label">Espectador</label>
+                <label for="espectador" class="form-label">Locales:</label>
                 <select name="espectador" id="espectador" [(ngModel)]="pago.local" class="form-select" required>
                   <option *ngFor="let e of listaLocales" [ngValue]="e._id">{{ e.nombre }}</option>
                 </select>
