@@ -37,6 +37,23 @@ alquilerCtrl.getAlquiler = async (req, res) =>
     res.json(alquiler);
 }
 
+alquilerCtrl.getAlquilerByLocalId = async (req, res) => 
+{
+    try 
+    {
+        const alquiler = await Alquiler.findOne({ local: req.params.localId }).populate('propietario').populate('local');
+        if (!alquiler) 
+        {
+            return res.status(404).json({ status: '0', msg: 'No se encontró el alquiler para este local' });
+        }
+            res.json(alquiler);
+    } 
+    catch (error) 
+    {
+        res.status(400).json({ status: '0', msg: 'Error procesando operación' });
+    }
+}
+
 alquilerCtrl.editAlquiler = async (req, res) => 
 {
     const valquiler = new Alquiler(req.body);

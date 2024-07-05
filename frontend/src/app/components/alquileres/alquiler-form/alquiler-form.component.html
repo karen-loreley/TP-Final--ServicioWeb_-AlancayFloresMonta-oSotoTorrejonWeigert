@@ -1,0 +1,33 @@
+<h3 class="mt-5">Gestión de Alquiler</h3> 
+<form>
+
+    <div class="mb-3">
+        <label for="propietario" class="form-label">Propietario</label>
+        <select name="propietario" id="propietario" [(ngModel)]="alquiler.propietario._id" class="form-select" required>
+          <option *ngFor="let p of listaPropietarios" [ngValue]="p._id">{{ p.nombres }} {{ p.apellido }}</option>
+        </select>
+  <!---->
+        <label for="local" class="form-label">Local</label>
+        <select name="local" id="local" [(ngModel)]="alquiler.local._id" class="form-select" required>
+          <option *ngFor="let l of listaLocales" [ngValue]="l._id">{{ l.nombre }}</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="plazomes" class="form-label">Plazo Mes</label>
+      <input type="number" class="form-control" id="plazomes" name="plazomes" [(ngModel)]="alquiler.plazomes"> 
+    </div>       
+
+    <div class="mb-3">
+        <label for="costoAlquiler" class="form-label">Costo Alquiler</label>
+        <input type="number" class="form-control" id="costoAlquiler" name="costoAlquiler" [(ngModel)]="alquiler.costoAlquiler"> 
+    </div> 
+
+    <div class="mb-3">
+      <label for="fechaAlquiler" class="form-label">Fecha</label>
+      <input type="date" class="form-control" id="fechaAlquiler" name="fechaAlquiler" [(ngModel)]="alquiler.fechaAlquiler">
+    </div>
+    
+    <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarAlquiler()">Agregar</button>
+    <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarAlquiler()">Actualizar</button>
+  </form>
