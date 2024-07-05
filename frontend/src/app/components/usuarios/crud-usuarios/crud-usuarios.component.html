@@ -1,6 +1,8 @@
-<button type="button" class="btn btn-primary mb-3" (click)="agregarUsuario()">AGREGAR</button>
+<button type="button" class="btn btn-primary mb-3 mx-3" (click)="agregarUsuario()">AGREGAR</button>
+<div class="row mx-2">
+    <div class="col-xl-9 col-md-12">
         <div class="row">
-            <h3 class="col-12 text-center text-danger text-decoration-underline py-2">LISTADO DE USUARIOS</h3>
+            <h3 class="col-12 text-center text-white text-decoration-underline py-2">LISTADO DE USUARIOS</h3>
         </div>
         <table class="table table-striped border border-1">
             <thead>
@@ -28,10 +30,27 @@
                     <td>{{us.activo}}</td>
                     <td>{{us.perfil}}</td>
                     <td>
-                        <button type="button" class="btn btn-danger mx-2" (click)="borrarUsuario(us._id)">Borrar</button>
+                        <button type="button" class="btn btn-danger mx-2"
+                            (click)="borrarUsuario(us._id)">Borrar</button>
                         <button type="button" class="btn btn-warning" (click)="elegirUsuario(us._id)">Modificar</button>
                     </td>
 
                 </tr>
             </tbody>
         </table>
+    </div>
+
+    <div class="col-xl-3 col-md-12">
+        <div class="card text-bg-light border-dark">
+            <label for="search" class="form-label fs-2 fw-bold text-danger text-center py-2">Buscar</label>
+            <div class="card-footer">
+                <div class="input-group mb-3">
+                    <input type="text" name="search" id="search" class="form-control"
+                        placeholder="Nombre de Usuario o Perfil ..." aria-label="Nombre de Usuario o Perfil ..."
+                        [(ngModel)]="parametro" (input)="buscarNombreUsuarioOPerfil()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

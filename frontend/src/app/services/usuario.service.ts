@@ -63,4 +63,14 @@ export class UsuarioService {
 
     return this._http.get(this.urlBase + _id, httpOption);
   }
+
+  getNombreUsuarioOPerfil(parametro: string): Observable<any>{
+    let httpOption = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      }),
+    }
+
+    return this._http.get(this.urlBase + 'buscar/' + parametro, httpOption);
+  }
 }

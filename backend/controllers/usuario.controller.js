@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Usuario = require('../models/usuario');
 const usuarioCtrl = {}
+
 usuarioCtrl.getUsuarios = async (req, res) => {
     var usuarios = await Usuario.find();
     res.json(usuarios);
@@ -99,6 +100,22 @@ usuarioCtrl.loginUsuario = async (req, res) => {
             status: 0,
             msg: 'error'
         })
+    }
+}
+
+
+usuarioCtrl.getNombreUsuarioOPerfil = async (req, res) => {
+    try {
+        const searchTerm = req.params.parametro;
+        const usuariosNombre = await Usuario.find({ 
+            $or: [
+           {usuario: new RegExp('^' + searchTerm, 'i')},
+           {perfil: new RegExp('^' + searchTerm, 'i')}
+            ]
+        });
+        res.json(usuariosNombre);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al buscar usuarios' });
     }
 }
     module.exports = usuarioCtrl;
