@@ -2,14 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Local } from '../../../models/local';
-import { LocalService } from '../../../services/local.service';
-import { Router } from '@angular/router';
-import { Alquiler } from '../../../models/alquiler';
-import { AlquilerService } from '../../../services/alquiler.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Alquiler } from '../../../models/alquiler';
 import { AlquilerService } from '../../../services/alquiler.service';
 import { LocalService } from '../../../services/local.service';
+import { Alquiler } from '../../../models/alquiler';
 
 @Component({
   selector: 'app-alquiler',
