@@ -40,18 +40,18 @@ export class FormPagoComponent {
 
     iniciarVariable(){
       this.pago = new Pago();
-        this.localService.getLocales().subscribe(
+      /*  this.localService.getLocalesByPago().subscribe(
           data => {
             this.listaLocales = data;
             console.log(this.listaLocales);
-    
+
 
           },
           error => {
             console.log(error);
           }
     
-        )
+        )*/
     
     }
 
