@@ -15,29 +15,5 @@ import { AlquilerService } from '../../../services/alquiler.service';
   styleUrl: './alquiler.component.css'
 })
 export class AlquilerComponent {
-  alquileres: Alquiler[] = [];
 
-  constructor(private alquilerService: AlquilerService) {}
-
-  ngOnInit(): void {
-    this.loadAlquileres();
-  }
-
-  loadAlquileres(): void {
-    this.alquilerService.getAlquileres().subscribe(data => {
-      this.alquileres = data;
-    });
-  }
-
-  isAlquilerVencido(alquiler: Alquiler): boolean {
-    const now = new Date();
-    const alquilerFecha = new Date(alquiler.fechaAlquiler);
-    alquilerFecha.setMonth(alquilerFecha.getMonth() + alquiler.plazomes);
-    return now > alquilerFecha;
-  }
-
-  pagarAlquiler(alquiler: Alquiler): void {
-    // Aquí puedes añadir la lógica para manejar el pago del alquiler
-    console.log(`Pagando alquiler de ${alquiler.propietario}`);
-  }
 }
