@@ -6,7 +6,8 @@ var app = express();
 
 //middlewares
 app.use(express.json());
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors());
+// app.use(cors({origin: 'http://localhost:4200'}));
 
         // Aumentar el límite de tamaño de carga a 50MB (ajusta según tus necesidades)
         app.use(bodyParser.json({ limit: '50mb' }));
