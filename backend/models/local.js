@@ -8,5 +8,5 @@ const LocalSchema = new Schema({
     pathimagen: {type:String, required:true},
     alquilado: {type: Boolean, required: true}
 })
-module.exports = mongoose.models.punto1 || mongoose.model('Local', LocalSchema);
+module.exports = mongoose.models.local || mongoose.model('Local', LocalSchema);
 //

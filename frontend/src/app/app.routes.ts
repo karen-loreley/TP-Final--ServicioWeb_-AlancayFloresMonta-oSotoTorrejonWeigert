@@ -10,7 +10,7 @@ import { LocalFormComponent } from './components/locals/local-form/local-form.co
 import { AlquilerComponent } from './components/alquileres/alquiler/alquiler.component';
 import { PagoComponent } from './components/pagos/pago/pago.component';
 import { AlquilerFormComponent } from './components/alquileres/alquiler-form/alquiler-form.component';
->>>>>>> Stashed changes
+import { FormPagoComponent } from './components/pagos/form-pago/form-pago.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -26,6 +26,7 @@ export const routes: Routes = [
         //usuarios
         {path: 'crud-usuarios', component: CrudUsuariosComponent,},
         {path: 'usuario-form', component: UsuarioFormComponent},
+        {path: 'login', component: LoginComponent},
 
         //local
         {path: 'local', component: LocalComponent},
