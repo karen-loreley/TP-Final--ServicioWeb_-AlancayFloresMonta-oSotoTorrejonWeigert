@@ -22,10 +22,8 @@ app.use('/api/propietario', require('./routes/propietario.route.js'));
 app.use('/api/alquiler', require('./routes/alquiler.route.js'));
 app.use('/api/novedades', require('./routes/novedadesRouter'));
 app.use('/api/usuario', require('./routes/usuario.route.js'));
-<<<<<<< HEAD
 app.use('/api/promocion', require('./routes/PromocionesRouter.js'));
-=======
->>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67
+
 //setting
 app.set('port', process.env.PORT || 3000);
 

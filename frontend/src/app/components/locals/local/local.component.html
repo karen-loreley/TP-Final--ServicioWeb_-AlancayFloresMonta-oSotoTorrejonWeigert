@@ -3,17 +3,6 @@
   <h2>Nuestros Locales</h2>
   <button type="button" class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="agregarLocal()"> Agregar
   </button>
-<<<<<<< HEAD
-</div>
-<div class="row">
-    <div class="col-4" *ngFor="let l of listaLocales">
-      <div class="card mt-5 card-costum" style="width: 22rem;" >
-        <div class="card-img">
-          <img [src]="l.pathimagen" class="rounded-2" alt="Imagen del local">
-        </div>
-        <div class="card-title">{{ l.nombre }} </div>
-        <p>Superficie: {{ l.superficie }} m2</p>
-=======
   <div class="dropdown">
     <button class="btn btn-dark dropdown-toggle mt-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">Aplicar Filtros</button>
     <ul class="dropdown-menu">
@@ -57,15 +46,6 @@
           </button>
         </div>
         <div class="card-footer">
-<<<<<<< HEAD
-          <button type="button" class="btn btn-danger" (click)="eliminarLocal(l._id)">Eliminar</button>
-          <button type="button" class="btn btn-warning" (click)="modificarLocal(l._id)">Modificar</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-=======
           <button type="button" class="btn btn-danger" (click)="openConfirmModal('delete', l._id)">Eliminar</button>
           <button type="button" class="btn btn-warning" (click)="openConfirmModal('modify', l._id)">Modificar</button>
         </div>
@@ -105,4 +85,3 @@
       </li>
     </ul>
   </nav>
->>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67
