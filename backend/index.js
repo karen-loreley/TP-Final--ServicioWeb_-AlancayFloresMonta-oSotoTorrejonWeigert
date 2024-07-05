@@ -24,6 +24,7 @@ app.use('/api/novedades', require('./routes/novedadesRouter'));
 app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/promocion', require('./routes/PromocionesRouter.js'));
 
+app.use('/api/pago', require('./routes/pago.route.js'));
 //setting
 app.set('port', process.env.PORT || 3000);
 
