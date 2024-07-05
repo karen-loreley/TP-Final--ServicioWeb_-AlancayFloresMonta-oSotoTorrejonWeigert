@@ -24,6 +24,7 @@ export const routes: Routes = [
         //usuarios
         {path: 'crud-usuarios', component: CrudUsuariosComponent,},
         {path: 'registro', component: UsuarioFormComponent},
+        {path: 'registro/:id', component: UsuarioFormComponent},
         {path: 'login',component: LoginComponent},
     
         //local

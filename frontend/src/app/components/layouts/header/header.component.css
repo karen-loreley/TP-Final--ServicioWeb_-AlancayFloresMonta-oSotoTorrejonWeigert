@@ -1,26 +1,42 @@
-nav{    
-    background: linear-gradient(0deg, #ff7f08, #da0606, #000000);
+/* Estilo para la barra de navegación */
+nav {
+    background: linear-gradient(to right, #d5a65d, #f9f6f0);
+    color: #333333; 
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #000000;     
+    top: 0; 
+    left: 0; 
+    width: 100%; 
 }
+
 .navbar-brand, .nav-link {
-    color: #ffffff !important; 
+    color: #000000 !important; 
 }
- 
-.navbar-brand{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif; /* Fuente serif elegante */
     font-style: italic;
-    font-size: 25px;    
+    font-size: 30px; /* Tamaño mayor para destacar */
+    color: #333333; /* Gris oscuro para el texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra sutil para dar profundidad */
 }
-.nav-link{
+
+.nav-link {
+    font-family: 'Montserrat', sans-serif; 
     font-weight: bold;
     margin-left: auto;
 }
+
 .nav-link:hover {
-    color: #ffffff !important;
+    color: #d5a65d !important; 
 }
+
+
 .btn-outline-light:hover {
-    background: linear-gradient(0deg, #ff0808, #000000);
-    color: #fff0f0; 
+    background: linear-gradient(0deg, #474343, #070605); 
 }
+
 .navbar-nav {
-    margin-left: auto; 
+    margin-left: auto;
 }

@@ -24,7 +24,6 @@
 
         <div class="card-title">{{ l.nombre }}</div>
         <div class="card-subtitle">Superficie: {{ l.superficie }} m2</div>
->>>>>>> 3b72607a382ad630b2cf4fa9bd5a713e7c2a5b67
         <div class="card-subtitle">
           <span *ngIf="l.alquilado; else notRented">Alquilado</span>
           <ng-template #notRented>No se puede Alquilar</ng-template>

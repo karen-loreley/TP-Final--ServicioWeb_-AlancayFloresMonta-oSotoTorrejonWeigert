@@ -1,20 +1,21 @@
-<div class="card">
-    <div class="card-header">
-        Formulario de Usuarios
-    </div>
-    <div class="card-body">
-        <form>
-            <div class="mb-3">
-                <label for="nombreUsuario" class="form-label">Nombre de Usuario</label>
-                <input name="nombreUsuario" type="text" class="form-control" id="nombreUsuario" [(ngModel)]="usuario.usuario">
+<div class="body">
+    <div class="login">
+        <h1>CREAR CUENTA</h1>
+        <form name="form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="formcontrol" name="username" [(ngModel)]="usuario.usuario" />
+                <i class="bi bi-person-fill"></i>
             </div>
-            <div class="mb-3">
-                <label class="col-sm-12 col-md-4" for="password">Contraseña</label>
-                <input class="form-control col-sm-12 col-md-8" id="password" type="password" name="password" [(ngModel)]="usuario.password"/>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="formcontrol" name="password" [(ngModel)]="usuario.password" />
+                <i class="bi bi-lock-fill"></i>
             </div>
-            <div class="mb-3">
-                <label class="col-sm-12 col-md-4" for="email">Email</label>
-                <input class="form-control col-sm-12 col-md-8" id="email" type="email" name="email" [(ngModel)]="usuario.email"/>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="formcontrol" name="email" [(ngModel)]="usuario.usuario" />
+                <i class="bi bi-person-fill"></i>
             </div>
             <div class="mb-3">
                 <label class="col-sm-12 col-md-4" for="perfil">Perfil</label>
@@ -28,12 +29,12 @@
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="activo" (change)="cambiarActivo($event)">
                 <label class="form-check-label" for="destacado">Activo?</label>
-              </div>
-            <div class="row form-group">
-            <button type="button" class="btn btn-primary mb-3" (click)="registrarUsuario()" *ngIf="accion=='new'">Registrar</button>
-            <button type="button" class="btn btn-primary mb-3" *ngIf="accion=='update'" (click)="modificarUsuario()">Modificar</button>
-            <button type="button" class="btn btn-secondary mb-3" (click)="atras()">Atras</button>
-</div>
+            </div>
+            <div class="form-group">
+                <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="registrarUsuario()">Agregar</button>
+                <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="modificarUsuario()">Actualizar</button>
+                <button type="button" class="btn btn-secondary mb-3" (click)="atras()">Atras</button>
+            </div>
         </form>
     </div>
 </div>
