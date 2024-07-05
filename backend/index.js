@@ -13,6 +13,8 @@ app.use('/api/propietario', require('./routes/propietario.route.js'));
 app.use('/api/alquiler', require('./routes/alquiler.route.js'));
 app.use('/api/novedades', require('./routes/novedadesRouter'));
 app.use('/api/usuario', require('./routes/usuario.route.js'));
+app.use('/api/pago', require('./routes/pago.route.js'));
+
 //setting
 app.set('port', process.env.PORT || 3000);
 
