@@ -6,6 +6,7 @@ import { UsuarioFormComponent } from './components/usuarios/usuario-form/usuario
 import { HomeComponent } from './components/home/home.component';
 import { LocalComponent } from './components/locals/local/local.component';
 import { LocalFormComponent } from './components/locals/local-form/local-form.component';
+import { LoginComponent } from './components/usuarios/login/login.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -18,8 +19,11 @@ export const routes: Routes = [
         //usuarios
         {path: 'crud-usuarios', component: CrudUsuariosComponent,},
         {path: 'registro', component: UsuarioFormComponent},
+        {path: 'login',component: LoginComponent},
     
         //local
         {path: 'local', component: LocalComponent},
         {path: 'local-form/:id', component: LocalFormComponent},
+
+
 ];
