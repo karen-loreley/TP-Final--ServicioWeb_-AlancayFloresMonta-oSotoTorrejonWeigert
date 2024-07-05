@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Alquiler = require('../models/alquiler');
 const alquilerCtrl = {}
 

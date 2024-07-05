@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alquiler } from '../models/alquiler';
 
@@ -8,20 +8,7 @@ import { Alquiler } from '../models/alquiler';
 })
 export class AlquilerService {
 
-  listaAlquileres!: Array<Alquiler>;
-
   constructor(private _http: HttpClient) { }
-
-  addAlquiler(alquiler: Alquiler): Observable<any>
-  {
-    console.log(alquiler);
-    let httpOption = 
-    {
-      headers: new HttpHeaders
-      ({
-        'Content-Type': 'application/json'
-      })
-    }
 
     let body: any = JSON.stringify(alquiler);
     return this._http.post("http://localhost:3000/api/alquiler", body, httpOption);
@@ -87,8 +74,4 @@ export class AlquilerService {
       ({
         'Content-Type': 'application/json'
       })
-    }
-
-    return this._http.delete(`http://localhost:3000/api/alquiler/${_id}`, httpOption);
-  }
 }

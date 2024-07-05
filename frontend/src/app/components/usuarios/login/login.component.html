@@ -1,0 +1,24 @@
+<div class="body">
+    <div class="login">
+        <h1>LOGIN</h1>
+        <form name="form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="formcontrol" name="username" [(ngModel)]="userform.usuario" />
+                <i class="bi bi-person-fill"></i>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="formcontrol" name="password" [(ngModel)]="userform.password" />
+                <i class="bi bi-lock-fill"></i>
+            </div>
+            <div class="form-group">
+                <button class="btn" (click)="login()">Login</button>
+            </div>
+            <div class="alert-danger">{{msglogin}}</div>
+            <div class="form-group">
+                No tienes cuenta, <a (click)="formusuario()">crear cuenta</a>
+            </div>
+        </form>
+    </div>
+</div>

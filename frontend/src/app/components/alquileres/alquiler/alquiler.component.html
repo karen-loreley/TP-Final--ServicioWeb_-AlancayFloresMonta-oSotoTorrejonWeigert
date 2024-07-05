@@ -1,19 +1,18 @@
 <div *ngIf="alquiler">
-    
-    <div class="row d-flex justify-content-center align-items-center">
-      <h2 class="mt-4" style="margin-left: 30px;">Lote en Alquiler</h2>
-      <p class="col-4">Dirección<br><strong>{{ alquiler.local.nombre }}</strong></p>
+    <h2 class="mt-4">Lote en Alquiler</h2>
+    <div class="row">
+      <p class="col-4">Nombre<br><strong>{{ alquiler.local.nombre }}</strong></p>
       <p class="col-4">Costo de Alquiler<strong><br> ARS {{ alquiler.costoAlquiler | currency }}</strong></p>
 
       <div class="row">
         <div class="col-md-8 col-12">
-          <img [src]="alquiler.local.pathimagen" alt="Imagen del Local" height="550px" width="auto" class="local-image rounded-2">
+          <img [src]="alquiler.local.pathimagen" alt="Imagen del Local" height="550px" width="auto" class="local-image">
         </div>
         
         <div class="col-md-4">
           <div class="info-box" style="color: black;">
-            <h4>Datos de Propietario.</h4>
-            <p><strong>Nombre: </strong>{{alquiler.propietario.nombres}} {{ alquiler.propietario.apellido }}</p>
+            <h4>Datos de Contacto.</h4>
+            <p><strong>Propietario: </strong>{{alquiler.propietario.nombres}} {{ alquiler.propietario.apellido }}</p>
             <p><strong>Contacto:</strong></p>
             <p>Correo: {{ alquiler.propietario.email }} </p>
             <p>Teléfono: +54 {{alquiler.propietario.telefono}}</p>
@@ -37,12 +36,5 @@
     </div>
     
   </div>
-<div class="container">
-  <div *ngIf="!alquiler" class="row mt-5">
-    <h4 class="col-4">El Alquiler de este Local todavía no existe...</h4>
-    <button type="button" class=" col-2 btn btn-success mb-0 mt-3 me-2" (click)="agregarAlquiler()" >Crear Alquiler..</button>
-  </div>
-  <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
-</div>
 
-  
+  <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>

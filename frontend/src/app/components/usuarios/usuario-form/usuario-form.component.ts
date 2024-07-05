@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../../models/usuario';
-import { UsuarioService } from '../../services/usuario.service';
+import { Usuario } from '../../../models/usuario';
+import { UsuarioService } from '../../../services/usuario.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -26,14 +26,14 @@ export class UsuarioFormComponent {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       if (params['id'] == "0"){
-      this.accion = "new";
+         this.accion = "new";
       this.iniciarVariable();
       }else{
-      this.accion = "update";
-      this.cargarUsuario(params['id']);
+        this.accion = "update";
+        this.cargarUsuario(params['id']);
       }
-      });
-    }
+    });
+  }
 
     iniciarVariable(){
       this.usuario = new Usuario();
@@ -54,23 +54,6 @@ export class UsuarioFormComponent {
       );
       this.usuario = new Usuario(); 
     }
-
-    /*cargarTicket(id: string): void 
-  {
-    console.log(this.ticket);
-    this.ticketService.getTicket(id).subscribe
-    (
-      (result) => 
-      {
-        this.ticket = result; 
-        this.ticket.espectador = this.espectadores.find(espectador => (espectador._id === this.ticket.espectador._id))!;
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    );
-  }*/
 
 
     cargarUsuario(id: string){
