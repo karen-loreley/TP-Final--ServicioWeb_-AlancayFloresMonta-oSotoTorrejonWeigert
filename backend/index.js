@@ -7,13 +7,13 @@ var app = express();
 //middlewares
 app.use(express.json());
 app.use(cors());
-// app.use(cors({origin: 'http://localhost:4200'}));
-
-        // Aumentar el límite de tamaño de carga a 50MB (ajusta según tus necesidades)
-        app.use(bodyParser.json({ limit: '50mb' }));
-        app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(cors({origin: 'http://localhost:4200'}));
     
-        // O, si estás usando `express.json` y `express.urlencoded`:
+        // Aumentar el límite de tamaño de carga a 50MB (ajusta según tus necesidades)
+        //app.use(bodyParser.json({ limit: '50mb' }));
+        //app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+        // usando `express.json` y `express.urlencoded`:
         app.use(express.json({ limit: '50mb' }));
         app.use(express.urlencoded({ limit: '50mb', extended: true }));
         
@@ -26,6 +26,7 @@ app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/promocion', require('./routes/PromocionesRouter.js'));
 
 app.use('/api/pago', require('./routes/pago.route.js'));
+
 //setting
 app.set('port', process.env.PORT || 3000);
 

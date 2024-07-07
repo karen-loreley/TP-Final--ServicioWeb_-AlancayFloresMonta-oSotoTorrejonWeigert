@@ -1,12 +1,13 @@
 <div *ngIf="alquiler">
+    
+    <div class="row d-flex justify-content-center align-items-center">
     <h2 class="mt-4">Lote en Alquiler</h2>
-    <div class="row">
       <p class="col-4">Nombre<br><strong>{{ alquiler.local.nombre }}</strong></p>
       <p class="col-4">Costo de Alquiler<strong><br> ARS {{ alquiler.costoAlquiler | currency }}</strong></p>
 
       <div class="row">
         <div class="col-md-8 col-12">
-          <img [src]="alquiler.local.pathimagen" alt="Imagen del Local" height="550px" width="auto" class="local-image">
+          <img [src]="alquiler.local.pathimagen" alt="Imagen del Local" height="550px" width="auto" class="local-image rounded-2">
         </div>
         
         <div class="col-md-4">
@@ -20,7 +21,7 @@
         </div>
   
         <div class="col-8">
-          <div class="info-box" style="color: white;">
+          <div class="info-box" style="color: black;">
             <h4>Descripción</h4>
             <p><strong>Local: </strong>Cuenta con una superficie de {{ alquiler.local.superficie}} Metros Cuadrados
                 y un costo de ARS{{alquiler.local.costomes | currency}} por mes.
@@ -37,4 +38,10 @@
     
   </div>
 
-  <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
+  <div class="container">
+    <div *ngIf="!alquiler" class="row mt-5">
+      <h4 class="col-4">El Alquiler de este Local todavía no existe...</h4>
+      <button type="button" class=" col-2 btn btn-success mb-0 mt-3 me-2" (click)="agregarAlquiler()" >Crear Alquiler..</button>
+    </div>
+    <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
+  </div>

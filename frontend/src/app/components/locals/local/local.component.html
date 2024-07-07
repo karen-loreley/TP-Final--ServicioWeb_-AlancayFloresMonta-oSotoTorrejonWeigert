@@ -1,8 +1,7 @@
 
 <div class="text-center p-3 ">
   <h2>Nuestros Locales</h2>
-  <button type="button" class="btn btn-outline-dark"  data-bs-toggle="modal" data-bs-target="#exampleModal"  (click)="agregarLocal()"> Agregar
-  </button>
+  <button type="button" class="btn btn-outline-dark" (click)="agregarLocal()">Agregar</button>
   <div class="dropdown">
     <button class="btn btn-dark dropdown-toggle mt-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">Aplicar Filtros</button>
     <ul class="dropdown-menu">
@@ -55,7 +54,7 @@
     <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal($event)">
       <div class="modal-content small-modal" (click)="$event.stopPropagation()">
         
-          <h4 class="modal-title" style="font-style: italic; color: aliceblue;">Confirmación</h4>
+        <h4 class="modal-title" style="font-style: italic; color: aliceblue;">Confirmación</h4>
         
         <div class="modal-body">
           <p style="color: orangered;">{{ modalMessage }}</p>
