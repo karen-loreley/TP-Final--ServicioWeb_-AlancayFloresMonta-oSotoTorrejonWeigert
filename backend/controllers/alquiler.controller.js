@@ -42,10 +42,10 @@ alquilerCtrl.getAlquilerByLocalId = async (req, res) =>
     try 
     {
         const alquiler = await Alquiler.findOne({ local: req.params.localId }).populate('propietario').populate('local');
-        if (!alquiler) 
+        /*if (!alquiler) 
         {
             return res.status(404).json({ status: '0', msg: 'No se encontró el alquiler para este local' });
-        }
+        }*/
             res.json(alquiler);
     } 
     catch (error) 
