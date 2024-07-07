@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 })
 export class UsuarioFormComponent {
   usuario!: Usuario;
-  //espectador: Espectador;
   usuarios: Array<Usuario>;
   accion: string = "new"; //accion tendra los valores de new y update
 
@@ -44,6 +43,7 @@ export class UsuarioFormComponent {
         respond => {
           if(respond.status == 1){
             alert("El usuario se agrego correctamente");
+            console.log(respond);
             this.router.navigate(['crud-usuarios']);
           }
         },
@@ -59,10 +59,7 @@ export class UsuarioFormComponent {
     cargarUsuario(id: string){
       this.usuarioService.getUsuario(id).subscribe(
         respond => {
-          //this.ticket = respond;
-          //console.log(this.ticket);
          Object.assign(this.usuario, respond);
-        //this.ticket.espectador = this.espectadores.find(espectador => (espectador._id === this.ticket.espectador._id))!;
         }
       )
     }

@@ -6,9 +6,8 @@ export class Usuario {
     activo: boolean;
     perfil: string;
 
-    constructor(id:string="", email:string="", password:string="", usuario:string="",
+    constructor(email:string="", password:string="", usuario:string="",
         activo:boolean=false, perfil:string=""){
-        this._id=id;
         this.email = email;
         this.usuario = usuario;
         this.password = password;
