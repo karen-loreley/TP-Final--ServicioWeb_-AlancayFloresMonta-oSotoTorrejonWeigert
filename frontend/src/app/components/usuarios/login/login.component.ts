@@ -32,21 +32,21 @@ export class LoginComponent implements OnInit{
           var usuario = result;
           if (usuario.status == 1){
 
-          sessionStorage.setItem("user", usuario.username);
-          sessionStorage.setItem("userid", usuario.userid);
-          sessionStorage.setItem("perfil", usuario.perfil);
+            sessionStorage.setItem("token", usuario.token);
+            sessionStorage.setItem("user", usuario.username);
+            sessionStorage.setItem("userid", usuario.userid);
+            sessionStorage.setItem("perfil", usuario.perfil);
 
           this.router.navigateByUrl(this.returnUrl);
           } else {
-
-          this.msglogin="Credenciales incorrectas..";
+            this.msglogin="Credenciales incorrectas..";
           }
       },
       error => {
           alert("Error de conexion");
           console.log("error en conexion");
           console.log(error);
-          });
+      });
   }
 
   formusuario(){

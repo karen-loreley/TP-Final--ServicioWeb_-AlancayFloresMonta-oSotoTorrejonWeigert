@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const Usuario = require('../models/usuario');
 const usuarioCtrl = {}
 
+//login
+const jwt = require('jsonwebtoken');
+
 usuarioCtrl.getUsuarios = async (req, res) => {
     var usuarios = await Usuario.find();
     res.json(usuarios);
@@ -86,13 +89,14 @@ usuarioCtrl.loginUsuario = async (req, res) => {
                 msg: "not found"
             })
         } else {
+            const unToken = jwt.sign({id:user._id},"secretKey");
             res.json({
                 status: 1,
                 msg: "success",
                 usuario: user.usuario, //retorno información útil para el frontend
                 perfil: user.perfil, //retorno información útil para el frontend
-
-                userid: user._id //retorno información útil para el frontend
+                userid: user._id, //retorno información útil para el frontend
+                token:unToken, //retorno el token
             })
         }
     } catch (error) {

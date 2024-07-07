@@ -1,40 +1,41 @@
 <div class="body">
     <div class="login">
-        <h1>CREAR CUENTA</h1>
-        <form name="form">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" class="formcontrol" id="username" name="username" [(ngModel)]="usuario.usuario" />
-                <i class="bi bi-person-fill"></i>
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="formcontrol"  id="password" name="password" [(ngModel)]="usuario.password" />
-                <i class="bi bi-lock-fill"></i>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="text" class="formcontrol" id="email" name="email" [(ngModel)]="usuario.email" />
-                <i class="bi bi-person-fill"></i>
-            </div>
-            <div class="mb-3">
-                <label class="col-sm-12 col-md-4" for="perfil">Perfil</label>
-                <select class="form-select" aria-label="Default select example" id="perfil" name="perfil" [(ngModel)]="usuario.perfil">
-                    <option selected value="">Seleccione el perfil del usuario</option>
-                    <option value="administrador">Administrativo</option>
-                    <option value="dueño">Dueño</option>
-                    <option value="propietario">Propietario</option>
-                </select>
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="destacado" (change)="cambiarActivo($event)">
-                <label class="form-check-label" for="destacado">Activo?</label>
-            </div>
-            <div class="form-group">
-                <button *ngIf="accion=='new'" type="submit" class="btn btn-primary mb-3" (click)="registrarUsuario()">Agregar</button>
-                <button *ngIf="accion=='update'" type="submit" class="btn btn-success mb-3" (click)="modificarUsuario()">Actualizar</button>
-                <button type="button" class="btn btn-secondary mb-3" (click)="atras()">Atras</button>
-            </div>
-        </form>
+      <h1>CREAR CUENTA</h1>
+      <form name="form" (ngSubmit)="accion === 'new' ? registrarUsuario() : modificarUsuario()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" class="formcontrol" id="username" name="username" [(ngModel)]="usuario.usuario" required />
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="formcontrol" id="password" name="password" [(ngModel)]="usuario.password" required />
+          <i class="bi bi-lock-fill"></i>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" class="formcontrol" id="email" name="email" [(ngModel)]="usuario.email" required />
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <div class="mb-3">
+          <label class="col-sm-12 col-md-4" for="perfil">Perfil</label>
+          <select class="form-select" aria-label="Default select example" id="perfil" name="perfil" [(ngModel)]="usuario.perfil" required>
+            <option selected value="">Seleccione el perfil del usuario</option>
+            <option value="administrador">Administrativo</option>
+            <option value="dueño">Dueño</option>
+            <option value="propietario">Propietario</option>
+          </select>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="destacado" (change)="cambiarActivo($event)">
+          <label class="form-check-label" for="destacado">Activo?</label>
+        </div>
+        <div class="form-group">
+          <button *ngIf="accion === 'new'" type="submit" class="btn btn-primary mb-3">Agregar</button>
+          <button *ngIf="accion === 'update'" type="submit" class="btn btn-success mb-3">Actualizar</button>
+          <button type="button" class="btn btn-secondary mb-3" (click)="atras()">Atrás</button>
+        </div>
+      </form>
     </div>
-</div>
+  </div>
+  

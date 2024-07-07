@@ -14,8 +14,9 @@ import { CommonModule } from '@angular/common';
 })
 export class UsuarioFormComponent {
   usuario!: Usuario;
+  //espectador: Espectador;
   usuarios: Array<Usuario>;
-  accion: string = "new"; //accion tendra los valores de new y update
+  accion: string = "new"; 
 
   constructor(private usuarioService: UsuarioService, private router: Router, private activatedRoute: ActivatedRoute){
     this.usuarios = new Array<Usuario>();
@@ -24,12 +25,13 @@ export class UsuarioFormComponent {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      if (params['id'] == "0"){
-         this.accion = "new";
-      this.iniciarVariable();
-      }else{
-        this.accion = "update";
-        this.cargarUsuario(params['id']);
+      if (params['id']) { //si hay un id
+        if (params['id'] === '0') { 
+          this.accion = "new";
+        } else {
+          this.accion = "update";
+          this.cargarUsuario(params['id']);
+        }
       }
     });
   }
@@ -43,7 +45,6 @@ export class UsuarioFormComponent {
         respond => {
           if(respond.status == 1){
             alert("El usuario se agrego correctamente");
-            console.log(respond);
             this.router.navigate(['crud-usuarios']);
           }
         },
@@ -55,11 +56,13 @@ export class UsuarioFormComponent {
       this.usuario = new Usuario(); 
     }
 
-
     cargarUsuario(id: string){
       this.usuarioService.getUsuario(id).subscribe(
         respond => {
+          //this.ticket = respond;
+          //console.log(this.ticket);
          Object.assign(this.usuario, respond);
+        //this.ticket.espectador = this.espectadores.find(espectador => (espectador._id === this.ticket.espectador._id))!;
         }
       )
     }

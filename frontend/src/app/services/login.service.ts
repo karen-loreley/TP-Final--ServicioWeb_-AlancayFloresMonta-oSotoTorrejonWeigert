@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Usuario } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -24,17 +25,11 @@ export class LoginService {
       return this._http.post(this.hostBase + 'login', body, httpOption);
   }
 
-  public logout() {
-    sessionStorage.removeItem("user");
-    sessionStorage.removeItem("perfil");
-    sessionStorage.removeItem("userid");
-  } 
-
   public userLoggedIn(){
       var resultado = false;
       var usuario = sessionStorage.getItem("user");
       if(usuario!=null){
-      resultado = true;
+        resultado = true;
       }
       return resultado;
   }
@@ -48,5 +43,20 @@ export class LoginService {
       var id = sessionStorage.getItem("userid");
       return id;
     }
-   
+  
+    
+    public logout(): void {
+      // reseteo las propiedades del service que indican que un usuario esta logueado y cual es el usuario logueado
+      // borro el token almacenado mediante el storage
+      sessionStorage.removeItem("token");
+      sessionStorage.removeItem("user");
+      sessionStorage.removeItem("userid");
+    }
+  getToken():string{
+      if (sessionStorage.getItem("token")!= null){
+      return sessionStorage.getItem("token")!;
+    }else{
+      return "";
+    }
+  }
 }
