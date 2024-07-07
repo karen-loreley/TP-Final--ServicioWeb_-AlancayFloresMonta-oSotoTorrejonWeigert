@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
-const Novedades = require('../models/novedades');
+const Novedad = require('../models/novedad');
 const Usuario=require('../models/usuario');
-const novedadesCtrl = {}
+const novedadCtrl = {}
 
-novedadesCtrl.getnovedades= async (req, res) => {
-    var novedades = await Novedades.find();
+novedadCtrl.getnovedades= async (req, res) => {
+    var novedades = await Novedad.find().populate('usuario');
     res.status(200).json(novedades);
 }
 
-novedadesCtrl.createnovedad = async (req, res) => {
-    var novedades = new Novedades(req.body);
+novedadCtrl.createnovedad = async (req, res) => {
+    var novedad = new Novedad(req.body);
         try {
-            await novedades.save();
+            await novedad.save();
             res.status(200).json({
             'status': '1',
             'msg': 'Novedad guardada.'})
@@ -25,15 +25,15 @@ novedadesCtrl.createnovedad = async (req, res) => {
         }
 }
 
-novedadesCtrl.getNovedad = async (req, res) => {
-    const novedad = await Novedades.findById(req.params.id).populate('Usuario');
+novedadCtrl.getNovedad = async (req, res) => {
+    const novedad = await Novedad.findById(req.params.id).populate('usuario');
     res.json(novedad);
 }
 
-novedadesCtrl.editNovedad = async (req, res) => {
-    const vnovedad = new Novedades(req.body);
+novedadCtrl.editNovedad = async (req, res) => {
+    const vnovedad = new Novedad(req.body);
         try {
-            await Novedades.updateOne({_id: req.body._id}, vnovedad);
+            await Novedad.updateOne({_id: req.body._id}, vnovedad);
             res.json({
             'status': '1',
             'msg': 'novedad editado'
@@ -46,9 +46,9 @@ novedadesCtrl.editNovedad = async (req, res) => {
         }
 }
 
-novedadesCtrl.deleteNovedad = async (req, res)=>{
+novedadCtrl.deleteNovedad = async (req, res)=>{
     try {
-        await Novedades.deleteOne({_id: req.params.id});
+        await Novedad.deleteOne({_id: req.params.id});
         res.json({
         status: '1',
         msg: 'novedad removed'
@@ -61,10 +61,10 @@ novedadesCtrl.deleteNovedad = async (req, res)=>{
     }
 }
 
-novedadesCtrl.filtraporestado= async(req, res)=>{
+novedadCtrl.filtraporestado= async(req, res)=>{
     try{
         const { estado } = req.params; 
-        const novedad = await Novedades.find({ estado: estado}).populate('Usuario');
+        const novedad = await Novedad.find({ estado: estado}).populate('usuario');
         res.json(novedad);
     }
     catch{
@@ -75,4 +75,4 @@ novedadesCtrl.filtraporestado= async(req, res)=>{
     }
 }
 
-module.exports = novedadesCtrl;
+module.exports = novedadCtrl;

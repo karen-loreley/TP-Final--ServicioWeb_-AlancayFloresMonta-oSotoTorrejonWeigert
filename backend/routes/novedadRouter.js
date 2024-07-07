@@ -1,10 +1,10 @@
 
-const novedad = require('../controllers/novedadesController');
+const novedad = require('../controllers/novedadController');
 
 const express = require('express');
 const router = express.Router();
 
-router.get('/estado', novedad.filtraporestado);
+router.get('/estado/:estado', novedad.filtraporestado);
 router.get('/', novedad.getnovedades);
 router.post('/', novedad.createnovedad);
 router.get('/:id', novedad.getNovedad);
