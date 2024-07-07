@@ -1,22 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const {mongoose} = require('./database.js');
 var app = express();
 
 //middlewares
-app.use(express.json());
-app.use(cors());
-app.use(cors({origin: 'http://localhost:4200'}));
+//app.use(express.json());
+//app.use(cors());
     
-        // Aumentar el límite de tamaño de carga a 50MB (ajusta según tus necesidades)
-        //app.use(bodyParser.json({ limit: '50mb' }));
-        //app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+              
+app.use(cors({origin: 'http://localhost:4200'}));
+      
 
-        // usando `express.json` y `express.urlencoded`:
-        app.use(express.json({ limit: '50mb' }));
-        app.use(express.urlencoded({ limit: '50mb', extended: true }));
-        
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/local', require('./routes/localRouter'));
 app.use('/api/propietario', require('./routes/propietario.route.js'));
