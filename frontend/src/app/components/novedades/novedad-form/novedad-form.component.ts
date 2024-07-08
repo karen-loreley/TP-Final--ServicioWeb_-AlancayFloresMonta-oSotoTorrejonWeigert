@@ -105,7 +105,7 @@ export class NovedadFormComponent {
     (
       (result) => 
       {
-        if(result.status === 1)
+        if(result.status == 1)
           {
             alert("Novedad actualizada");
             this.router.navigate(['novedad']);

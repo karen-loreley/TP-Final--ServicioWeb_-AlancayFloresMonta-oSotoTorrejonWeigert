@@ -50,7 +50,7 @@ export class NovedadesService {
     return this._http.get("http://localhost:3000/api/novedades/" +_id, httpOption);
   }
 
-  getNovedadByEstado(estado: string): Observable<any>
+  getNovedadesByEstado(estado: string): Observable<any>
   {
     let httpOption = 
     {
