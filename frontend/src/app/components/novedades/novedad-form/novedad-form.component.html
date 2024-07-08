@@ -28,7 +28,7 @@
   
       <div class="d-flex justify-content-between">
         <button type="button" class="btn btn-primary" *ngIf="accion == 'new'" (click)="agregarNovedad()">Agregar</button>
-        <button type="button" class="btn btn-primary" *ngIf="accion == 'update'" (click)="actualizarNovedad()">Actualizar</button>
+        <button type="button" class="btn btn-success" *ngIf="accion == 'update'" (click)="actualizarNovedad()">Actualizar</button>
         <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
       </div>
     </form>

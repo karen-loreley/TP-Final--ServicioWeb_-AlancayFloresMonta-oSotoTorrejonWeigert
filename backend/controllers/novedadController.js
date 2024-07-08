@@ -37,7 +37,17 @@ novedadCtrl.createnovedad = async (req, res) => {
 }
 
 novedadCtrl.getNovedad = async (req, res) => {
-    const novedad = await Novedad.findById(req.params.id).populate('alquiler');
+    const novedad = await Novedad.findById(req.params.id)
+    .populate
+    ({
+        path: 'alquiler',
+        populate: 
+        [
+            { path: 'local' },
+            { path: 'propietario' }
+        ]
+    });
+
     res.json(novedad);
 }
 
@@ -75,7 +85,17 @@ novedadCtrl.deleteNovedad = async (req, res)=>{
 novedadCtrl.filtraporestado= async(req, res)=>{
     try{
         const { estado } = req.params; 
-        const novedad = await Novedad.find({ estado: estado}).populate('alquiler');
+        const novedad = await Novedad.find({ estado: estado})
+        .populate
+    ({
+        path: 'alquiler',
+        populate: 
+        [
+            { path: 'local' },
+            { path: 'propietario' }
+        ]
+    });
+    
         res.json(novedad);
     }
     catch{
