@@ -3,8 +3,19 @@ const Novedad = require('../models/novedad');
 const Usuario=require('../models/usuario');
 const novedadCtrl = {}
 
-novedadCtrl.getnovedades= async (req, res) => {
-    var novedades = await Novedad.find().populate('usuario');
+novedadCtrl.getnovedades= async (req, res) => 
+{
+    var novedades = await Novedad.find()
+    .populate
+    ({
+        path: 'alquiler',
+        populate: 
+        [
+            { path: 'local' },
+            { path: 'propietario' }
+        ]
+    });
+
     res.status(200).json(novedades);
 }
 
@@ -26,7 +37,7 @@ novedadCtrl.createnovedad = async (req, res) => {
 }
 
 novedadCtrl.getNovedad = async (req, res) => {
-    const novedad = await Novedad.findById(req.params.id).populate('usuario');
+    const novedad = await Novedad.findById(req.params.id).populate('alquiler');
     res.json(novedad);
 }
 
@@ -64,7 +75,7 @@ novedadCtrl.deleteNovedad = async (req, res)=>{
 novedadCtrl.filtraporestado= async(req, res)=>{
     try{
         const { estado } = req.params; 
-        const novedad = await Novedad.find({ estado: estado}).populate('usuario');
+        const novedad = await Novedad.find({ estado: estado}).populate('alquiler');
         res.json(novedad);
     }
     catch{
