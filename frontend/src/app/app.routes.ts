@@ -11,6 +11,8 @@ import { AlquilerComponent } from './components/alquileres/alquiler/alquiler.com
 import { PagoComponent } from './components/pagos/pago/pago.component';
 import { AlquilerFormComponent } from './components/alquileres/alquiler-form/alquiler-form.component';
 import { FormPagoComponent } from './components/pagos/form-pago/form-pago.component';
+import { NovedadComponent } from './components/novedades/novedad/novedad.component';
+import { NovedadFormComponent } from './components/novedades/novedad-form/novedad-form.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -37,4 +39,10 @@ export const routes: Routes = [
         {path: 'pago', component: PagoComponent},
         {path: 'pago-form/:id', component: FormPagoComponent},
         {path: 'pago-form', component: FormPagoComponent},
+
+        //novedades
+        {path: 'novedad', component: NovedadComponent},
+        {path: 'novedad/:id', component: NovedadComponent},
+        {path: 'novedad-form', component: NovedadFormComponent},
+        {path: 'novedad-form/:id', component: NovedadFormComponent},
 ];

@@ -1,0 +1,69 @@
+<div class="container">
+
+    <h3 class="mt-5">Novedades disponibles.</h3>
+<button type="button" class="btn btn-primary" (click)="agregarNovedad()">Agregar</button>
+<!--<button type="button" class="btn btn-success" (click)="obtenerTickets()">Recuperar Todos</button>-->
+
+    <div class="mt-4">
+        <div class="row align-items-end mb-3">
+            <div class="col-auto">
+                <label for="estado">Estado:</label>
+                <select name="estado" id="estado" [(ngModel)]="estado" class="form-select w-auto">
+                    <option value="pendiente">Pendiente</option>
+                    <option value="procesado">Procesado</option>
+                    <option value="todos">Todos</option>
+                </select>
+            </div>
+
+            <div class="col-auto">
+                <button type="button" class="btn btn-info mt-2" (click)="obtenerNovedadesByEstado()">Buscar</button>
+            </div>
+            
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Alquiler</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Gestionar</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let n of listaNovedades">
+                <th>{{ n.alquiler.propietario.dni }} : {{ n.alquiler.local.nombre }}</th>
+                <td>{{ n.descripcion }}</td>
+                <td>{{ n.estado }}</td>
+                <td>{{ n.fecha | date: 'dd/MM/yyyy' }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger custom-margin" (click)="openConfirmModal('delete', n._id)">Eliminar</button>
+                    <button type="button" class="btn btn-warning" (click)="openConfirmModal('modify', n._id)">Modificar</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Modal -->
+    <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal($event)">
+        <div class="modal-content small-modal" (click)="$event.stopPropagation()">
+          
+          <h4 class="modal-title" style="font-style: italic; color: aliceblue;">Confirmación</h4>
+          
+          <div class="modal-body">
+            <p style="color: orangered;">{{ modalMessage }}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" *ngIf="modalAction === 'delete'" (click)="confirmAction()">Eliminar</button>
+            <button type="button" class="btn btn-warning" *ngIf="modalAction === 'modify'" (click)="confirmAction()">Modificar</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+          </div>
+        </div>
+    </div>
+      <!-- Fin Modal -->
+    </div>
+
+    
+
+</div>

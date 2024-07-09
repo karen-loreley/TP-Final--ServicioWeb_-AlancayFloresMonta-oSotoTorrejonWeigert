@@ -8,11 +8,9 @@ import { Novedades } from '../models/novedades';
 })
 export class NovedadesService {
 
-  listaNovedades!: Array<Novedades>;
-
   constructor(private _http: HttpClient) { }
 
-  addNovedades(novedades: Novedades): Observable<any>
+  addNovedad(novedades: Novedades): Observable<any>
   {
     console.log(novedades);
     let httpOption = 
@@ -27,7 +25,7 @@ export class NovedadesService {
     return this._http.post("http://localhost:3000/api/novedades", body, httpOption);
   }
 
-  getAlquileres(): Observable<any>
+  getNovedades(): Observable<any>
   {
     let httpOption = 
     {
@@ -39,7 +37,7 @@ export class NovedadesService {
     return this._http.get("http://localhost:3000/api/novedades", httpOption);
   }
 
-  getAlquilerById(_id: string): Observable<any>
+  getNovedadById(_id: string): Observable<any>
   {
     let httpOption = 
     {
@@ -52,7 +50,19 @@ export class NovedadesService {
     return this._http.get("http://localhost:3000/api/novedades/" +_id, httpOption);
   }
 
-  updateAlquiler(novedades: Novedades): Observable<any> 
+  getNovedadesByEstado(estado: string): Observable<any>
+  {
+    let httpOption = 
+    {
+      headers: new HttpHeaders
+      ({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this._http.get("http://localhost:3000/api/novedades/estado/" +estado, httpOption);
+  }
+
+  updateNovedad(novedades: Novedades): Observable<any> 
   { 
     let httpOption = 
     {
@@ -66,7 +76,7 @@ export class NovedadesService {
     return this._http.put("http://localhost:3000/api/novedades/" + novedades._id, body, httpOption);
   }
 
-  deleteAlquiler(_id: string): Observable<any>
+  deleteNovedad(_id: string): Observable<any>
   {
     let httpOption = 
     {

@@ -16,4 +16,9 @@ export class HeaderComponent {
   {
     this.router.navigate(['alquiler-form', 0]);
   }
+
+  agregarNovedad()
+  {
+    this.router.navigate(['novedad-form', 0]);
+  }
 }
