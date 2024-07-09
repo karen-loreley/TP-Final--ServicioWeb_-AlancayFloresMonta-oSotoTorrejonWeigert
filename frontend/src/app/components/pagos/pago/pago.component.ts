@@ -10,6 +10,12 @@ import { Local } from '../../../models/local';
 Chart.register(...registerables);
 
 
+import { OnInit } from '@angular/core';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
+// SDK de Mercado Pago
+import { MercadoPagoConfig, Preference } from 'mercadopago';
+// Agrega credenciales
 
 
 @Component({
@@ -49,7 +55,38 @@ export class PagoComponent {
     this.obtenerLocales();
   }
 
+  ngOnInit(): void {
+    initMercadoPago('APP_USR-3ce1d8d4-7bb5-436b-aa13-ea7e69546323', {
+      locale: "es-AR"
+    });
+  }
+  mercadoPago(t: Pago) {
+    const client = new MercadoPagoConfig({ accessToken: 'YOUR_ACCESS_TOKEN' });
+
+    const preference = new Preference(client);
+
+    preference.create({
+      body: {
+        items: [
+          {
+            id: t._id, // ID único del artículo
+            title: t.local.nombre,
+            description: 'Descripción del producto 1',
+            unit_price: 1000, // Precio unitario en centavos
+            quantity: parseInt(t._id),
+            currency_id: 'ARS', // Moneda (por ejemplo, ARS para pesos argentinos)
+            
+          }
+        ],
+      }
+    })
+      .then(console.log)
+      .catch(console.log);
+
+
+  }
   obtenerPagos() {
+
     this.pagoService.getPagos().subscribe(
       data => {
         this.listaPagos = data;
@@ -61,6 +98,7 @@ export class PagoComponent {
 
         this.listaPagos.forEach(pago => {
           const mes = new Date(pago.mes).getMonth();
+
           if (mes == 0) {
             this.enero++;
           }
@@ -99,7 +137,7 @@ export class PagoComponent {
           }
 
         });
-        
+
       },
       error => {
         console.log(error);
@@ -108,7 +146,7 @@ export class PagoComponent {
     )
 
   }
-  obtenerLocales(){
+  obtenerLocales() {
     this.pagoService.getPagos().subscribe(
       data => {
         this.listaPagos = data;
@@ -124,7 +162,7 @@ export class PagoComponent {
             this.local2++;
           }
         });
-        
+
       },
       error => {
         console.log(error);
@@ -261,4 +299,7 @@ export class PagoComponent {
       }
     }
       */
+
+
+
 }
