@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LocalComponent } from './components/locals/local/local.component';
 import { LocalFormComponent } from './components/locals/local-form/local-form.component';
 import { LoginComponent } from './components/usuarios/login/login.component';
+import { CrudPromocinoComponent } from './components/alquileres/crud-promocino/crud-promocino.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -25,5 +26,7 @@ export const routes: Routes = [
         {path: 'local', component: LocalComponent},
         {path: 'local-form/:id', component: LocalFormComponent},
 
+        //ppromociones o ofertas
 
+        {path: 'promociones', component: CrudPromocinoComponent},
 ];

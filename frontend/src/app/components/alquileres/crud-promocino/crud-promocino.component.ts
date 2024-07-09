@@ -1,20 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Promocion } from '../../../models/promocion';
 import { Local } from '../../../models/local';
 import { ActivatedRoute } from '@angular/router';
 import { PromocionService } from '../../../services/promocion.service';
 import { LocalService } from '../../../services/local.service';
+import { FacebookModule, FacebookService, InitParams } from 'ngx-facebook';
+import { ApiMethod } from 'ngx-facebook/providers/facebook';
+
 
 @Component({
   selector: 'app-crud-promocino',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FacebookModule.forRoot()],
   templateUrl: './crud-promocino.component.html',
   styleUrl: './crud-promocino.component.css'
 })
-export class CrudPromocinoComponent {
+export class CrudPromocinoComponent implements OnInit{
 
   promocion!:Promocion;
   promociones!: Array<Promocion>;
@@ -22,14 +25,17 @@ export class CrudPromocinoComponent {
   form: boolean=true;
   locales!: Array<Local>;
   promocionId: string | null = null;
+  mensaje: string='';
 
   constructor(private activateRouter: ActivatedRoute,
               private promocionservice:PromocionService,
-              private localService: LocalService
+              private localService: LocalService,
+              private fb: FacebookService
   ){
    this.obtenerPromocion();
     this.iniciarvariable();
     this.obtenerLocales(); 
+    this.iniciarFb();
   }
 
   ngOnInit():void{
@@ -110,14 +116,14 @@ export class CrudPromocinoComponent {
   }
 
   obtenerLocales(): void {
-    this.localService.getLocal().subscribe(
+    this.localService.getLocales().subscribe(
       data => {
         this.locales = data;
       },
       error => {
         console.log(error);
       }
-    );
+    )
   }
 
   agregar(): void{
@@ -148,4 +154,28 @@ export class CrudPromocinoComponent {
     );
   }
 
+  postFb(){
+    var apiMethod: ApiMethod = "post";
+    this.fb.api('/363849570145163/feed', apiMethod,
+      {
+      "message": this.mensaje,
+      "access_token":"EAALOPZAFU72ABO5WD1qLgv1YAZA0kneCsqWZAbnLuLtCq2d0lPGJR1RNpChfxHa8TJSKy2KGuAERqsaE6ZAznlNtJVZASJOSfCzLc4ZB5VkEZB8hqAKaWIrXCXhRe2iVstTk1JKUKkMK0Xod45TYrwpNy0cw2el3bZCFu4Wz5svha6kKZBnH7eIwEOHxczoF1LnIHySzbq7lMZCBYaYIUHNA0ZD"
+       
+    }
+    ).then((response: any) => {
+      console.log('Publicación exitosa:', response);
+    }).catch((error: any) => {
+      console.error('Error al publicar en Facebook:', error);
+    });
+ }
+
+ iniciarFb(){
+ let initParams: InitParams = {
+ appId: '789713780010848',
+ autoLogAppEvents : true,
+ xfbml : true,
+ version : 'v20.0'
+ };
+ this.fb.init(initParams);
+ }
 }
