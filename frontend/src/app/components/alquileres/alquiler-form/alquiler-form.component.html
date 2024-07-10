@@ -25,10 +25,12 @@
 
     <div class="mb-3">
       <label for="fechaAlquiler" class="form-label">Fecha</label>
-      <input type="date" class="form-control" id="fechaAlquiler" name="fechaAlquiler" [(ngModel)]="alquiler.fechaAlquiler">
+      <input type="date" class="form-control w-auto" id="fechaAlquiler" name="fechaAlquiler" [(ngModel)]="alquiler.fechaAlquiler">
     </div>
     
-    <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarAlquiler()">Agregar</button>
-    <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarAlquiler()">Actualizar</button>
-    <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
+    <div class="d-flex justify-content-between">
+      <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarAlquiler()">Agregar</button>
+      <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarAlquiler()">Actualizar</button>
+      <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
+    </div>
   </form>

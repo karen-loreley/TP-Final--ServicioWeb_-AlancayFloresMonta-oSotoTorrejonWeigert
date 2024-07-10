@@ -14,9 +14,10 @@ import { CommonModule } from '@angular/common';
 })
 export class UsuarioFormComponent {
   usuario!: Usuario;
-  //espectador: Espectador;
   usuarios: Array<Usuario>;
-  accion: string = "new"; 
+  mostrarContrasena = false;
+  randomPassword: string = "";
+  accion: string = "new"; //accion tendra los valores de new y update
 
   constructor(private usuarioService: UsuarioService, private router: Router, private activatedRoute: ActivatedRoute){
     this.usuarios = new Array<Usuario>();
@@ -41,10 +42,18 @@ export class UsuarioFormComponent {
     }
 
     registrarUsuario():void{
+
+      if (this.randomPassword) {
+              // Si hay una contraseña generada, se guarda en usuario.password
+              this.usuario.password = this.randomPassword;
+          }
+
       this.usuarioService.addUsuario(this.usuario).subscribe(
         respond => {
           if(respond.status == 1){
+            
             alert("El usuario se agrego correctamente");
+            console.log(respond);
             this.router.navigate(['crud-usuarios']);
           }
         },
@@ -56,13 +65,25 @@ export class UsuarioFormComponent {
       this.usuario = new Usuario(); 
     }
 
+    verContrasenaEncriptada() {
+      this.mostrarContrasena = !this.mostrarContrasena;
+  }
+
+  obtenerRandomPassword(){
+    this.usuarioService.getRandomPassword().subscribe(
+      respond =>{
+        this.randomPassword = respond.password;
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+  }
+
     cargarUsuario(id: string){
       this.usuarioService.getUsuario(id).subscribe(
         respond => {
-          //this.ticket = respond;
-          //console.log(this.ticket);
          Object.assign(this.usuario, respond);
-        //this.ticket.espectador = this.espectadores.find(espectador => (espectador._id === this.ticket.espectador._id))!;
         }
       )
     }

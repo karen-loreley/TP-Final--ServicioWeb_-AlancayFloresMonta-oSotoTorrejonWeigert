@@ -1,16 +1,18 @@
-import { Usuario } from "./usuario";
+import { Alquiler } from "./alquiler";
 
 export class Novedades {
 
     _id!: string;
-    usuario: Usuario;
-    texto: string;
+    alquiler: Alquiler;
+    fecha: Date;
+    descripcion: string;
     estado: string;
 
     constructor()
     {
-        this.usuario = new Usuario();
-        this.texto = "";
+        this.alquiler = new Alquiler();
+        this.fecha = new Date();
+        this.descripcion = "";
         this.estado = "";
     }
 }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Usuario } from '../models/usuario';
 
 @Injectable({
@@ -9,34 +9,53 @@ import { Usuario } from '../models/usuario';
 export class LoginService {
 
   hostBase: string;
+  private isLoggedIn = false;
+
 
   constructor(private _http:HttpClient) {
     this.hostBase = "http://localhost:3000/api/usuario/";
   }
 
-  public login(usuario: string, password: string):Observable<any> {
+  public login(usuario: string, password: string): Observable<any> {
     const httpOption = {
       headers: new HttpHeaders({
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
       })
+    };
+    let body = JSON.stringify({ usuario: usuario, password: password });
+    console.log(body);
+    return this._http.post(this.hostBase + 'login', body, httpOption).pipe(
+      tap((response: any) => {
+        if (response && response.token) {
+          sessionStorage.setItem("token", response.token);
+          sessionStorage.setItem("user", JSON.stringify({
+            usuario: response.usuario,
+            perfil: response.perfil,
+            userid: response.userid // Guarda userid en el JSON
+          }));
+          this.isLoggedIn = true;
+        }
+      })
+    );
+  }
+  
+    public userLoggedIn(): boolean {
+      const user = sessionStorage.getItem("user");
+      return this.isLoggedIn || user != null;
     }
-      let body = JSON.stringify({ usuario: usuario, password: password });
-      console.log(body);
-      return this._http.post(this.hostBase + 'login', body, httpOption);
-  }
-
-  public userLoggedIn(){
-      var resultado = false;
-      var usuario = sessionStorage.getItem("user");
-      if(usuario!=null){
-        resultado = true;
-      }
-      return resultado;
-  }
 
   public userLogged(){
-      var usuario = sessionStorage.getItem("user");
-      return usuario;
+    const usuario = sessionStorage.getItem("user");
+    if (usuario) {
+    try {
+      return JSON.parse(usuario);
+    } catch (e) {
+      console.error('Error al parsear el usuario:', e);
+      sessionStorage.removeItem("user");
+      return null; // Retorna null si el JSON no es válido
+    }
+  }
+  return null;
   }
 
   public idLogged(){
@@ -51,6 +70,8 @@ export class LoginService {
       sessionStorage.removeItem("token");
       sessionStorage.removeItem("user");
       sessionStorage.removeItem("userid");
+      sessionStorage.removeItem("perfil");
+      this.isLoggedIn = false;
     }
   getToken():string{
       if (sessionStorage.getItem("token")!= null){
@@ -58,5 +79,8 @@ export class LoginService {
     }else{
       return "";
     }
+  }
+  setLoggedIn(loggedIn: boolean) {
+    this.isLoggedIn = loggedIn;
   }
 }

@@ -3,10 +3,7 @@ const cors = require('cors');
 const {mongoose} = require('./database.js');
 var app = express();
 
-//middlewares
-//app.use(express.json());
-//app.use(cors());
-    
+//middlewares    
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
               
@@ -17,10 +14,9 @@ app.use(cors({origin: 'http://localhost:4200'}));
 app.use('/api/local', require('./routes/localRouter'));
 app.use('/api/propietario', require('./routes/propietario.route.js'));
 app.use('/api/alquiler', require('./routes/alquiler.route.js'));
-app.use('/api/novedades', require('./routes/novedadesRouter'));
+app.use('/api/novedades', require('./routes/novedadRouter.js'));
 app.use('/api/usuario', require('./routes/usuario.route.js'));
 app.use('/api/promocion', require('./routes/PromocionesRouter.js'));
-
 app.use('/api/pago', require('./routes/pago.route.js'));
 
 //setting

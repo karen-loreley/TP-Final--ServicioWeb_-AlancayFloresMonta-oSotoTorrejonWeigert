@@ -5,6 +5,7 @@ import { UsuarioService } from '../../../services/usuario.service';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-crud-usuarios',
   standalone: true,
@@ -16,19 +17,29 @@ export class CrudUsuariosComponent {
 
   parametro: string = "";
   usuarios: Array<Usuario>;
+  perfil: string = "";
+  perfiles:string[]=['administrativo','dueño','propietario']
+
   
   constructor(private usuarioService: UsuarioService, private router: Router){
     this.usuarios = new Array<Usuario>();
     this.obtenerUsuarios();
+    this.perfil = '';
   }
 
+  
   obtenerUsuarios() {
     this.usuarioService.getTodosUsuarios().subscribe(
-      respond => {
-        this.usuarios = respond;
+      (usuarios: Usuario[]) => {
+        this.usuarios = usuarios;      
         console.log(this.usuarios);
-        });
-    }
+        this.filtrarPorPefil(this.perfil)
+      },
+      error => {
+        console.error('Error al obtener usuarios:', error);
+      }
+    );
+  }
     
     buscarNombreUsuarioOPerfil(){
         if (!this.parametro) {
@@ -42,6 +53,14 @@ export class CrudUsuariosComponent {
                   console.log(error);
               }
           );
+      }
+    }
+
+    filtrarPorPefil(perfil:string){
+      if(perfil === ""){
+        this.usuarios = this.usuarios;
+      }else{
+        this.usuarios=this.usuarios.filter(usuario => usuario.perfil === perfil)
       }
     }
 
@@ -63,6 +82,10 @@ export class CrudUsuariosComponent {
       }
     );
     
-    }
+  }
 
+  cambiarPerfil(perfil:string){
+    this.perfil = perfil;
+    this.filtrarPorPefil(perfil);
+  }
 }

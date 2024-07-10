@@ -28,29 +28,31 @@ export class LoginComponent implements OnInit{
 
     login() {
       this.loginService.login(this.userform.usuario, this.userform.password).subscribe(
-      (result) => {
-          var usuario = result;
-          if (usuario.status == 1){
-
-            sessionStorage.setItem("token", usuario.token);
-            sessionStorage.setItem("user", usuario.username);
-            sessionStorage.setItem("userid", usuario.userid);
-            sessionStorage.setItem("perfil", usuario.perfil);
-
-          this.router.navigateByUrl(this.returnUrl);
+        (result) => {
+          const usuario = result;
+          if (usuario.status === 1) {
+            // Guardar el token y los datos del usuario
+            sessionStorage.setItem("user", result.usuario);
+            sessionStorage.setItem("userid", result._id);
+            sessionStorage.setItem("perfil", result.perfil);
+            sessionStorage.setItem("token", result.token);
+            this.loginService.setLoggedIn(true);
+            console.log('login correcto');
+            this.router.navigate(['home']);
           } else {
-            this.msglogin="Credenciales incorrectas..";
+            this.msglogin = "Credenciales incorrectas..";
           }
-      },
-      error => {
-          alert("Error de conexion");
-          console.log("error en conexion");
+        },
+        error => {
+          alert("Error de conexión");
+          console.log("error en conexión");
           console.log(error);
-      });
+        }
+      );
   }
 
-  formusuario(){
-    this.router.navigate(['usuario-form']);
+  registrarse(){
+    this.router.navigate(['usuario-form',0]);
   }
 
 }

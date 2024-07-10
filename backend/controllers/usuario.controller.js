@@ -1,29 +1,28 @@
 const mongoose = require('mongoose');
 const Usuario = require('../models/usuario');
-const usuarioCtrl = {}
 
-//login
+const usuarioCtrl = {}
 const jwt = require('jsonwebtoken');
 
 usuarioCtrl.getUsuarios = async (req, res) => {
     var usuarios = await Usuario.find();
     res.json(usuarios);
 }
-usuarioCtrl.createUsuario = async (req, res) => {
+
+usuarioCtrl.createUsuarios = async (req, res) => {
     var usuario = new Usuario(req.body);
     try {
         await usuario.save();
-        res.json({
-            'status': '1',
-            'msg': 'Usuario guardado.'
-        })
+        console.log("Enviando usuario:", usuario); // Para depuración
+        res.status(200).json({
+            status: '1',
+            msg: 'Usuario creado exitosamente.'
+        });
     } catch (error) {
-        res.status(400).json({
-            'status': '0',
-            'msg': 'Error procesando operacion.'
-        })
+        console.error('Error al crear usuario:', error);
     }
-}
+};
+
 usuarioCtrl.getUsuario = async (req, res) => {
     try {
         const userId = req.params.id;
@@ -89,14 +88,14 @@ usuarioCtrl.loginUsuario = async (req, res) => {
                 msg: "not found"
             })
         } else {
-            const unToken = jwt.sign({id:user._id},"secretKey");
+            const unToken = jwt.sign({id: user._id}, "secretkey");
             res.json({
                 status: 1,
                 msg: "success",
-                usuario: user.usuario, //retorno información útil para el frontend
-                perfil: user.perfil, //retorno información útil para el frontend
-                userid: user._id, //retorno información útil para el frontend
-                token:unToken, //retorno el token
+                usuario: user.usuario, 
+                perfil: user.perfil, 
+                token:unToken,
+                userid: user._id.toString()//retorno información útil para el frontend
             })
         }
     } catch (error) {
@@ -122,4 +121,5 @@ usuarioCtrl.getNombreUsuarioOPerfil = async (req, res) => {
         res.status(500).json({ error: 'Error al buscar usuarios' });
     }
 }
-    module.exports = usuarioCtrl;
+
+module.exports = usuarioCtrl;

@@ -29,7 +29,8 @@ export class UsuarioService {
     }
 
     let body: any = JSON.stringify(usuario);
-
+    console.log("Cuerpo de la solicitud:", body); 
+    console.log("Enviando usuario:", usuario);
     return this._http.post(this.urlBase, body,httpOption);
   }
 
@@ -72,5 +73,16 @@ export class UsuarioService {
     }
 
     return this._http.get(this.urlBase + 'buscar/' + parametro, httpOption);
+  }
+
+  getRandomPassword(): Observable<any>{
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'X-RapidAPI-Host': 'password-generator24.p.rapidapi.com',
+        'X-RapidAPI-Key': 'c6db663476msh598612b49b9b0e2p1f1ac6jsnd48dd6189f01'
+      }),
+    }
+    return this._http.get("https://password-generator24.p.rapidapi.com/Password_Generator?length=8&use_lower=true&use_upper=true&use_digits=true&use_symbols=false", httpOptions);
   }
 }

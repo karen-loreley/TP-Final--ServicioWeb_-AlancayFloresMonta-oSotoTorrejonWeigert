@@ -110,7 +110,7 @@ export class CrudPromocinoComponent {
   }
 
   obtenerLocales(): void {
-    this.localService.getLocal().subscribe(
+    this.localService.getLocales().subscribe(
       data => {
         this.locales = data;
       },

@@ -10,11 +10,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     provideHttpClient(), 
     provideClientHydration(),
+    provideHttpClient(withInterceptorsFromDi()),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    },
-    provideHttpClient(withInterceptorsFromDi())
+    }, 
   ]
 };
