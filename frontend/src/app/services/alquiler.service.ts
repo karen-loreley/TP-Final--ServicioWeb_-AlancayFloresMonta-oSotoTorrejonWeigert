@@ -88,4 +88,14 @@ export class AlquilerService {
 
     return this._http.delete(`http://localhost:3000/api/alquiler/${_id}`, httpOption);
   }
+
+  deleteAlquilerPorLocalId(localId: string): Observable<any> {
+    let httpOption = {
+        headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+        })
+    };
+    return this._http.delete(`http://localhost:3000/api/alquiler/local/${localId}`, httpOption);
+}
+
 }

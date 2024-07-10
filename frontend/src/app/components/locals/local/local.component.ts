@@ -91,6 +91,22 @@ export class LocalComponent {
 
               this.obtenerLocales(this.currentPage);
             }
+            //this.eliminarAlquilerPorLocal(); //cuando se elimina el loca, tambien eliminar el Alquiler, porque sino genera errores
+        },
+        error => 
+        {
+          console.log(error);
+        }
+    )
+  }
+
+  eliminarAlquilerPorLocal(_id: string)
+  {
+    this.alquilerService.deleteAlquiler(_id).subscribe
+    (
+      data => 
+        {
+          this.obtenerLocales(this.currentPage);
         },
         error => 
         {

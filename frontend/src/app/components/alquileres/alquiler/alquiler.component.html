@@ -32,6 +32,16 @@
           </div>
         </div>
 
+        <div class="col-8" *ngIf="novedad">
+          <div class="info-box" style="color: black;">
+            <h4>Novedades</h4>
+            <p><strong>Descripción: </strong>{{ novedad.descripcion }}</p>
+            <p><strong>Estado: </strong>{{ novedad.estado}}</p>
+            <p><strong>Fecha: </strong>{{ novedad.fecha | date: 'dd/MM/yyyy' }}</p>
+            <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="editarNovedad(novedad._id)">Editar Novedad</button>
+          </div>
+        </div>
+
       </div>
 
     </div>
@@ -43,5 +53,5 @@
       <h4 class="col-4">El Alquiler de este Local todavía no existe...</h4>
       <button type="button" class=" col-2 btn btn-success mb-0 mt-3 me-2" (click)="agregarAlquiler()" >Crear Alquiler..</button>
     </div>
-    <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
+    <button type="button" class="btn btn-danger mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
   </div>
