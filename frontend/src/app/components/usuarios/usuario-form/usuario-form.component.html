@@ -9,8 +9,8 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input type="password" class="formcontrol"  id="password" name="password" [(ngModel)]="usuario.password" />
-                <i class="bi bi-lock-fill"></i>
+                <input [type]="mostrarContrasena ? 'text' : 'password'" class="formcontrol"  id="password" name="password" [(ngModel)]="usuario.password" />
+                <i [class]="mostrarContrasena ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" (click)="verContrasenaEncriptada()"></i>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>

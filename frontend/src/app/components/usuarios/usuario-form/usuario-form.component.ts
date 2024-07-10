@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 export class UsuarioFormComponent {
   usuario!: Usuario;
   usuarios: Array<Usuario>;
+  mostrarContrasena = false;
   accion: string = "new"; //accion tendra los valores de new y update
 
   constructor(private usuarioService: UsuarioService, private router: Router, private activatedRoute: ActivatedRoute){
@@ -54,6 +55,10 @@ export class UsuarioFormComponent {
       );
       this.usuario = new Usuario(); 
     }
+
+    verContrasenaEncriptada() {
+      this.mostrarContrasena = !this.mostrarContrasena;
+  }
 
 
     cargarUsuario(id: string){
