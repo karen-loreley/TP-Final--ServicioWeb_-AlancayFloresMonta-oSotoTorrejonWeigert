@@ -9,8 +9,11 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <input [type]="mostrarContrasena ? 'text' : 'password'" class="formcontrol"  id="password" name="password" [(ngModel)]="usuario.password" />
+                <input [type]="mostrarContrasena ? 'text' : 'password'" class="formcontrol"  id="password" name="password" [(ngModel)]="usuario.password" [value]=randomPassword/>
                 <i [class]="mostrarContrasena ? 'bi bi-eye-fill' : 'bi bi-eye-slash-fill'" (click)="verContrasenaEncriptada()"></i>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-secondary" (click)="obtenerRandomPassword()">Generar Contraseña</button>
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
