@@ -181,4 +181,9 @@ export class LocalComponent {
       this.isModalOpen = false;
     }
 
+    //boton realizar pago
+    realizarPago(id: string | undefined): void{
+      this.router.navigate(['pago-form', id]);
+    }
+
 }

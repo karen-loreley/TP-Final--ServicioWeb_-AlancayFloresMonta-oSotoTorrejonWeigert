@@ -44,6 +44,22 @@ export class PagoComponent {
   noviembre: number = 0;
   diciembre: number = 0;
 
+  totalEnero: number = 0;
+  totalFebrero: number = 0;
+  totalMarzo: number = 0;
+  totalAbril: number = 0;
+  totalMayo: number = 0;
+  totalJunio: number = 0;
+  totalJulio: number = 0;
+  totalAgosto: number = 0;
+  totalSeptiembre: number = 0;
+  totalOctubre: number = 0;
+  totalNoviembre: number = 0;
+  totalDiciembre: number = 0;
+
+
+
+
   local1: number = 0;
   local2: number = 0;
 
@@ -75,7 +91,7 @@ export class PagoComponent {
             unit_price: 1000, // Precio unitario en centavos
             quantity: parseInt(t._id),
             currency_id: 'ARS', // Moneda (por ejemplo, ARS para pesos argentinos)
-            
+
           }
         ],
       }
@@ -101,39 +117,63 @@ export class PagoComponent {
 
           if (mes == 0) {
             this.enero++;
+            this.totalEnero += pago.local.costomes;
           }
           if (mes == 1) {
             this.febrero++;
+            this.totalFebrero += pago.local.costomes;
+
           }
           if (mes == 2) {
             this.marzo++;
+            this.totalMarzo += pago.local.costomes;
+
           }
           if (mes == 3) {
             this.abril++;
+            this.totalAbril += pago.local.costomes;
+            
+
           }
           if (mes == 4) {
             this.mayo++;
+            this.totalMayo += pago.local.costomes;
+
           }
           if (mes == 5) {
             this.junio++;
+            this.totalJunio += pago.local.costomes;
+
           }
           if (mes == 6) {
             this.julio++;
+            this.totalJulio += pago.local.costomes;
+
           }
           if (mes == 7) {
             this.agosto++;
+            this.totalAgosto += pago.local.costomes;
+
           }
           if (mes == 8) {
             this.septiembre++;
+            this.totalSeptiembre += pago.local.costomes;
+
           }
           if (mes == 9) {
             this.octubre++;
+            this.totalOctubre += pago.local.costomes;
+
           }
           if (mes == 10) {
             this.noviembre++;
+            this.totalNoviembre += pago.local.costomes;
+
           }
           if (mes == 11) {
             this.diciembre++;
+            this.totalDiciembre += pago.local.costomes;
+
           }
 
         });
@@ -187,7 +227,7 @@ export class PagoComponent {
         labels: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
         datasets: [{
           label: 'Pagos realizados',
-          data: [this.enero, this.febrero, this.marzo, this.abril, this.mayo, this.junio, this.julio, this.agosto, this.septiembre, this.octubre, this.noviembre, this.diciembre],
+          data: [this.totalEnero, this.totalFebrero, this.totalMarzo, this.totalAbril, this.totalMayo, this.totalJunio, this.totalJulio, this.totalAgosto, this.totalSeptiembre, this.totalOctubre, this.totalNoviembre, this.totalDiciembre],
           backgroundColor: [
             'rgba(75, 192, 192, 0.2)',    // Color para la primera barra
             'rgba(255, 99, 132, 0.2)',    // Color para la segunda barra
@@ -210,7 +250,10 @@ export class PagoComponent {
         scales: {
           y: {
             beginAtZero: true,
-            max: 7 // Establece el valor máximo
+            max: 1000, // Cambia el valor máximo a un número más grande
+            ticks: {
+              stepSize: 100 // Ajusta el tamaño del paso entre las marcas de graduación
+            }
 
           }
         }
