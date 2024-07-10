@@ -36,6 +36,13 @@
               <li class="nav-item" *ngIf="isAdmin()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['/pago']">Listado de Pago</a>
               </li>
+              <li class="nav-item dropdown" *ngIf="isAdmin()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Novedades</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['novedad']">Listado</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['novedad-form/0']">Crear Novedad</a></li>
+                </ul>
+            </li>
               <li class="nav-item" *ngIf="isAdmin()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['novedad-form/0']">Crear Novedad</a>
               </li>
@@ -56,6 +63,13 @@
               <li class="nav-item" *ngIf="isPropi()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['/promo-form']">Realizar Promocion</a>
               </li>
+              <li class="nav-item dropdown" *ngIf="isPropi()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Propietarios</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['propietario']">Listado</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['propietario-form/0']">Crear Propietario</a></li>
+                </ul>
+            </li>
 
 
               <!-- DUEÑO -->
@@ -71,6 +85,7 @@
               <li class="nav-item" *ngIf="isDuenio()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['alquiler/pago']">Pagar Alquiler</a>
               </li>
+
 
 
               <!-- Botones Usuario -->

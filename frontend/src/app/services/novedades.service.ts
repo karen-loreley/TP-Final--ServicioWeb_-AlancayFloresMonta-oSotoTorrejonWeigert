@@ -62,6 +62,18 @@ export class NovedadesService {
     return this._http.get("http://localhost:3000/api/novedades/estado/" +estado, httpOption);
   }
 
+  getNovedadByAlquilerId(alquilerId: string): Observable<any>
+  {
+    let httpOption = 
+    {
+      headers: new HttpHeaders
+      ({
+        'Content-Type': 'application/json'
+      })
+    }
+    return this._http.get(`http://localhost:3000/api/novedades/alquiler/${alquilerId}`, httpOption);
+  }
+
   updateNovedad(novedades: Novedades): Observable<any> 
   { 
     let httpOption = 

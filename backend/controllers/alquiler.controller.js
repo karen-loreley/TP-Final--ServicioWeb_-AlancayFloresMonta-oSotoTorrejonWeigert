@@ -123,6 +123,31 @@ alquilerCtrl.deleteAlquiler = async (req, res) =>
         })
     }
 }
+
+alquilerCtrl.deleteAlquilerPorLocalId = async (req, res) => 
+{
+    const alquiler = await Alquiler.findOne({ local: req.params.localId });
+    const localId = req.params.localId;
+    try 
+    {
+        const result = await Alquiler.deleteOne({ alquiler });
+        res.json
+        ({
+            status: '1',
+            msg: 'Alquiler(es) asociado(s) eliminado(s)'
+        });
+    } 
+    catch (error) 
+    {
+        console.error('Error eliminando alquiler(es) asociado(s):', error);
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando la operación delete'
+        });
+    }
+}
+
 //este filtro en proceso 
 alquilerCtrl.getAlquileresPorAño = async (req, res) => 
     {

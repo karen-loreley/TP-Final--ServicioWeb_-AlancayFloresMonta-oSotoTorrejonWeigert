@@ -51,6 +51,23 @@ novedadCtrl.getNovedad = async (req, res) => {
     res.json(novedad);
 }
 
+novedadCtrl.getNovedadByAlquilerId = async (req, res) => 
+    {
+        try 
+        {
+            const novedad = await Novedad.findOne({ alquiler: req.params.alquilerId }).populate('alquiler');
+            /*if (!alquiler) 
+            {
+                return res.status(404).json({ status: '0', msg: 'No se encontró el novedad para este local' });
+            }*/
+                res.json(novedad);
+        } 
+        catch (error) 
+        {
+            //res.status(400).json({ status: '0', msg: 'Error procesando operación' });
+        }
+    }
+
 novedadCtrl.editNovedad = async (req, res) => {
     const vnovedad = new Novedad(req.body);
         try {

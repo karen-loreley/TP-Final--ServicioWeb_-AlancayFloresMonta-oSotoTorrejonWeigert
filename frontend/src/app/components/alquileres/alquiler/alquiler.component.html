@@ -32,6 +32,16 @@
           </div>
         </div>
 
+        <div class="col-8" *ngIf="novedad">
+          <div class="info-box" style="color: black;">
+            <h4>Novedades</h4>
+            <p><strong>Descripción: </strong>{{ novedad.descripcion }}</p>
+            <p><strong>Estado: </strong>{{ novedad.estado}}</p>
+            <p><strong>Fecha: </strong>{{ novedad.fecha | date: 'dd/MM/yyyy' }}</p>
+            <button type="button" class="btn btn-secondary mb-0 mt-3 me-2" (click)="editarNovedad(novedad._id)">Editar Novedad</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

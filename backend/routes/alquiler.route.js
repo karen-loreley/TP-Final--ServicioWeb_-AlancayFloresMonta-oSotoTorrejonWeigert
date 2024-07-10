@@ -13,6 +13,13 @@ router.get('/:id', autCtrl.verifyToken,alquilerCtrl.getAlquiler);
 router.get('/local/:localId', autCtrl.verifyToken,alquilerCtrl.getAlquilerByLocalId);
 router.put('/:id',autCtrl.verifyToken, alquilerCtrl.editAlquiler);
 router.delete('/:id',autCtrl.verifyToken, alquilerCtrl.deleteAlquiler);
+router.get('/', alquilerCtrl.getAlquileres);
+router.post('/', alquilerCtrl.createAlquiler);
+router.get('/:id', alquilerCtrl.getAlquiler);
+router.get('/local/:localId', alquilerCtrl.getAlquilerByLocalId);
+router.put('/:id', alquilerCtrl.editAlquiler);
+router.delete('/:id', alquilerCtrl.deleteAlquiler);
+router.delete('/local/:localId', alquilerCtrl.deleteAlquilerPorLocalId);
 
 //exportamos el modulo de rutas
 module.exports = router;
