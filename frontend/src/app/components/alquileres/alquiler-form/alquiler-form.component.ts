@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Alquiler } from '../../../models/alquiler';
@@ -8,6 +8,8 @@ import { AlquilerService } from '../../../services/alquiler.service';
 import { LocalService } from '../../../services/local.service';
 import { Propietario } from '../../../models/propietario';
 import { PropietarioService } from '../../../services/propietario.service';
+import { UsuarioService } from '../../../services/usuario.service';
+import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'app-alquiler-form',
@@ -16,7 +18,7 @@ import { PropietarioService } from '../../../services/propietario.service';
   templateUrl: './alquiler-form.component.html',
   styleUrl: './alquiler-form.component.css'
 })
-export class AlquilerFormComponent {
+export class AlquilerFormComponent implements OnInit {
 
   alquiler: Alquiler = new Alquiler();
   listaLocales: Local[] = [];
@@ -29,6 +31,7 @@ export class AlquilerFormComponent {
     private alquilerService: AlquilerService,
     private localService: LocalService,
     private propietarioService: PropietarioService,
+    private usuarioService: UsuarioService,
     private router: Router)
   {
     //this.iniciarVariable();
@@ -131,21 +134,14 @@ export class AlquilerFormComponent {
     );
   }
 
-  cargarPropietarios(): void
-  {
-    this.propietarioService.getPropietarios().subscribe
-    (
-      (result) => 
-      {
-        console.log('Propietarios:', result);
-        this.listaPropietarios = result;
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
+  cargarPropietarios(): void{
+    this.propietarioService.getPropietarios().subscribe(
+      propietarios => this.listaPropietarios = propietarios,
+      error => console.error(error)
     );
   }
+
+  
 
   cancelar()
   {

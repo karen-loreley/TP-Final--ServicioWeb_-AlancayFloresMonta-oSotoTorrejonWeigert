@@ -3,7 +3,7 @@
 
     <div class="mb-3">
         <label for="propietario" class="form-label">Propietario</label>
-        <select name="propietario" id="propietario" [(ngModel)]="alquiler.propietario._id" class="form-select" required>
+        <select name="propietario" id="propietario" [(ngModel)]="alquiler.propietario" class="form-select" required>
           <option *ngFor="let p of listaPropietarios" [ngValue]="p._id">{{ p.nombres }} {{ p.apellido }}</option>
         </select>
   <!---->

@@ -52,7 +52,15 @@ export class PropietarioService {
     return this._http.get("http://localhost:3000/api/propietario/" +_id, httpOption);
   }
 
-  updatePropietario(propietario: Propietario): Observable<any> 
+  // Nuevo método para obtener propietario por el ID del usuario
+  getPropietarioByUsuarioId(usuarioId: string): Observable<any> {
+    let httpOption = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+    return this._http.get(`http://localhost:3000/api/propietario/usuario/${usuarioId}`, httpOption);
+  }
+  
+  updatePropietario(id: string, propietario: Propietario): Observable<any> 
   { 
     let httpOption = 
     {

@@ -16,23 +16,22 @@ import { Alquiler } from '../../../models/alquiler';
 })
 export class AlquilerComponent {
 
-  alquiler!: Alquiler;
+  alquiler: Alquiler = new Alquiler;
 
   constructor(private route: ActivatedRoute,
               private alquilerService: AlquilerService,
               private localService: LocalService,
               private router: Router) {}
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     const localId = this.route.snapshot.paramMap.get('id');
     if (localId) 
       {
       this.alquilerService.getAlquilerByLocalId(localId).subscribe
       (
-        (result) => 
+        (result:Alquiler) => 
         {
-          this.alquiler = result;
+          this.alquiler = result || new Alquiler(); //en caso de que result sea null
         },
         (error: any) => 
         {
