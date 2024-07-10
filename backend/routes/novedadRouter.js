@@ -8,6 +8,7 @@ router.get('/estado/:estado', novedad.filtraporestado);
 router.get('/', novedad.getnovedades);
 router.post('/', novedad.createnovedad);
 router.get('/:id', novedad.getNovedad);
+router.get('/alquiler/:alquilerId', novedad.getNovedadByAlquilerId);
 router.put('/:id', novedad.editNovedad);
 router.delete('/:id', novedad.deleteNovedad);
 

@@ -13,6 +13,8 @@ import { AlquilerFormComponent } from './components/alquileres/alquiler-form/alq
 import { FormPagoComponent } from './components/pagos/form-pago/form-pago.component';
 import { NovedadComponent } from './components/novedades/novedad/novedad.component';
 import { NovedadFormComponent } from './components/novedades/novedad-form/novedad-form.component';
+import { PropietarioComponent } from './components/propietarios/propietario/propietario.component';
+import { PropietarioFormComponent } from './components/propietarios/propietario-form/propietario-form.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -45,4 +47,8 @@ export const routes: Routes = [
         {path: 'novedad/:id', component: NovedadComponent},
         {path: 'novedad-form', component: NovedadFormComponent},
         {path: 'novedad-form/:id', component: NovedadFormComponent},
+
+        //propietarios
+        {path: 'propietario', component: PropietarioComponent},
+        {path: 'propietario-form/:id', component: PropietarioFormComponent},
 ];

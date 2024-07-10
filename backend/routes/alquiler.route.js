@@ -12,6 +12,7 @@ router.get('/:id', alquilerCtrl.getAlquiler);
 router.get('/local/:localId', alquilerCtrl.getAlquilerByLocalId);
 router.put('/:id', alquilerCtrl.editAlquiler);
 router.delete('/:id', alquilerCtrl.deleteAlquiler);
+router.delete('/local/:localId', alquilerCtrl.deleteAlquilerPorLocalId);
 
 //exportamos el modulo de rutas
 module.exports = router;

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Local = require('../models/local');
+const Alquiler = require('../models/alquiler');
 const localCtrl = {}
 
 localCtrl.getlocales = async (req, res) => 
@@ -81,6 +82,31 @@ localCtrl.editLocal = async (req, res) => {
         })
     }
 }
+
+/*localCtrl.deleteLocal = async (req, res) => {
+
+    const localId = req.params.id;
+    try {
+        const local = await Local.findById(localId);
+        const alquiler = await Alquiler.findOne({ localId });
+
+        // Eliminar los alquileres asociados al local
+        await Alquiler.deleteOne({ alquiler });
+
+        // Eliminar el local
+        await Local.deleteOne(localId);
+        res.json({
+            status: '1',
+            msg: 'Local eliminado'
+        });
+    } catch (error) {
+        console.error('Error eliminando local:', error);
+        res.status(400).json({
+            'status': '0',
+            'msg': 'Error procesando la operación delete'
+        });
+    }
+}*/
 
 localCtrl.deleteLocal = async (req, res) => {
     try {
