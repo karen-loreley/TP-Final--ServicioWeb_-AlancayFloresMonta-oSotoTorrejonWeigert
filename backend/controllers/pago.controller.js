@@ -34,7 +34,7 @@ pagoCtrl.createPago = async (req, res) =>
 pagoCtrl.getPago = async (req, res) => 
 {
     //const pago = await pago.findById(req.params.id).populate('propietario').populate('local');
-    res.json(pago);
+    //res.json(pago);
 }
 
 pagoCtrl.editPago = async (req, res) => 

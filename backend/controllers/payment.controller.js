@@ -4,7 +4,6 @@ const Payment = require('mercadopago');
 const paymentService = require('../service/paymentService.js');
 
 
-mercadopago.configurations.setAccessToken('TEST-8375554891244595-070723-9bba8c34bf20623643c4ce7831bfd377-610012598');
 
 const PagoMercado = require('../models/pagoMercado');
 const pagoMercadoCtrl = {}
@@ -12,11 +11,14 @@ const pagoMercadoCtrl = {}
 
 pagoMercadoCtrl.createOrder = async (req, res) => {
 
+  mercadopago.configure({
+    access_token:'APP_USR-7426806883583257-070800-78a2cf07e165ab9d6e23a9375bdf1647-1889902603',
+  })
   const preference = {
     items: [
       {
         title: req.body.title,
-        unit_price: parseFloat(req.body.price),
+        unit_price: 1,
         quantity: 1,
       }
     ],
@@ -30,6 +32,7 @@ pagoMercadoCtrl.createOrder = async (req, res) => {
 
   try {
     const response = await mercadopago.preferences.create(preference);
+    console.log(response);
     res.json({
       id: response.body.id
     });

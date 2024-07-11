@@ -15,8 +15,9 @@ import { NovedadComponent } from './components/novedades/novedad/novedad.compone
 import { NovedadFormComponent } from './components/novedades/novedad-form/novedad-form.component';
 import { PropietarioComponent } from './components/propietarios/propietario/propietario.component';
 import { PropietarioFormComponent } from './components/propietarios/propietario-form/propietario-form.component';
-import { AdelantoComponent } from './components/adelanto/adelanto.component';
+
 import { AdelantoFormComponent } from './components/adelanto-form/adelanto-form.component';
+import { AdelantoComponent } from './components/adelanto/adelanto.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -54,7 +55,7 @@ export const routes: Routes = [
         {path: 'propietario', component: PropietarioComponent},
         {path: 'propietario-form/:id', component: PropietarioFormComponent},
 
-        //adelantis
+        //adelantos
         {path: 'adelanto', component:AdelantoComponent },
         {path: 'adelanto-form/:id', component: AdelantoFormComponent},
 ];
