@@ -5,11 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PropietarioService } from '../../../services/propietario.service';
+import { PropietarioFormComponent } from '../../propietarios/propietario-form/propietario-form.component';
 
 @Component({
   selector: 'app-usuario-form',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,PropietarioFormComponent],
   templateUrl: './usuario-form.component.html',
   styleUrl: './usuario-form.component.css'
 })
@@ -66,7 +67,7 @@ export class UsuarioFormComponent {
                   this.propietario.email = this.usuario.email; 
                   this.propietarioService.addPropietario(this.propietario).subscribe(() => {
                     alert("El usuario y propietario se agregaron correctamente");
-                    this.router.navigate(['crud-usuarios']);
+                    this.router.navigate(['/home']);
                   });
                 } else {
                   alert("El usuario se agregó correctamente");

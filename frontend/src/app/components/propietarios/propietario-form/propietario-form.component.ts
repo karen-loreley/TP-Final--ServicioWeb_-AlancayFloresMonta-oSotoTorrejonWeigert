@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Propietario } from '../../../models/propietario';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,9 +15,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PropietarioFormComponent {
 
-  propietario: Propietario = new Propietario();
+  propietario: Propietario  = new Propietario();
+  ;//para llamarlo desde el usuario-form
   listaPropietarios!: Array<Propietario>; 
   accion: string = "new";
+  usuarioId?: string;
 
   constructor(private activatedRoute: ActivatedRoute, 
     private propietarioService: PropietarioService,
@@ -31,15 +33,13 @@ ngOnInit(): void
   {
     this.activatedRoute.params.subscribe(params => 
       {
-        if (params['id'] == "0")
-          {
-            this.accion = "new"; 
-            this.iniciarVariable();
+        if (params['id']) { //si hay un id
+          if (params['id'] === '0') { 
+            this.accion = "new";
+          } else {
+            this.accion = "update";
+            this.cargarPropietario(params['id']);
           }
-        else
-        {
-          this.accion = "update"; 
-          this.cargarPropietario(params['id']);
         }
       });
   }
@@ -59,7 +59,7 @@ ngOnInit(): void
       }
     );
   }
-
+  
   agregarPropietario(): void
   {
     console.log("Datos enviados:", this.propietario);
@@ -82,26 +82,28 @@ ngOnInit(): void
     this.propietario = new Propietario(); 
   }
 
-  actualizarPropietario():void
-  {
-    console.log(this.propietario);
-    this.propietarioService.updatePropietario(this.propietario).subscribe
-    (
-      (result) => 
-      {
-        if(result.status == 1)
-          {
-            alert("Local actualizado");
+
+
+  actualizarPropietario(): void {
+    if (this.propietario && this.propietario._id) {
+      this.propietarioService.updatePropietario(this.propietario._id, this.propietario).subscribe(
+        (result) => {
+          if (result.status === 1) {
+            alert("Propietario actualizado correctamente");
             this.router.navigate(['home']);
           }
-        
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    ); 
+        },
+        (error: any) => {
+          console.error("Error al actualizar el propietario:", error);
+          alert("Error al actualizar el propietario.");
+        }
+      );
+    } else {
+      console.error("ID del propietario no encontrado para la actualización.");
+      alert("ID del propietario no encontrado para la actualización.");
+    }
   }
+  
 
   iniciarVariable(): void
   {

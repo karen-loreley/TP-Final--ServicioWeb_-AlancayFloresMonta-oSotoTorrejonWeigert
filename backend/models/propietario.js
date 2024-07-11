@@ -7,7 +7,8 @@ const PropietarioSchema = new Schema
     dni: { type: String, required: true },
     email: { type: String, required: true },
     telefono: { type: Number, required: true },
-    usuario:{type: Schema.Types.ObjectId,ref: 'Usuario', required: true}
+    usuario: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true }
+
 })
 
 module.exports = mongoose.models.Propietario || mongoose.model('Propietario', PropietarioSchema);

@@ -48,20 +48,23 @@
               </li>
 
               <!-- PROPIETARIO -->
+              <li class="nav-item dropdown" *ngIf="isPropi()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pagos</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/pago-form']">Realizar Pago</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/pago']">Mis Pagos</a></li>
+                </ul>
+              </li>
               <li class="nav-item" *ngIf="isPropi()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['/alquiler-form/0']">Crear Alquiler</a>
               </li>
-              <li class="nav-item" *ngIf="isPropi()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['/pago']">Mis Pagos</a>
-              </li>
-              <li class="nav-item" *ngIf="isPropi()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['/pago-form']">Realizar Pago</a>
-              </li>
-              <li class="nav-item" *ngIf="isPropi()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['/promo']">Mis Promociones</a>
-              </li>
-              <li class="nav-item" *ngIf="isPropi()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['/promo-form']">Realizar Promocion</a>
+              <li class="nav-item dropdown" *ngIf="isPropi()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Promociones</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/promo']">Mis Promociones</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/promo-form/0']">Crear Promociones</a></li>
+
+                </ul>
               </li>
               <li class="nav-item dropdown" *ngIf="isPropi()">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Propietarios</a>
@@ -69,7 +72,7 @@
                   <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['propietario']">Listado</a></li>
                   <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['propietario-form/0']">Crear Propietario</a></li>
                 </ul>
-            </li>
+              </li>
 
 
               <!-- DUEÑO -->

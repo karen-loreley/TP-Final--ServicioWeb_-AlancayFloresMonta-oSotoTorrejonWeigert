@@ -5,12 +5,10 @@
             <h3>Formulario Propietario</h3>
           <br>
         </div>
-        <form class="p-3" #productoForm="ngForm">
+        <form class="p-3" #productoForm="ngForm" *ngIf="propietario">
             <div class="form-group">
                 <label for="nombre" class="form-label" style="font-weight: bold;">Nombre:</label>
-                <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" [(ngModel)]="propietario.nombres" name="nombre"
-                    required #nombre="ngModel">
-  
+                <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" [(ngModel)]="propietario.nombres" name="nombre" placeholder="Ingrese el nombre" required #nombre="ngModel">  
                 <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
                     <div *ngIf="nombre.errors?.['required']">
                          El Nombre es requerido.

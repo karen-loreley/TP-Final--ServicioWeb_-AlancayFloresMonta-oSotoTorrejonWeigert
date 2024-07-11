@@ -16,7 +16,8 @@ propietarioCtrl.getPropietarios = async (req, res) => {
 // Crear un nuevo propietario
 propietarioCtrl.createPropietario = async (req, res) => {
   try {
-    const { usuarioId, apellido, nombres, dni, email, telefono } = req.body;
+    // Extraer datos del cuerpo de la solicitud
+    const { propietario, usuarioId } = req.body; 
 
     // Verificar si el usuario existe
     const usuario = await Usuario.findById(usuarioId);
@@ -25,21 +26,19 @@ propietarioCtrl.createPropietario = async (req, res) => {
     }
 
     // Crear el nuevo propietario
-    const propietario = new Propietario({
-      apellido,
-      nombres,
-      dni,
-      email,
-      telefono,
-      usuario: usuarioId
+    const nuevoPropietario = new Propietario({
+      ...propietario, // Usar los datos proporcionados para el propietario
+      usuario: usuarioId // Asociar el propietario con el usuario
     });
 
-    await propietario.save();
+    await nuevoPropietario.save();
     res.json({ status: '1', msg: 'Propietario creado con éxito.' });
   } catch (error) {
+    console.error('Error al crear propietario:', error);
     res.status(400).json({ status: '0', msg: 'Error al crear propietario.' });
   }
 };
+
 
 // Obtener un propietario por su ID
 propietarioCtrl.getPropietario = async (req, res) => {

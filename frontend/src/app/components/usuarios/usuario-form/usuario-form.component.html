@@ -39,22 +39,7 @@
 
          <!-- CAMPOS DE PROPIETARIO -->
       <div *ngIf="usuario.perfil === 'Propietario'">
-        <div class="form-group">
-          <label for="apellido">Apellido</label>
-          <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="propietario.apellido" required />
-        </div>
-        <div class="form-group">
-          <label for="nombres">Nombres</label>
-          <input type="text" class="form-control" id="nombres" name="nombres" [(ngModel)]="propietario.nombres" required />
-        </div>
-        <div class="form-group">
-          <label for="dni">DNI</label>
-          <input type="text" class="form-control" id="dni" name="dni" [(ngModel)]="propietario.dni" required />
-        </div>
-        <div class="form-group">
-          <label for="telefono">Teléfono</label>
-          <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="propietario.telefono" required />
-        </div>
+        <app-propietario-form></app-propietario-form>
       </div>
 
       <!-- Botones Usuario -->
