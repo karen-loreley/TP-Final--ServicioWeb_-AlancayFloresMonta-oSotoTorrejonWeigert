@@ -26,13 +26,13 @@ import { MercadoPagoConfig, Preference } from 'mercadopago';
   styleUrl: './pago.component.css'
 })
 export class PagoComponent {
-  
+
   listaPagos!: Array<Pago>;
   listaLocal!: Array<Local>;
   graficoPagosMensualesVisible: boolean = false;
   localVisible: boolean = false;
 
-  
+
   totalPorMes: number[] = new Array(12).fill(0);
   nombresLocales: string[] = [];
 
@@ -47,36 +47,13 @@ export class PagoComponent {
 
     this.obtenerPagos();
   }
-
-  ngOnInit(): void {
-    initMercadoPago('APP_USR-3ce1d8d4-7bb5-436b-aa13-ea7e69546323', {
-      locale: "es-AR"
-    });
-  }
+  preferenceId: string="";
   mercadoPago(t: Pago) {
-    const client = new MercadoPagoConfig({ accessToken: 'YOUR_ACCESS_TOKEN' });
-
-    const preference = new Preference(client);
-
-    preference.create({
-      body: {
-        items: [
-          {
-            id: t._id, // ID único del artículo
-            title: t.local.nombre,
-            description: 'Descripción del producto 1',
-            unit_price: 1000, // Precio unitario en centavos
-            quantity: parseInt(t._id),
-            currency_id: 'ARS', // Moneda (por ejemplo, ARS para pesos argentinos)
-
-          }
-        ],
-      }
+    this.pagoService.cargarAlquilerEnPreferencia(t.local.costomes,t.local.nombre).subscribe(resp=>{
+      this.preferenceId = resp.id.init_point;
+      console.log(this.preferenceId);
+      window.location.href = this.preferenceId;
     })
-      .then(console.log)
-      .catch(console.log);
-
-
   }
   obtenerPagos() {
 
@@ -89,7 +66,7 @@ export class PagoComponent {
           const mes = new Date(pago.mes).getMonth();
           this.totalPorMes[mes] += pago.local.costomes;
         });
-        
+
         // Inicializar conteo para cada local
         this.listaLocal.forEach(local => {
           this.conteoPagosPorLocal[local.nombre] = 0;
@@ -132,10 +109,10 @@ export class PagoComponent {
 
     )
   }
-  
+
 
   dibujarGrafico() {
-    
+
 
     const ctx = document.getElementById('graficoPagosMensuales') as HTMLCanvasElement;
     if (!ctx) {
