@@ -55,8 +55,10 @@ export const routes: Routes = [
         //propietarios
         {path: 'propietario', component: PropietarioComponent},
         {path: 'propietario-form/:id', component: PropietarioFormComponent},
-        {path: '**', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia
 
         //promociones
-        {path: 'promociones', component: CrudPromocinoComponent},
+        {path: 'crud-promocion', component: CrudPromocinoComponent},
+
+        {path: '**', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia
+
 ];

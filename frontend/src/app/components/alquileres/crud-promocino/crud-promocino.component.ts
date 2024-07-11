@@ -13,7 +13,7 @@ import { ApiMethod } from 'ngx-facebook/providers/facebook';
 @Component({
   selector: 'app-crud-promocino',
   standalone: true,
-  imports: [FormsModule, CommonModule, FacebookModule.forRoot()],
+  imports: [FormsModule, CommonModule],
   templateUrl: './crud-promocino.component.html',
   styleUrl: './crud-promocino.component.css'
 })

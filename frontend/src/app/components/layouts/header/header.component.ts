@@ -52,5 +52,10 @@ export class HeaderComponent implements OnInit{
     this.router.navigate(['novedad-form', 0]);
   }
 
+  agregarPromocion()
+  {
+    this.router.navigate(['crud-promocion']);
+  }
+
 
 }
