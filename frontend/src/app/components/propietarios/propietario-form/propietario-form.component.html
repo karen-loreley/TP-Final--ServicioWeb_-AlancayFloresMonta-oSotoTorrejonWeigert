@@ -1,80 +1,76 @@
-<div class="d-flex flex-lg-row flex-column-reverse">
-    <div class="col-lg-6 col-12 form">
-        <div class="titulo3">
-          <br>
-            <h3>Formulario Propietario</h3>
-          <br>
-        </div>
-        <form class="p-3" #productoForm="ngForm" *ngIf="propietario">
+    <div class="body">
+      <div class="login">
+          <h1>Formulario De Propietario</h1>
+          
+          <form name="form" #productoForm="ngForm" *ngIf="propietario">
             <div class="form-group">
-                <label for="nombre" class="form-label" style="font-weight: bold;">Nombre:</label>
-                <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" [(ngModel)]="propietario.nombres" name="nombre" placeholder="Ingrese el nombre" required #nombre="ngModel">  
-                <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
-                    <div *ngIf="nombre.errors?.['required']">
-                         El Nombre es requerido.
-                    </div>
+              <label for="nombre">Nombre</label>
+              <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" [(ngModel)]="propietario.nombres" name="nombre" placeholder="Ingrese el nombre" required #nombre="ngModel">
+              <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert alert-danger">
+                <div *ngIf="nombre.errors?.['required']">
+                     El Nombre es requerido.
                 </div>
+            </div>  
             </div>
-  
-            <div class="form-group">
-              <div class="mb-3">
-                <label for="apellido" class="form-label" style="font-weight: bold;">Apellido: </label>
-                <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="propietario.apellido" class="form-control" placeholder="Ingrese el apellido"
-                required #apellido="ngModel"> 
-                
-                <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
-                    class="alert alert-danger">
-                    <div *ngIf="apellido.errors?.['required']">
-                        El apellido es requerido.
-                    </div>
-                </div>
-              </div>    
-            </div>
-
-            <div class="form-group">
-                <div class="mb-3">
-                  <label for="dni" class="form-label" style="font-weight: bold;">DNI: </label>
-                  <input type="text" class="form-control" id="dni" name="dni" [(ngModel)]="propietario.dni" class="form-control" placeholder="Ingrese el dni"
-                  required #dni="ngModel"> 
-                  
-                  <div *ngIf="dni.invalid && (dni.dirty || dni.touched)"
-                      class="alert alert-danger">
-                      <div *ngIf="dni.errors?.['required']">
-                          El dni es requerido.
-                      </div>
-                  </div>
-                </div>    
-              </div>
-
               <div class="form-group">
                 <div class="mb-3">
-                  <label for="email" class="form-label" style="font-weight: bold;">Email: </label>
-                  <input type="text" class="form-control" id="email" name="email" [(ngModel)]="propietario.email" class="form-control" placeholder="Ingrese el email"
-                  required #email="ngModel"> 
-                  
-                  <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                  <label for="apellido" class="form-label">Apellido: </label>
+                  <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="propietario.apellido" class="form-control" placeholder="Ingrese el apellido" required #apellido="ngModel"> 
+                  <div *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)"
                       class="alert alert-danger">
-                      <div *ngIf="email.errors?.['required']">
-                          El email es requerido.
+                      <div *ngIf="apellido.errors?.['required']">
+                          El apellido es requerido.
                       </div>
                   </div>
                 </div>    
               </div>
-  
-            <div class="form-group">
-                <label for="telefono" class="form-label" style="font-weight: bold;">Teléfono: </label>
-                <input id="telefono" type="number" class="form-control" placeholder="Ingrese Precio" [(ngModel)]="propietario.telefono" name="telefono"
-                    required #telefono="ngModel">
-  
-                <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="alert alert-danger">
-                    <div *ngIf="telefono.errors?.['required']">
-                        telefono es requerido.
+              <div class="form-group">
+                  <div class="mb-3">
+                    <label for="dni" class="form-label">DNI: </label>
+                    <input type="text" class="form-control" id="dni" name="dni" [(ngModel)]="propietario.dni" class="form-control" placeholder="Ingrese el dni"
+                    required #dni="ngModel"> 
+                    <div *ngIf="dni.invalid && (dni.dirty || dni.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="dni.errors?.['required']">
+                            El dni es requerido.
+                        </div>
                     </div>
+                  </div>    
                 </div>
+                <div class="form-group">
+                  <div class="mb-3">
+                    <label for="email" class="form-label">Email: </label>
+                    <input type="text" class="form-control" id="email" name="email" [(ngModel)]="propietario.email" class="form-control" placeholder="Ingrese el email"
+                    required #email="ngModel"> 
+                    
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                        class="alert alert-danger">
+                        <div *ngIf="email.errors?.['required']">
+                            El email es requerido.
+                        </div>
+                    </div>
+                  </div>    
+                </div>
+    
+              <div class="form-group">
+                  <label for="telefono" class="form-label">Teléfono: </label>
+                  <input id="telefono" type="number" class="form-control" placeholder="Ingrese Precio" [(ngModel)]="propietario.telefono" name="telefono"
+                      required #telefono="ngModel">
+    
+                  <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="alert alert-danger">
+                      <div *ngIf="telefono.errors?.['required']">
+                          telefono es requerido.
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarPropietario()">Agregar</button>
+                <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarPropietario()">Actualizar</button>
             </div>
-  
-          <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarPropietario()">Agregar</button>
-          <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarPropietario()">Actualizar</button>
-          <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
-        </form>
-    </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+          </div>
+            
+          </form>
+      </div>
+  </div>

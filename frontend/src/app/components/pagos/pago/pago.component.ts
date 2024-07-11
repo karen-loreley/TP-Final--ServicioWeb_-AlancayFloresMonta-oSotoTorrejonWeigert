@@ -9,8 +9,6 @@ import { LocalService } from '../../../services/local.service';
 import { Local } from '../../../models/local';
 Chart.register(...registerables);
 
-
-import { OnInit } from '@angular/core';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
 // SDK de Mercado Pago
@@ -44,7 +42,6 @@ export class PagoComponent {
     private localService: LocalService,
     private router: Router) {
     this.obtenerLocales(this.currentPage);
-
     this.obtenerPagos();
   }
   preferenceId: string="";

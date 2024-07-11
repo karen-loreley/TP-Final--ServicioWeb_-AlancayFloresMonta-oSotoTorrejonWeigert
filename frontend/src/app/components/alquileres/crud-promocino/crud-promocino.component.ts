@@ -6,16 +6,20 @@ import { Local } from '../../../models/local';
 import { ActivatedRoute } from '@angular/router';
 import { PromocionService } from '../../../services/promocion.service';
 import { LocalService } from '../../../services/local.service';
+import { FacebookModule, FacebookService, InitParams, LoginResponse} from 'ngx-facebook';
+import { ApiMethod } from 'ngx-facebook/providers/facebook';
+
 
 @Component({
   selector: 'app-crud-promocino',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, FacebookModule.forRoot()],
   templateUrl: './crud-promocino.component.html',
   styleUrl: './crud-promocino.component.css'
 })
 export class CrudPromocinoComponent {
 
+  mensaje: string = "";
   promocion!:Promocion;
   promociones!: Array<Promocion>;
   accion:string="new";
@@ -25,11 +29,13 @@ export class CrudPromocinoComponent {
 
   constructor(private activateRouter: ActivatedRoute,
               private promocionservice:PromocionService,
-              private localService: LocalService
+              private localService: LocalService,
+              private fb: FacebookService
   ){
    this.obtenerPromocion();
     this.iniciarvariable();
     this.obtenerLocales(); 
+    this.iniciarFb();
   }
 
   ngOnInit():void{
@@ -110,7 +116,7 @@ export class CrudPromocinoComponent {
   }
 
   obtenerLocales(): void {
-    this.localService.getLocales().subscribe(
+    this.localService.getLocales(1,6).subscribe(
       data => {
         this.locales = data;
       },
@@ -148,4 +154,35 @@ export class CrudPromocinoComponent {
     );
   }
 
+  postFb(){
+    var apiMethod: ApiMethod = "post";
+    this.fb.api('/102692548160135/feed', apiMethod,
+    {
+    "message": this.mensaje, //el token vence cada 1/2 hora
+    "access_token":"EAAXGSugihHIBO46HHmJpFOUNGZB745xNNPZAmU2vhkOhICgkn9mnAStZC1KWPDXD3ghVBLHAoXQKEvO6Smh0ZBaKWoIatUaFQk8IDAtDlhJXwF2Gyl5y7NnEXgNp8oy1LZCwZA0zRvcDum196Lz5LzaFCOBgXGi4cMZB7zK4ocTgt44WXY2VbPHRwLlCKGoFBuqGZA3DMEHvxJhAZBE0B9rGQefiq"
+  }).then((response: any) => {
+    console.log('Publicación exitosa:', response);
+  }).catch((error: any) => {
+    console.error('Error al publicar en Facebook:', error);
+  });;
+}
+iniciarFb(){
+let initParams: InitParams = {
+appId: '308626842344467',
+autoLogAppEvents : true,
+xfbml : true,
+version : 'v20.0'
+};
+this.fb.init(initParams);
+}
+loginWithFacebook(): void {
+
+  this.fb.login()
+  .then((response: LoginResponse) =>
+  {
+  console.log(response);
+ 
+  })
+  .catch((error: any) => console.error(error));
+  }
 }

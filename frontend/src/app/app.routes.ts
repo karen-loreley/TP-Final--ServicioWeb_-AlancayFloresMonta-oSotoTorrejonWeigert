@@ -16,6 +16,7 @@ import { NovedadFormComponent } from './components/novedades/novedad-form/noveda
 import { PropietarioComponent } from './components/propietarios/propietario/propietario.component';
 import { PropietarioFormComponent } from './components/propietarios/propietario-form/propietario-form.component';
 import { SuccesComponent } from './components/pagos/succes/succes.component';
+import { CrudPromocinoComponent } from './components/alquileres/crud-promocino/crud-promocino.component';
 
 export const routes: Routes = [
         //inicio/home
@@ -44,6 +45,7 @@ export const routes: Routes = [
         {path: 'pago-form', component: FormPagoComponent},
         { path:'pago-exitoso', component: SuccesComponent },
         { path:'pago-fallido', component: SuccesComponent },
+        
         //novedades
         {path: 'novedad', component: NovedadComponent},
         {path: 'novedad/:id', component: NovedadComponent},
@@ -54,4 +56,7 @@ export const routes: Routes = [
         {path: 'propietario', component: PropietarioComponent},
         {path: 'propietario-form/:id', component: PropietarioFormComponent},
         {path: '**', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia
+
+        //promociones
+        {path: 'promociones', component: CrudPromocinoComponent},
 ];

@@ -9,7 +9,6 @@ import { LocalService } from '../../../services/local.service';
 import { Propietario } from '../../../models/propietario';
 import { PropietarioService } from '../../../services/propietario.service';
 import { UsuarioService } from '../../../services/usuario.service';
-import { Usuario } from '../../../models/usuario';
 
 @Component({
   selector: 'app-alquiler-form',

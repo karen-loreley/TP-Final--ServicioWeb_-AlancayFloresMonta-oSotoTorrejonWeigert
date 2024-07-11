@@ -7,7 +7,6 @@ const PropietarioSchema = new Schema
     dni: { type: String, required: true },
     email: { type: String, required: true },
     telefono: { type: Number, required: true },
-    usuario: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true }
 
 })
 

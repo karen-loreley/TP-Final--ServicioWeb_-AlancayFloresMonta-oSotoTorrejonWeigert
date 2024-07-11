@@ -9,12 +9,11 @@ mercadopago.configure({
   access_token: 'APP_USR-7435184822730950-071020-0d5d46ad29a4408739ca12827966590c-1896999924',
 });
 
-
 //middlewares    
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
               
-app.use(cors({origin: 'http://localhost:4200'}));
+app.use(cors({origin: 'https://localhost:4200'}));
 //Cargamos el modulo de direccionamiento de rutas
 app.use('/api/local', require('./routes/localRouter'));
 app.use('/api/propietario', require('./routes/propietario.route.js'));

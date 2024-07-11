@@ -51,4 +51,6 @@ export class HeaderComponent implements OnInit{
   {
     this.router.navigate(['novedad-form', 0]);
   }
+
+
 }

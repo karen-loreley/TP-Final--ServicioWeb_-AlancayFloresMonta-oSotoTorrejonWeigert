@@ -118,7 +118,7 @@ registrarUsuario(): void {
     }
 
     redirigirPropietarioForm() {
-      this.router.navigate(['/propietario-form/:_id']);
+      this.router.navigate(['/propietario-form/0']);
     }
   
   }

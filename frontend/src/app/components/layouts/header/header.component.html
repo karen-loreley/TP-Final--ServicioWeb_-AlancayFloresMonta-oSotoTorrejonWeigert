@@ -28,6 +28,9 @@
              <!-- ADMINISTRADOR -->
             <ng-container *ngSwitchCase="'loggedIn'">
               <li class="nav-item" *ngIf="isAdmin()">
+                <a class="nav-link btn btn-outline-light" [routerLink]="['/home']">Inicio></a>
+              </li>
+              <li class="nav-item" *ngIf="isAdmin()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['/crud-usuarios']">Listado Usuarios</a>
               </li>
               <li class="nav-item" *ngIf="isAdmin()">
@@ -42,12 +45,15 @@
                   <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['novedad']">Listado</a></li>
                   <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['novedad-form/0']">Crear Novedad</a></li>
                 </ul>
-            </li>
-              <li class="nav-item" *ngIf="isAdmin()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['novedad-form/0']">Crear Novedad</a>
               </li>
 
               <!-- PROPIETARIO -->
+              <li class="nav-item" *ngIf="isPropi()">
+                <a class="nav-link btn btn-outline-light" [routerLink]="['/home']">Inicio</a>
+              </li>
+              <li class="nav-item" *ngIf="isPropi()">
+                <a class="nav-link btn btn-outline-light" [routerLink]="['/propietario-form/0']">Agregar Datos </a>
+              </li>
               <li class="nav-item dropdown" *ngIf="isPropi()">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pagos</a>
                 <ul class="dropdown-menu">
@@ -58,13 +64,8 @@
               <li class="nav-item" *ngIf="isPropi()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['/alquiler-form/0']">Crear Alquiler</a>
               </li>
-              <li class="nav-item dropdown" *ngIf="isPropi()">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Promociones</a>
-                <ul class="dropdown-menu">
-                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/promo']">Mis Promociones</a></li>
-                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/promo-form/0']">Crear Promociones</a></li>
-
-                </ul>
+              <li class="nav-item" *ngIf="isPropi()">
+                <a class="nav-link btn btn-outline-light" [routerLink]="['/promocion']">Mis Promociones</a>
               </li>
               <li class="nav-item dropdown" *ngIf="isPropi()">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Propietarios</a>
@@ -77,18 +78,39 @@
 
               <!-- DUEÑO -->
               <li class="nav-item" *ngIf="isDuenio()">
+                <a class="nav-link btn btn-outline-light" [routerLink]="['/home']">Inicio</a>
+              </li>
+              <li class="nav-item" *ngIf="isDuenio()">
                 <a class="nav-link btn btn-outline-light" [routerLink]="['/crud-usuarios']">Listado Usuarios</a>
               </li>
-              <li class="nav-item" *ngIf="isDuenio()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['/pago']">Listado de Pago</a>
+              <li class="nav-item dropdown" *ngIf="isDuenio()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pagos</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/pago-form']">Realizar Pago</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['/pago']">Mis Pagos</a></li>
+                </ul>
               </li>
-              <li class="nav-item" *ngIf="isDuenio()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['/alquiler-form/0']">Crear Alquiler</a>
+              <li class="nav-item dropdown" *ngIf="isDuenio()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Novedades</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['novedad']">Listado</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['novedad-form/0']">Crear Novedad</a></li>
+                </ul>
               </li>
-              <li class="nav-item" *ngIf="isDuenio()">
-                <a class="nav-link btn btn-outline-light" [routerLink]="['alquiler/pago']">Pagar Alquiler</a>
+              <li class="nav-item dropdown" *ngIf="isDuenio()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Alquileres</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light"  [routerLink]="['/alquiler-form/0']">Crear Alquiler</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['alquiler/pago']">Pagar Alquiler</a></li>
+                </ul>
               </li>
-
+              <li class="nav-item dropdown" *ngIf="isDuenio()">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Propietarios</a>
+                <ul class="dropdown-menu">
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['propietario']">Listado</a></li>
+                  <li class="nav-item"><a class="nav-link btn btn-outline-light" [routerLink]="['propietario-form/0']">Crear Propietario</a></li>
+                </ul>
+              </li>
 
 
               <!-- Botones Usuario -->

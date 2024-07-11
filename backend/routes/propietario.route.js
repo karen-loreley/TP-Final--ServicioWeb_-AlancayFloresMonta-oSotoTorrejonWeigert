@@ -9,11 +9,7 @@ const router = express.Router();
 router.get('/', propietarioCtrl.getPropietarios);
 router.post('/', propietarioCtrl.createPropietario);
 router.get('/:id', propietarioCtrl.getPropietario);
-router.put('/:id', propietarioCtrl.updatePropietario);
-router.delete('/:id', propietarioCtrl.deletePropietario);
-
-router.get('/usuario/:usuarioId', propietarioCtrl.getPropietarioByUsuarioId); 
-
-
+router.put('/:id', propietarioCtrl.editPropietario);
+router.delete('/:id', propietarioCtrl.deletePropietario)
 //exportamos el modulo de rutas
 module.exports = router;

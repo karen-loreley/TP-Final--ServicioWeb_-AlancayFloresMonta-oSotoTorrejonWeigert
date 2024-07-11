@@ -1,112 +1,85 @@
+const mongoose = require('mongoose');
 const Propietario = require('../models/propietario');
-const Usuario = require('../models/usuario');
+const propietarioCtrl = {}
 
-const propietarioCtrl = {};
-
-// Obtener todos los propietarios con información de usuario poblada
-propietarioCtrl.getPropietarios = async (req, res) => {
-  try {
-    const propietarios = await Propietario.find().populate('usuario'); 
+propietarioCtrl.getPropietarios = async (req, res) => 
+{
+    var propietarios = await Propietario.find();
     res.json(propietarios);
-  } catch (error) {
-    res.status(400).json({ status: '0', msg: 'Error al obtener propietarios.' });
-  }
-};
+}
 
-// Crear un nuevo propietario
-propietarioCtrl.createPropietario = async (req, res) => {
-  try {
-    // Extraer datos del cuerpo de la solicitud
-    const { propietario, usuarioId } = req.body; 
+propietarioCtrl.createPropietario = async (req, res) => 
+{
+    var propietario = new Propietario(req.body);
+    try 
+    {
+        await propietario.save();
+        res.json
+        ({
+            'status': '1',
+            'msg': 'Propietario guardado.'
+        })
 
-    // Verificar si el usuario existe
-    const usuario = await Usuario.findById(usuarioId);
-    if (!usuario) {
-      return res.status(404).json({ status: '0', msg: 'Usuario no encontrado.' });
+    } 
+    catch (error) 
+    {
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando operacion.'
+        })
     }
+}
 
-    // Crear el nuevo propietario
-    const nuevoPropietario = new Propietario({
-      ...propietario, // Usar los datos proporcionados para el propietario
-      usuario: usuarioId // Asociar el propietario con el usuario
-    });
-
-    await nuevoPropietario.save();
-    res.json({ status: '1', msg: 'Propietario creado con éxito.' });
-  } catch (error) {
-    console.error('Error al crear propietario:', error);
-    res.status(400).json({ status: '0', msg: 'Error al crear propietario.' });
-  }
-};
-
-
-// Obtener un propietario por su ID
-propietarioCtrl.getPropietario = async (req, res) => {
-  try {
-    const propietario = await Propietario.findById(req.params.id).populate('usuario');
-    if (!propietario) {
-      return res.status(404).json({ status: '0', msg: 'Propietario no encontrado.' });
-    }
+propietarioCtrl.getPropietario = async (req, res) => 
+{
+    const propietario = await Propietario.findById(req.params.id);
     res.json(propietario);
-  } catch (error) {
-    res.status(400).json({ status: '0', msg: 'Error al obtener propietario.' });
-  }
-};
+}
 
-// Actualizar un propietario
-propietarioCtrl.updatePropietario = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { usuarioId, apellido, nombres, dni, email, telefono } = req.body;
-    const propietario = await Propietario.findById(id);  // Verificar si el propietario existe
-    if (!propietario) {
-      return res.status(404).json({ status: '0', msg: 'Propietario no encontrado.' });
+propietarioCtrl.editPropietario = async (req, res) => 
+{
+    const vpropietario = new Propietario(req.body);
+    try 
+    {
+        await Propietario.updateOne({ _id: req.body._id }, vpropietario);
+        res.json
+        ({
+            'status': '1',
+            'msg': 'Propietario updated'
+        })
+
+    } 
+    catch (error) 
+    {
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando la operacion'
+        })
     }
-    const usuario = await Usuario.findById(usuarioId);// Verificar si el usuario existe
-    if (!usuario) {
-      return res.status(404).json({ status: '0', msg: 'Usuario no encontrado.' });
+}
+
+propietarioCtrl.deletePropietario = async (req, res) => 
+{
+    try 
+    {
+        await Propietario.deleteOne({ _id: req.params.id });
+        res.json
+        ({
+            status: '1',
+            msg: 'Propietario removed'
+        })
+
+    } 
+    catch (error) 
+    {
+        res.status(400).json
+        ({
+            'status': '0',
+            'msg': 'Error procesando la operacion'
+        })
     }
-    propietario.apellido = apellido || propietario.apellido;
-    propietario.nombres = nombres || propietario.nombres;
-    propietario.dni = dni || propietario.dni;
-    propietario.email = email || propietario.email;
-    propietario.telefono = telefono || propietario.telefono;
-    propietario.usuario = usuarioId || propietario.usuario;
-    await propietario.save();
-    res.json({ status: '1', msg: 'Propietario actualizado con éxito.' });
-  } catch (error) {
-    res.status(400).json({ status: '0', msg: 'Error al actualizar propietario.' });
-  }
-};
-
-// Eliminar un propietario
-propietarioCtrl.deletePropietario = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const propietario = await Propietario.findById(id);
-    if (!propietario) {
-      return res.status(404).json({ status: '0', msg: 'Propietario no encontrado.' });
-    }
-
-    await Propietario.deleteOne({ _id: id });
-    res.json({ status: '1', msg: 'Propietario eliminado con éxito.' });
-  } catch (error) {
-    res.status(400).json({ status: '0', msg: 'Error al eliminar propietario.' });
-  }
-};
-
-// Obtener propietario por el ID del usuario
-propietarioCtrl.getPropietarioByUsuarioId = async (req, res) => {
-  try {
-    const propietario = await Propietario.findOne({ usuario: req.params.usuarioId }).populate('usuario');
-    if (!propietario) {
-      return res.status(404).json({ status: '0', msg: 'Propietario no encontrado.' });
-    }
-    res.json(propietario);
-  } catch (error) {
-    res.status(400).json({ status: '0', msg: 'Error al obtener propietario.' });
-  }
-};
-
+}
 
 module.exports = propietarioCtrl;
