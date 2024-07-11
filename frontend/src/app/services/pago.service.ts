@@ -30,9 +30,17 @@ export class PagoService {
       })
     }
     return this._http.get("http://localhost:3000/api/pago", httpOption);
-    
+
   }
-  
+  cargarAlquilerEnPreferencia(precio:number,local:string) {
+    console.log("entro")
+    const orderData = {
+      quantity: 1,
+      description: local,
+      price: precio,
+    };
+    return this._http.post<any>(`http://localhost:3000/crear-preferencia`,orderData)
+  }
 /*
   deletePago(id: string): Observable<any>{
     let httpOption = {

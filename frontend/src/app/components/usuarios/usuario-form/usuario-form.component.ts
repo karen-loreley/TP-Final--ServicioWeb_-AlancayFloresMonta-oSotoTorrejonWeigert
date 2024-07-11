@@ -16,15 +16,7 @@ import { PropietarioFormComponent } from '../../propietarios/propietario-form/pr
 })
 export class UsuarioFormComponent {
   usuario: Usuario = new Usuario();
-  usuarios: Array<Usuario>;
-  id: string | null = null;
-  propietario: any = {
-    apellido: '',
-    nombres: '',
-    dni: '',
-    email: '',
-    telefono: null
-  };
+  usuarios: Array<Usuario>
 
   mostrarContrasena = false;
   randomPassword: string = "";
@@ -38,7 +30,7 @@ export class UsuarioFormComponent {
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
-      if (params['id']) { //si hay un id
+      if (params['id']) { // si hay un id
         if (params['id'] === '0') { 
           this.accion = "new";
         } else {
@@ -53,35 +45,28 @@ export class UsuarioFormComponent {
       this.usuario = new Usuario();
     }
 
-    registrarUsuario():void{
-
-      if (this.randomPassword) {
-              // Si hay una contraseña generada, se guarda en usuario.password
-              this.usuario.password = this.randomPassword;
-          }
-          this.usuarioService.addUsuario(this.usuario).subscribe(
-            response => {
-              if (response.status == 1) {
-                if (this.usuario.perfil === 'Propietario') {
-                  this.propietario.usuarioId = response.data._id; 
-                  this.propietario.email = this.usuario.email; 
-                  this.propietarioService.addPropietario(this.propietario).subscribe(() => {
-                    alert("El usuario y propietario se agregaron correctamente");
-                    this.router.navigate(['/home']);
-                  });
-                } else {
-                  alert("El usuario se agregó correctamente");
-                  this.router.navigate(['crud-usuarios']);
-                }
-              }
-            },
-            error => {
-              alert("Error al registrar");
-              console.log(error);
-            }
-          );
-          this.usuario = new Usuario(); 
-        }
+registrarUsuario(): void {
+  if (this.randomPassword) {
+    // Si hay una contraseña generada, se guarda en usuario.password
+    this.usuario.password = this.randomPassword;
+  }
+  this.usuarioService.addUsuario(this.usuario).subscribe(
+    respond => {
+      if(respond.status == 1){
+        alert("El usuario se agrego correctamente");
+        console.log(respond);
+          this.router.navigate(['login']);
+      }else {
+        alert("Error al agregar el usuario: " + respond.msg); // Manejar el caso donde status no es 1
+      }
+    },
+    error => {
+      alert("Error al registrar");
+      console.log(error);
+    }
+  );
+  this.usuario = new Usuario(); 
+}
 
     verContrasenaEncriptada() {
       this.mostrarContrasena = !this.mostrarContrasena;
@@ -102,11 +87,6 @@ export class UsuarioFormComponent {
     this.usuarioService.getUsuario(id).subscribe(
       respond => {
         Object.assign(this.usuario, respond);
-        if (this.usuario.perfil === 'Propietario') {
-          this.propietarioService.getPropietarioByUsuarioId(id).subscribe(prop => {
-            this.propietario = prop;
-          });
-        }
       },
       error => {
         console.log("Error al cargar usuario:", error);
@@ -120,36 +100,25 @@ export class UsuarioFormComponent {
 
     modificarUsuario() {
       this.usuarioService.putUsuario(this.usuario).subscribe(
-        response => {
-          if (response.status === 1) {
-            if (this.usuario.perfil === 'Propietario') {
-              if (this.propietario._id) {
-                this.propietarioService.updatePropietario(this.propietario._id, this.propietario).subscribe(() => {
-                  alert("El Usuario y propietario se actualizaron correctamente");
-                  this.router.navigate(['crud-usuarios']);
-                }, error => {
-                  console.error("Error al actualizar propietario:", error);
-                  alert("Error al actualizar propietario");
-                });
-              } else {
-                console.error("ID del propietario no encontrado para la actualización");
-                alert("ID del propietario no encontrado para la actualización");
-              }
-            } else {
-              alert("El Usuario se actualizó correctamente");
-              this.router.navigate(['crud-usuarios']);
-            }
+        respond => {
+          if(respond.status == 1){
+            alert("El Usuario se actualizo correctamente");
+            this.router.navigate(['crud-usuarios']);
           }
         },
         error => {
-          console.error("Error al actualizar usuario:", error);
-          alert("Error al actualizar usuario");
+          console.log(error);
+          alert("El usuario no se actualizo correctamente");
         }
-      );
+      )
     }
-
+    
     cambiarActivo(event: any) {
       this.usuario.activo = event.target.checked;
     }
 
-}
+    redirigirPropietarioForm() {
+      this.router.navigate(['/propietario-form/:_id']);
+    }
+  
+  }

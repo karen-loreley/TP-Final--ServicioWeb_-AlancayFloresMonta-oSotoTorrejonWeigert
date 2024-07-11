@@ -52,7 +52,7 @@ export class UsuarioService {
       }),
     }
     let body: any = JSON.stringify(usuario);
-    return this._http.put(this.urlBase + usuario._id, body, httpOption);
+    return this._http.put(this.urlBase + '/' + usuario._id, body, httpOption); // Asegúrate de que la URL esté bien formada
   }
 
   getUsuario(_id: string): Observable<any>{

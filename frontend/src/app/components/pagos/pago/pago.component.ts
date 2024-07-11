@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { PagoService } from '../../../services/pago.service';
 import { Router } from '@angular/router';
@@ -10,6 +10,12 @@ import { Local } from '../../../models/local';
 Chart.register(...registerables);
 
 
+import { OnInit } from '@angular/core';
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
+// SDK de Mercado Pago
+import { MercadoPagoConfig, Preference } from 'mercadopago';
+// Agrega credenciales
 
 
 @Component({
@@ -23,108 +29,79 @@ export class PagoComponent {
 
   listaPagos!: Array<Pago>;
   listaLocal!: Array<Local>;
+  graficoPagosMensualesVisible: boolean = false;
+  localVisible: boolean = false;
 
 
-  enero: number = 0;
-  febrero: number = 0;
-  marzo: number = 0;
-  abril: number = 0;
-  mayo: number = 0;
-  junio: number = 0;
-  julio: number = 0;
-  agosto: number = 0;
-  septiembre: number = 0;
-  octubre: number = 0;
-  noviembre: number = 0;
-  diciembre: number = 0;
+  totalPorMes: number[] = new Array(12).fill(0);
+  nombresLocales: string[] = [];
 
-  local1: number = 0;
-  local2: number = 0;
+  conteoPagosPorLocal: { [nombre: string]: number } = {};
 
+  currentPage: number = 1;
 
   constructor(private pagoService: PagoService,
     private localService: LocalService,
     private router: Router) {
-    this.obtenerPagos();
-    this.obtenerLocales();
-  }
+    this.obtenerLocales(this.currentPage);
 
+    this.obtenerPagos();
+  }
+  preferenceId: string="";
+  mercadoPago(t: Pago) {
+    this.pagoService.cargarAlquilerEnPreferencia(t.local.costomes,t.local.nombre).subscribe(resp=>{
+      this.preferenceId = resp.id.init_point;
+      console.log(this.preferenceId);
+      window.location.href = this.preferenceId;
+    })
+  }
   obtenerPagos() {
+
     this.pagoService.getPagos().subscribe(
       data => {
         this.listaPagos = data;
         console.log(this.listaPagos);
-
-        const meses = this.listaPagos.map(pago => new Date(pago.mes).getMonth());
-
-        console.log(meses);
 
         this.listaPagos.forEach(pago => {
           const mes = new Date(pago.mes).getMonth();
-          if (mes == 0) {
-            this.enero++;
-          }
-          if (mes == 1) {
-            this.febrero++;
-          }
-          if (mes == 2) {
-            this.marzo++;
-          }
-          if (mes == 3) {
-            this.abril++;
-          }
-          if (mes == 4) {
-            this.mayo++;
-          }
-          if (mes == 5) {
-            this.junio++;
-          }
-          if (mes == 6) {
-            this.julio++;
-          }
-          if (mes == 7) {
-            this.agosto++;
-          }
-          if (mes == 8) {
-            this.septiembre++;
-          }
-          if (mes == 9) {
-            this.octubre++;
-          }
-          if (mes == 10) {
-            this.noviembre++;
-          }
-          if (mes == 11) {
-            this.diciembre++;
-          }
-
+          this.totalPorMes[mes] += pago.local.costomes;
         });
-        
-      },
-      error => {
-        console.log(error);
-      }
 
-    )
+        // Inicializar conteo para cada local
+        this.listaLocal.forEach(local => {
+          this.conteoPagosPorLocal[local.nombre] = 0;
+        });
 
-  }
-  obtenerLocales(){
-    this.pagoService.getPagos().subscribe(
-      data => {
-        this.listaPagos = data;
-        console.log(this.listaPagos);
-
-
+        // Contar los pagos por local
         this.listaPagos.forEach(pago => {
-          const nombre = pago.local.nombre.toString();
-          if (nombre === "Local 1") {
-            this.local1++;
-          }
-          if (nombre === "Local 2") {
-            this.local2++;
+          const nombreLocal = pago.local.nombre;
+          if (this.conteoPagosPorLocal.hasOwnProperty(nombreLocal)) {
+            this.conteoPagosPorLocal[nombreLocal] += pago.local.costomes;
           }
         });
-        
+
+        console.log('Conteo de pagos por local:', this.conteoPagosPorLocal);
+
+      },
+      error => {
+        console.log(error);
+      }
+
+    )
+
+  }
+  obtenerLocales(page: number) {
+    this.localService.getLocales(page, 6).subscribe(
+      data => {
+        this.listaLocal = data.locales;
+
+
+        this.listaLocal.forEach(local => {
+          this.nombresLocales.push(local.nombre);
+        });
+
+        console.log(this.nombresLocales);
+
       },
       error => {
         console.log(error);
@@ -132,9 +109,9 @@ export class PagoComponent {
 
     )
   }
-  dibujarGrafico() {
-    const meses = this.listaPagos.map((pago) => { pago.mes });
 
+
+  dibujarGrafico() {
 
 
     const ctx = document.getElementById('graficoPagosMensuales') as HTMLCanvasElement;
@@ -149,7 +126,7 @@ export class PagoComponent {
         labels: ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
         datasets: [{
           label: 'Pagos realizados',
-          data: [this.enero, this.febrero, this.marzo, this.abril, this.mayo, this.junio, this.julio, this.agosto, this.septiembre, this.octubre, this.noviembre, this.diciembre],
+          data: this.totalPorMes,
           backgroundColor: [
             'rgba(75, 192, 192, 0.2)',    // Color para la primera barra
             'rgba(255, 99, 132, 0.2)',    // Color para la segunda barra
@@ -172,7 +149,10 @@ export class PagoComponent {
         scales: {
           y: {
             beginAtZero: true,
-            max: 7 // Establece el valor máximo
+            max: 1000, // Cambia el valor máximo a un número más grande
+            ticks: {
+              stepSize: 100 // Ajusta el tamaño del paso entre las marcas de graduación
+            }
 
           }
         }
@@ -180,7 +160,6 @@ export class PagoComponent {
     });
   }
   filtrarLocal() {
-
 
     const ctx = document.getElementById('local') as HTMLCanvasElement;
     if (!ctx) {
@@ -191,10 +170,10 @@ export class PagoComponent {
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['local 1', 'local2'],
+        labels: this.nombresLocales,
         datasets: [{
-          label: 'Pagos realizados por Local',
-          data: [this.local1, this.local2],
+          label: 'Total recaudado por Local',
+          data: this.conteoPagosPorLocal,
           backgroundColor: [
             'rgba(75, 192, 192, 0.2)',    // Color para la primera barra
             'rgba(255, 99, 132, 0.2)',    // Color para la segunda barra
@@ -217,8 +196,10 @@ export class PagoComponent {
         scales: {
           y: {
             beginAtZero: true,
-            max: 7 // Establece el valor máximo
-
+            max: 1000, // Cambia el valor máximo a un número más grande
+            ticks: {
+              stepSize: 100 // Ajusta el tamaño del paso entre las marcas de graduación
+            }
           }
         }
       }
@@ -247,9 +228,6 @@ export class PagoComponent {
      )*/
   }
 
-  agregarTicket() {
-    this.router.navigate(['pago-form', 0]);
-  }
   /*
     modificarTicket(id: string | undefined) {
       console.log(id);
@@ -261,4 +239,7 @@ export class PagoComponent {
       }
     }
       */
+
+
+
 }

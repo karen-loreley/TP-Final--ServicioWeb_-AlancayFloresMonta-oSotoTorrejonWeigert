@@ -19,7 +19,7 @@ export class CrudUsuariosComponent {
   usuarios: Array<Usuario>;
 
   perfil: string = "";
-  perfiles:string[]=['administrativo','dueño']
+  perfiles:string[]=['administrativo','dueño','propietario']
 
   
   constructor(private usuarioService: UsuarioService, private router: Router){
@@ -70,7 +70,7 @@ export class CrudUsuariosComponent {
     this.router.navigate(['usuario-form', 0]);
     }
     elegirUsuario(id: string){
-    this.router.navigate(["usuario-form"]);
+    this.router.navigate(["usuario-form",id]);
     }
     borrarUsuario(id: string):void{
     this.usuarioService.deleteUsuario(id).subscribe(
@@ -84,7 +84,6 @@ export class CrudUsuariosComponent {
     );
     
   }
-
   cambiarPerfil(perfil:string){
     this.perfil = perfil;
     this.filtrarPorPefil(perfil);

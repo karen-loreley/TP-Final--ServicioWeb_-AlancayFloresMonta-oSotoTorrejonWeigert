@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Propietario } from '../../../models/propietario';
-import { ActivatedRoute, Router } from '@angular/router';
 import { PropietarioService } from '../../../services/propietario.service';
 import { HttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-propietario-form',
