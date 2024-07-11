@@ -199,7 +199,7 @@ export class LocalComponent {
 
     //boton realizar pago
     realizarPago(id: string | undefined): void{
-      this.router.navigate(['pago-form', id]);
+      this.router.navigate(['alquiler-form', id]);
     }
 
 }

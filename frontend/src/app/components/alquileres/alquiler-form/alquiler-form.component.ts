@@ -19,8 +19,8 @@ import { PropietarioService } from '../../../services/propietario.service';
 export class AlquilerFormComponent {
 
   alquiler: Alquiler = new Alquiler();
-  listaLocales: Local[] = [];
-  listaPropietarios: Propietario[] = [];
+  local: Local = new Local();
+
   accion: string = "new";
 
   currentPage: number = 1;
@@ -28,127 +28,90 @@ export class AlquilerFormComponent {
   constructor(private activatedRoute: ActivatedRoute,
     private alquilerService: AlquilerService,
     private localService: LocalService,
-    private propietarioService: PropietarioService,
-    private router: Router)
-  {
+    private router: Router) {
     //this.iniciarVariable();
-    this.cargarLocales(this.currentPage);
-    this.cargarPropietarios();
   }
 
-  ngOnInit(): void
-  {
-    this.activatedRoute.params.subscribe(params => 
-      {
-        if (params['id'] == "0")
-          {
-            this.accion = "new"; 
-            this.iniciarVariable();
-          }
-        else
-        {
-          this.accion = "update"; 
-          this.cargarAlquiler(params['id']);
-        }
-      });
+  ngOnInit(): void {
+    this.activatedRoute.params.subscribe(params => {
+      if (params['id'] == "0") {
+        this.accion = "new";
+        this.iniciarVariable();
+      }
+      else {
+        this.accion = "update";
+      this.cargarLocal(params['id']);
+      }
+    });
   }
-
-  cargarAlquiler(id: string): void 
-  {
-    console.log(this.alquiler);
-    this.alquilerService.getAlquilerById(id).subscribe
+  cargarLocal(id: string):void {
+      
+    this.localService.getLocalById(id).subscribe
     (
       (result) => 
       {
-        this.alquiler = result; 
+        this.local = result;
+        this.alquiler.local = this.local ;
       },
       (error: any) => 
       {
         console.log(error);
       }
     );
+    }
+
+  cargarAlquiler(id: string): void {
+    console.log(this.alquiler);
+    this.alquilerService.getAlquilerById(id).subscribe
+      (
+        (result) => {
+          this.alquiler = result;
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
-  agregarAlquiler(): void
-  {
+  agregarAlquiler(): void {
     this.alquilerService.addAlquiler(this.alquiler).subscribe
-    (
-      (result) => 
-      {
-        if(result.status == 1)
-          {
+      (
+        (result) => {
+          if (result.status == 1) {
             alert("Alquiler guardado");
             this.router.navigate(['local']);
           }
-        
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    ); 
-    this.alquiler = new Alquiler(); 
+
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
+    this.alquiler = new Alquiler();
   }
 
-  actualizarAlquiler():void
-  {
+  actualizarAlquiler(): void {
     this.alquilerService.updateAlquiler(this.alquiler).subscribe
-    (
-      (result) => 
-      {
-        if(result.status == 1)
-          {
+      (
+        (result) => {
+          if (result.status == 1) {
             alert("Alquiler actualizado");
             this.router.navigate(['alquiler']);
           }
-        
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    ); 
+
+        },
+        (error: any) => {
+          console.log(error);
+        }
+      );
   }
 
-  iniciarVariable(): void
-  {
-    this.alquiler = new Alquiler(); 
+  iniciarVariable(): void {
+    this.alquiler = new Alquiler();
   }
 
-  cargarLocales(page: number): void 
-  {
-    this.localService.getLocales(page, 6).subscribe
-    (
-      (result) => 
-      {
-        console.log('Locales:', result);
-        this.listaLocales = result.locales;
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    );
-  }
 
-  cargarPropietarios(): void
-  {
-    this.propietarioService.getPropietarios().subscribe
-    (
-      (result) => 
-      {
-        console.log('Propietarios:', result);
-        this.listaPropietarios = result;
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    );
-  }
-
-  cancelar()
-  {
+  cancelar() {
     this.router.navigate(['home']);
   }
 

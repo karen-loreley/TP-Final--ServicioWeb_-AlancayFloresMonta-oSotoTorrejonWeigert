@@ -29,8 +29,6 @@ export class PagoComponent {
   
   listaPagos!: Array<Pago>;
   listaLocal!: Array<Local>;
-  graficoPagosMensualesVisible: boolean = false;
-  localVisible: boolean = false;
 
   
   totalPorMes: number[] = new Array(12).fill(0);

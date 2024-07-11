@@ -4,7 +4,7 @@ const alquilerCtrl = {}
 
 alquilerCtrl.getAlquileres = async (req, res) => 
 {
-    var alquileres = await Alquiler.find().populate('propietario').populate('local');
+    var alquileres = await Alquiler.find().populate('local');
     res.json(alquileres);
 }
 
@@ -33,7 +33,7 @@ alquilerCtrl.createAlquiler = async (req, res) =>
 
 alquilerCtrl.getAlquiler = async (req, res) => 
 {
-    const alquiler = await Alquiler.findById(req.params.id).populate('propietario').populate('local');
+    const alquiler = await Alquiler.findById(req.params.id).populate('local');
     res.json(alquiler);
 }
 
@@ -41,7 +41,7 @@ alquilerCtrl.getAlquilerByLocalId = async (req, res) =>
 {
     try 
     {
-        const alquiler = await Alquiler.findOne({ local: req.params.localId }).populate('propietario').populate('local');
+        const alquiler = await Alquiler.findOne({ local: req.params.localId }).populate('local');
         /*if (!alquiler) 
         {
             return res.status(404).json({ status: '0', msg: 'No se encontró el alquiler para este local' });

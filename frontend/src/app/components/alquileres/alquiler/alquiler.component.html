@@ -1,3 +1,38 @@
+<div class="bg-secondary-subtle p-3">
+
+
+  <h3 class="">LISTADO DE ALQUILERES</h3>
+  <button type="button" class="btn btn-info me-2" (click)="dibujarGrafico()">Ver pagos por mes</button>
+  <button type="button" class="btn btn-info me-2" (click)="filtrarLocal()">Ver pagos por local</button>
+  <div class="mt-2">
+
+    <table class="table table-striped table-hover mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Mes</th>
+          <th>Local</th>
+          <th>Precio</th>
+          <th>Superficie</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let t of listaAlquileres">
+          <th>{{ t._id }}</th>
+          <td>{{ t.fechaAlquiler }}</td>
+          <td>{{t.local.nombre}}</td>
+          <td>{{t.local.costomes}}</td>
+          <td>{{t.local.superficie}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div>
+    <canvas id="graficoPagosMensuales" width="400" height="400"></canvas>
+    <canvas id="local" width="400" height="400"></canvas>
+  </div>
+<!-- 
 <div *ngIf="alquiler">
     
     <div class="row d-flex justify-content-center align-items-center">
@@ -55,3 +90,4 @@
     </div>
     <button type="button" class="btn btn-danger mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
   </div>
+ -->

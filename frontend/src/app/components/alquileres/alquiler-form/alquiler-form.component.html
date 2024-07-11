@@ -1,36 +1,42 @@
-<form class="container">
-  <h3 class="mt-5">Gestión de Alquiler</h3>
-
-    <div class="mb-3">
-        <label for="propietario" class="form-label">Propietario</label>
-        <select name="propietario" id="propietario" [(ngModel)]="alquiler.propietario._id" class="form-select" required>
-          <option *ngFor="let p of listaPropietarios" [ngValue]="p._id">{{ p.nombres }} {{ p.apellido }}</option>
-        </select>
-  <!---->
-        <label for="local" class="form-label">Local</label>
-        <select name="local" id="local" [(ngModel)]="alquiler.local._id" class="form-select" required>
-          <option *ngFor="let l of listaLocales" [ngValue]="l._id">{{ l.nombre }}</option>
-        </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="plazomes" class="form-label">Plazo Mes</label>
-      <input type="number" class="form-control" id="plazomes" name="plazomes" [(ngModel)]="alquiler.plazomes"> 
-    </div>       
-
-    <div class="mb-3">
-        <label for="costoAlquiler" class="form-label">Costo Alquiler</label>
-        <input type="number" class="form-control" id="costoAlquiler" name="costoAlquiler" [(ngModel)]="alquiler.costoAlquiler"> 
-    </div> 
-
-    <div class="mb-3">
-      <label for="fechaAlquiler" class="form-label">Fecha</label>
-      <input type="date" class="form-control w-auto" id="fechaAlquiler" name="fechaAlquiler" [(ngModel)]="alquiler.fechaAlquiler">
-    </div>
+<div class="container">
+  <h3 class="mt-5">Realizar Pago</h3>
     
-    <div class="d-flex justify-content-between">
-      <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarAlquiler()">Agregar</button>
-      <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarAlquiler()">Actualizar</button>
-      <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
+        <div class="card-body">
+            <form class="my-form">
+                <div class="mb-3">
+                    <div class="card card-alquiler mt-5" style="width: 22rem;" >
+                        <div class="card-img">
+                            <img [src]="local.pathimagen" class="rounded-2 btn" alt="Imagen del local" >
+                        </div>
+                        <div class="card-title">{{ local.nombre }}</div>
+                        <div class="card-subtitle">Superficie: {{ local.superficie }} m2</div>
+                        <div class="card-subtitle">
+                            <span *ngIf="local.alquilado; else notRented">Alquilado</span>
+                            <ng-template #notRented>No se puede Alquilar</ng-template>
+                        </div>
+                        <div class="card-subtitle">
+                            <span *ngIf="local.habilitado; else notHabilitado">Habilitado</span>
+                            <ng-template #notHabilitado>No se encuentra Habilitado</ng-template>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-price">ARS{{ local.costomes | currency }}/Mes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="mesPago" class="form-label">Mes de Pago</label>
+                    <input name="mesPago" type="date" class="form-control" id="mesPago" [(ngModel)]="alquiler.fechaAlquiler">
+                </div>
+                <div class="mb-3">
+                  <label for="mesesPago" class="form-label">Meses de Pago</label>
+                  <input name="mesesPago" type="number" class="form-control" id="mesesPago" [(ngModel)]="alquiler.plazomes">
+              </div>
+                <div class="d-flex justify-content-between">
+                    
+                        <button type="submit" class="btn btn-primary" (click)="agregarAlquiler()">Registrar Pago</button>
+                        <button type="submit" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+                    
+                </div>
+            </form>
+        </div>
     </div>
-  </form>
