@@ -6,7 +6,7 @@ import { Local } from '../../../models/local';
 import { ActivatedRoute } from '@angular/router';
 import { PromocionService } from '../../../services/promocion.service';
 import { LocalService } from '../../../services/local.service';
-import { FacebookModule, FacebookService, InitParams, LoginResponse} from 'ngx-facebook';
+import { FacebookModule, FacebookService, InitParams} from 'ngx-facebook';
 import { ApiMethod } from 'ngx-facebook/providers/facebook';
 
 
@@ -32,7 +32,7 @@ export class CrudPromocinoComponent implements OnInit{
   constructor(private activateRouter: ActivatedRoute,
               private promocionservice:PromocionService,
               private localService: LocalService,
-              private fb: FacebookService
+              private fb: FacebookService,
 
   ){
    this.obtenerPromocion();
@@ -106,27 +106,26 @@ export class CrudPromocinoComponent implements OnInit{
      console.log("No hay ticket para actualizar");
     }
   }
-  
-  obtenerPromocion(){
+  obtenerPromocion(): void {
     this.promocionservice.getPromocion().subscribe(
-      data=>{
-        this.promociones= data;
+      data => {
+        this.promociones = data;
       },
-      error=>{
+      error => {
         console.log(error);
       }
-    )
+    );
   }
 
-  obtenerLocales(page:number): void {
-    this.localService.getLocales(page,6).subscribe(
+  obtenerLocales(page: number): void {
+    this.localService.getLocales(page, 6).subscribe(
       data => {
         this.locales = data.locales;
       },
       error => {
         console.log(error);
       }
-    )
+    );
   }
 
   agregar(): void{
@@ -162,8 +161,8 @@ export class CrudPromocinoComponent implements OnInit{
     this.fb.api('/308626842344467/feed', apiMethod,
       {
       "message": descripcion, //el token debe actualizarse cada media hora
-      "access_token":"EAAXGSugihHIBOyT5XMMUkQYkflxd9v6zaIVkLfl9oZAPzJt52AJQVQMeT9Tj3ZAv9XiwkwpF2Je6Xsb9bMZANhC1WcOqNpki4Ur501GiV6TYTYWnGOFVNKYOPIoM39mv66ZC95hboNrsaezu5TAqGDctAfUq2bz7KONqVwtBv4cMEeTSXPtjFZAe6J8e0ZCYiEc9ZArNZBhYjdHEkA3olIuwc6jm"
-       
+      "access_token":"EAAXGSugihHIBO0ZBjgYRCqZCb8TpUXKArl5rMc94LpAFj44aJx51XmeLaca1ObXhhtbzcaiMvb01ZCzLH2Hk4rQnGdMPtZBC9O2rBIq5NOxyFihfdUCKmjVG0FVdY3xgWeP0sBnCkvWC5DZBhPtwYk9tBqLBwSCJrzX5Ngqw448fZAwz3sODpmzqXolsFVEljdvMsywFIVT06K42J8tdWNyrLrTAZDZD"
+
     }
     ).then((response: any) => {
       alert('Publicación exitosa en facebook');

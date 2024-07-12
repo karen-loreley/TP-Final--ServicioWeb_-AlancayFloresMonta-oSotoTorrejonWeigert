@@ -16,70 +16,52 @@
 </div>
 
 <div class="row">
-    <div class="col-12 col-md-6 col-xl-4 d-flex justify-content-center align-items-center" *ngFor="let l of listaLocales">
-      <div class="card mt-5 card-costum" style="width: 22rem;" >
+  <div class="col-12 col-md-6 col-xl-4 d-flex justify-content-center align-items-center" *ngFor="let l of listaLocales">
+    <div class="card mt-5 card-costum" style="width: 22rem;" >
 
-        <div class="card-img">
-          <img [src]="l.pathimagen" class="rounded-2 btn" alt="Imagen del local">
-        </div>
+      <div class="card-img">
+        <img [src]="l.pathimagen" class="rounded-2 btn" alt="Imagen del local">
+      </div>
 
-        <div class="card-title">{{ l.nombre }}</div>
-        <div class="card-subtitle">
-          <span><strong>Propietario: </strong>{{ l.propietario.nombres }} {{ l.propietario.apellido }}</span>
-        </div>
-        <div class="card-subtitle">
-          <span><strong>Email: </strong>{{ l.propietario.email }}</span>
-        </div>
-        <div class="card-subtitle">
-          <span><strong>Teléfono: </strong>+54 {{ l.propietario.telefono }}</span>
-        </div>
-        <div class="card-subtitle"><strong>Superficie: </strong>{{ l.superficie }} m2</div>
-        <div class="card-subtitle">
-          <span *ngIf="l.alquilado; else notRented">Alquilado</span>
-          <ng-template #notRented>Sin Alquilar</ng-template>
-        </div>
-        <div class="card-subtitle">
-          <span *ngIf="l.habilitado; else notAble">Habilitado</span>
-          <ng-template #notAble>Deshabilitado</ng-template>
-        </div>
+      <div class="card-title">{{ l.nombre }}</div>
+      <div class="card-subtitle">
+        <span><strong>Propietario: </strong>{{ l.propietario.nombres }} {{ l.propietario.apellido }}</span>
+      </div>
+      <div class="card-subtitle">
+        <span><strong>Email: </strong>{{ l.propietario.email }}</span>
+      </div>
+      <div class="card-subtitle">
+        <span><strong>Teléfono: </strong>+54 {{ l.propietario.telefono }}</span>
+      </div>
+      <div class="card-subtitle"><strong>Superficie: </strong>{{ l.superficie }} m2</div>
+      <div class="card-subtitle">
+        <span *ngIf="l.alquilado; else notRented">Alquilado</span>
+        <ng-template #notRented>Sin Alquilar</ng-template>
+      </div>
+      <div class="card-subtitle">
+        <span *ngIf="l.habilitado; else notAble">Habilitado</span>
+        <ng-template #notAble>Deshabilitado</ng-template>
+      </div>
 
-        <div class="card-footer">
-          <div class="card-price">ARS{{ l.costomes | currency }}/Mes</div>
-          <button class="card-btn" (click)="realizarPago(l._id)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-              <path d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
-              </path>
-              <path d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path>
-              <path d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path><path d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
-              </path>
-            </svg>
-          </button>
-        </div>
-        <div class="card-footer" *ngIf="isUserAuthenticated()">
-          <button type="button" class="btn btn-danger" (click)="openConfirmModal('delete', l._id)">Eliminar</button>
-          <button type="button" class="btn btn-warning" (click)="openConfirmModal('modify', l._id)">Modificar</button>
-        </div>
+      <div class="card-footer">
+        <div class="card-price">ARS{{ l.costomes | currency }}/Mes</div>
+        <button class="card-btn" (click)="realizarPago(l._id)">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z">
+            </path>
+            <path d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path>
+            <path d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z"></path><path d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z">
+            </path>
+          </svg>
+        </button>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-danger" (click)="openConfirmModal('delete', l._id)">Eliminar</button>
+        <button type="button" class="btn btn-warning" (click)="openConfirmModal('modify', l._id)">Modificar</button>
       </div>
     </div>
-
-    <!-- Modal -->
-    <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal($event)">
-      <div class="modal-content small-modal" (click)="$event.stopPropagation()">
-        
-        <h4 class="modal-title" style="font-style: italic; color: aliceblue;">Confirmación</h4>
-        
-        <div class="modal-body">
-          <p style="color: orangered;">{{ modalMessage }}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" *ngIf="modalAction === 'delete'" (click)="confirmAction()">Eliminar</button>
-          <button type="button" class="btn btn-warning" *ngIf="modalAction === 'modify'" (click)="confirmAction()">Modificar</button>
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-        </div>
-      </div>
-    </div>
-    <!-- Fin Modal -->
   </div>
+
   
   <br><br>
   <div class="mt-4 d-flex justify-content-center align-items-center">
