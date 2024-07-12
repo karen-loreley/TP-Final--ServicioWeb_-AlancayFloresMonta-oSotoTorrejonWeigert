@@ -93,5 +93,27 @@
   cursor: pointer;
 }
 .btn-info:hover, .btn-primary:hover {
-    background-color: #5a2a19;; /* Color más oscuro para el estado hover */
+    background-color: #5a2a19;; 
+}
+
+.btn-danger.custom-margin {
+  background-color: #c75b39; 
+  color: #ffffff; 
+  border:none;
+  cursor: pointer;
+}
+
+.btn-danger.custom-margin:hover {
+  background-color: #a04d2e; 
+}
+
+.btn-warning {
+  background-color: #d5a680; 
+  color: #000000; 
+  border:none;
+  cursor: pointer;
+}
+
+.btn-warning:hover {
+  background-color: #d5a65d; 
 }

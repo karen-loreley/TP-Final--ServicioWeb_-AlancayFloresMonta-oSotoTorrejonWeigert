@@ -74,10 +74,13 @@
                 <label class="form-check-label" for="exampleCheck2" style="font-weight: bold;">Habilitado?</label>
               </div>
           </div>
-
-        <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarLocal()">Agregar</button>
-        <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarLocal()">Actualizar</button>
-        <button type="submit" class="btn btn-danger" (click)="cancelar()" style="margin-left: 30px;">Cancelar</button>
+          <div class="form-group">
+            <button *ngIf="accion=='new'" type="submit" class="btn btn-primary" (click)="agregarLocal()">Agregar</button>
+            <button *ngIf="accion=='update'" type="submit" class="btn btn-success" (click)="actualizarLocal()">Actualizar</button>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+        </div>
       </form>
   </div>
 
@@ -89,7 +92,7 @@
               <h3>{{local.nombre | titlecase}}</h3>
           </div>
           <ng-template #sinNombre>
-              <h3>Nombre del Producto</h3>
+              <h3>Nombre del Local</h3>
           </ng-template>
       </div>
       
@@ -111,12 +114,12 @@
                   <p>{{local.superficie}}</p>
               </div>
               <ng-template #sinDescripcion>
-                  <p>Descripcion del Producto</p>
+                  <p>Descripcion del Local</p>
               </ng-template>
           </div>
 
           <div class="m-1">
-              <h5>Precio del Producto:</h5>
+              <h5>Precio del Local:</h5>
               <div *ngIf="local.costomes; else sinPrecio">
                   <p>{{local.costomes| currency:'ARS':'symbol-narrow'}}</p>
               </div>

@@ -59,6 +59,8 @@ export const routes: Routes = [
         //promociones
         {path: 'crud-promocion', component: CrudPromocinoComponent},
 
-        {path: '**', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia
+        //este path siempre tiene que ir al ultimo
+        {path: '**', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia 
 
+  
 ];

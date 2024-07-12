@@ -11,7 +11,7 @@
                 <th scope="col">DNI</th>
                 <th scope="col">Correo Electronico</th>
                 <th scope="col">Teléfono</th>
-                <th scope="col">Gestionar</th>
+                <th scope="col">  </th>
             </tr>
             </thead>
             <tbody>
@@ -21,8 +21,8 @@
                 <td>{{ p.email }}</td>
                 <td>+54 {{ p.telefono }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger custom-margin" (click)="eliminarPropietario(p._id)">Eliminar</button>
-                    <button type="button" class="btn btn-warning" (click)="modificarPropietario(p._id)">Modificar</button>
+                    <button type="button" class="btn btn-danger custom-margin m-1" (click)="eliminarPropietario(p._id)">Eliminar</button>
+                    <button type="button" class="btn btn-warning m-1" (click)="modificarPropietario(p._id)">Modificar</button>
                 </td>
             </tr>
             </tbody>

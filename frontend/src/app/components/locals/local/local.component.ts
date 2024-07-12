@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AlquilerService } from '../../../services/alquiler.service';
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-local',
@@ -19,7 +20,7 @@ export class LocalComponent {
   totalPages: number = 1;
   currentPage: number = 1;
 
-  constructor(private localService: LocalService, private alquilerService: AlquilerService, private router: Router)
+  constructor(private localService: LocalService, private alquilerService: AlquilerService, private loginService: LoginService,private router: Router)
   {
     this.obtenerLocales(this.currentPage);
   }
@@ -200,6 +201,10 @@ export class LocalComponent {
     //boton realizar pago
     realizarPago(id: string | undefined): void{
       this.router.navigate(['pago-form', id]);
+    }
+
+    isUserAuthenticated(): boolean {
+      return this.loginService.isAuthenticated();
     }
 
 }

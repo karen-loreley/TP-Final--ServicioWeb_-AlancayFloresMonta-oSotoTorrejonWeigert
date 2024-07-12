@@ -23,8 +23,8 @@
 
   <div class="mb-3">
     <label for="local" class="form-label">Local</label>
-    <select class="form-control" id="local" name="local" [(ngModel)]="promocion.local._id">
-      <option *ngFor="let loc of locales" [value]="loc._id">{{ loc._id }}</option>
+    <select name="local" id="local" [(ngModel)]="promocion.local._id" class="form-select" required>
+      <option *ngFor="let l of locales" [ngValue]="l._id">{{ l.nombre }}</option>
     </select>
   </div>
 
@@ -32,32 +32,37 @@
   <button *ngIf="accion=='update'" type="button" class="btn btn-primary" (click)="actualizar()">Actualizar</button>
 </form>
 
-<div class="tabla" *ngIf="form">
-  <h1>Tabla de las Promociones Cargadas</h1>
-  <button type="button" class="btn btn-primary m-3" (click)="agregar()">Agregar</button>
-  
-  <table class="table table-dark table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Descripción</th>
-        <th scope="col">Imagen</th>
-        <th scope="col">Desde</th>
-        <th scope="col">Hasta</th>
-        <th scope="col">Funciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let e of promociones">
-        <td>{{e.descripcion}}</td>
-        <td>{{e.imagen}}</td>
-        <td>{{e.desde | date: 'dd/MM/yyyy'}}</td>
-        <td>{{e.hasta | date:'dd/MM/yyyy'}}</td>
-        <td>
-          <button type="button" class="btn btn-warning m-1" (click)="modificar(e._id)">Modificar</button>
-          <button type="button" class="btn btn-danger" (click)="eliminar(e._id)">Eliminar</button>
-          <button type="button" class="btn btn-primary" (click)="postFb()">Publicar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row m-3" *ngIf="form">
+    <div class="col">
+        <div class="row">
+            <h3 class="titulo text-center">Promociones Cargadas</h3>
+            <div class="text-center mb-3">
+                <button type="button" class="btn btn-primary mb-3 mx-3" (click)="agregar()">AGREGAR</button>
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">Descripción</th>
+                  <th scope="col">Imagen</th>
+                  <th scope="col">Desde</th>
+                  <th scope="col">Hasta</th>
+                  <th scope="col">Funciones</th>
+                </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let e of promociones">
+                <td>{{e.descripcion}}</td>
+                <td>{{e.imagen}}</td>
+                <td>{{e.desde | date: 'dd/MM/yyyy'}}</td>
+                <td>{{e.hasta | date:'dd/MM/yyyy'}}</td>
+                <td>
+                  <button type="button" class="btn btn-warning m-1" (click)="modificar(e._id)">Modificar</button>
+                  <button type="button" class="btn btn-danger m-1" (click)="eliminar(e._id)">Eliminar</button>
+                  <button type="button" class="btn btn-primary m-1" (click)="postFb(e.descripcion)">Publicar Facebook </button>
+                </td>
+              </tr>
+            </tbody>
+        </table>
+      </div>
 </div>

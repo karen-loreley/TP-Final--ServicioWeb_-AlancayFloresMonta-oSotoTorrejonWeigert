@@ -1,8 +1,10 @@
 
 <div class="text-center p-3 ">
   <h2>Nuestros Locales</h2>
-  <button type="button" class="btn btn-outline-dark" (click)="agregarLocal()">Agregar</button>
-  <div class="dropdown">
+  <div *ngIf="isUserAuthenticated()">
+    <button type="button" class="btn btn-outline-dark" (click)="agregarLocal()">Agregar</button>
+  </div>
+    <div class="dropdown">
     <button class="btn btn-dark dropdown-toggle mt-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">Aplicar Filtros</button>
     <ul class="dropdown-menu">
       <li><a class="dropdown-item btn" (click)="obtenerAlquilados()">Alquilados</a></li>

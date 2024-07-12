@@ -13,7 +13,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let alquiler of alquileres">
-        <td>{{ alquiler.propietario.nombres }} {{ alquiler.propietario.apellido }}</td>
+        <td>{{ alquiler.propietario?.nombres }} {{ alquiler.propietario?.apellido }}</td>
         <td>{{ alquiler.local.nombre }}</td>
         <td>{{ alquiler.plazomes }}</td>
         <td>{{ alquiler.costoAlquiler }}</td>

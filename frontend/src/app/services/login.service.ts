@@ -43,6 +43,9 @@ export class LoginService {
       const user = sessionStorage.getItem("user");
       return this.isLoggedIn || user != null;
     }
+    isAuthenticated(): boolean {
+      return this.isLoggedIn;
+    }
 
   public userLogged(){
     const usuario = sessionStorage.getItem("user");
