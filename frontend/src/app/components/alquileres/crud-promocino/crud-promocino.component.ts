@@ -110,14 +110,14 @@ export class CrudPromocinoComponent {
   }
 
   obtenerLocales(): void {
-    this.localService.getLocal().subscribe(
+    /*this.localService.getLocal().subscribe(
       data => {
         this.locales = data;
       },
       error => {
         console.log(error);
       }
-    );
+    );*/
   }
 
   agregar(): void{
