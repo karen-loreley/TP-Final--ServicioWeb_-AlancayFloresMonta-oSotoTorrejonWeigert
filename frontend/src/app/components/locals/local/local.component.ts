@@ -4,7 +4,6 @@ import { LocalService } from '../../../services/local.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AlquilerService } from '../../../services/alquiler.service';
 import { LoginService } from '../../../services/login.service';
 
 @Component({
@@ -20,7 +19,7 @@ export class LocalComponent {
   totalPages: number = 1;
   currentPage: number = 1;
 
-  constructor(private localService: LocalService, private alquilerService: AlquilerService, private loginService: LoginService,private router: Router)
+  constructor(private localService: LocalService, private loginService: LoginService,private router: Router)
   {
     this.obtenerLocales(this.currentPage);
   }
@@ -75,46 +74,24 @@ export class LocalComponent {
     )
   }
 
-  eliminarLocal(_id: string)
-  {
-    this.localService.deleteLocal(_id).subscribe
-    (
-      data => 
-        {
-          if (data.status == 1)
-            {
-              alert("Local eliminado")
+//Eliminar Local y respectiva Novedad
+eliminarLocal(_id: string) {
+  this.localService.deleteLocal(_id).subscribe(
+      data => {
+          if (data.status == 1) {
+              alert("Local y novedad relacionados eliminados");
               // Si la página actual tiene solo un elemento, decrementar la página
-              if (this.listaLocales.length === 1 && this.currentPage > 1) 
-                {
+              if (this.listaLocales.length === 1 && this.currentPage > 1) {
                   this.currentPage--;
-                }
-
+              }
               this.obtenerLocales(this.currentPage);
-            }
-            //this.eliminarAlquilerPorLocal(); //cuando se elimina el loca, tambien eliminar el Alquiler, porque sino genera errores
-        },
-        error => 
-        {
+          }
+      },
+      error => {
           console.log(error);
-        }
-    )
-  }
-
-  eliminarAlquilerPorLocal(_id: string)
-  {
-    this.alquilerService.deleteAlquiler(_id).subscribe
-    (
-      data => 
-        {
-          this.obtenerLocales(this.currentPage);
-        },
-        error => 
-        {
-          console.log(error);
-        }
-    )
-  }
+      }
+  )
+}
 
   agregarLocal()
   {

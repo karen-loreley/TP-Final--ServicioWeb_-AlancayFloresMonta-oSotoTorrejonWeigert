@@ -23,7 +23,7 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">Alquiler</th>
+                    <th scope="col">Propietario y Local</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Estado</th>
                     <th scope="col">Fecha</th>
@@ -32,9 +32,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let n of listaNovedades">
-                    <th *ngIf="n.alquiler">
-                        {{ n.alquiler.propietario?.dni }} : {{ n.alquiler.local.nombre }}
-                      </th>               
+                    <th>{{ n.local.propietario.apellido }} : {{ n.local.nombre }}</th>             
                     <td>{{ n.descripcion }}</td>
                     <td>{{ n.estado }}</td>
                     <td>{{ n.fecha | date: 'dd/MM/yyyy' }}</td>

@@ -5,6 +5,8 @@ import { Local } from '../../../models/local';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalService } from '../../../services/local.service';
 import { HttpClient } from '@angular/common/http';
+import { Propietario } from '../../../models/propietario';
+import { PropietarioService } from '../../../services/propietario.service';
 
 @Component({
   selector: 'app-local-form',
@@ -16,17 +18,18 @@ import { HttpClient } from '@angular/common/http';
 export class LocalFormComponent {
 
   local: Local = new Local();
-  //local!: Local;
   listaLocales!: Array<Local>;
+  listaPropietarios: Propietario[] = [];
   accion: string = "new";
   selectedFile: File | null = null;
 
   constructor(private activatedRoute: ActivatedRoute, 
               private localService: LocalService,
+              private propietarioService: PropietarioService,
               private router: Router,
               private http: HttpClient) 
   {
-
+    this.cargarPropietarios();
   }
 
   ngOnInit(): void
@@ -44,7 +47,6 @@ export class LocalFormComponent {
           this.cargarLocal(params['id']);
         }
       });
-      //this.cargarEspectadores();
   }/**/
 
   onFileChange(event: any) 
@@ -87,7 +89,7 @@ export class LocalFormComponent {
         if(result.status == 1)
           {
             alert("Local guardado");
-            this.router.navigate(['local']);
+            this.router.navigate(['home']);
           }
         
       },
@@ -123,6 +125,22 @@ export class LocalFormComponent {
   iniciarVariable(): void
   {
     this.local = new Local(); 
+  }
+
+  cargarPropietarios(): void
+  {
+    this.propietarioService.getPropietarios().subscribe
+    (
+      (result) => 
+      {
+        console.log('Propietarios:', result);
+        this.listaPropietarios = result;
+      },
+      (error: any) => 
+      {
+        console.log(error);
+      }
+    );
   }
 
   cancelar()

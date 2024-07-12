@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Local = require('../models/local');
-const Alquiler = require('../models/alquiler');
+const Novedad = require('../models/novedad');
 const localCtrl = {}
 
 localCtrl.getlocales = async (req, res) => 
@@ -12,7 +12,7 @@ localCtrl.getlocales = async (req, res) =>
 
     try 
     {
-        const locales = await Local.find().skip(skip).limit(limit);
+        const locales = await Local.find().skip(skip).limit(limit).populate('propietario');
         const count = await Local.countDocuments();
         
         res.status(200).json
@@ -51,7 +51,7 @@ localCtrl.createlocal = async (req, res) => {
 
 localCtrl.getLocal = async (req, res) => {
     try {
-        const local = await Local.findById(req.params.id);
+        const local = await Local.findById(req.params.id).populate('propietario');
         if (!local) {
             return res.status(404).json({
                 status: '0',
@@ -108,13 +108,21 @@ localCtrl.editLocal = async (req, res) => {
     }
 }*/
 
+//Eliminar Local y respectiva Novedad
 localCtrl.deleteLocal = async (req, res) => {
     try {
+        // Encuentra el alquiler asociado al local
+        const novedad = await Novedad.findOne({ local: req.params.id });
+        if (novedad) {
+            // Elimina el novedad si existe
+            await Novedad.deleteOne({ _id: novedad._id });
+        }
+        // Elimina el local
         await Local.deleteOne({ _id: req.params.id });
         res.json({
             status: '1',
-            msg: 'local removed'
-        })
+            msg: 'Local y Novedad relacionados eliminados'
+        });
     } catch (error) {
         res.status(400).json({
             'status': '0',
@@ -127,7 +135,7 @@ localCtrl.getlocalesAlquilados = async (req, res) =>
 {
     try
     {
-        var locales = await Local.find({ alquilado: true });
+        var locales = await Local.find({ alquilado: true }).populate('propietario');
         res.json(locales);
     }
     catch (error)
@@ -144,7 +152,7 @@ localCtrl.getLocalesNoAlquilados = async (req, res) =>
 {
     try
     {
-        var locales = await Local.find({ alquilado: false });
+        var locales = await Local.find({ alquilado: false }).populate('propietario');
         res.json(locales);
     }
     catch (error)

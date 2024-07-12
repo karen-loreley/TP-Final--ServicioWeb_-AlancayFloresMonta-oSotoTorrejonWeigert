@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Novedades } from '../../../models/novedades';
-import { Alquiler } from '../../../models/alquiler';
-import { AlquilerService } from '../../../services/alquiler.service';
 import { NovedadesService } from '../../../services/novedades.service';
 import { LocalService } from '../../../services/local.service';
 import { PropietarioService } from '../../../services/propietario.service';
@@ -21,7 +19,6 @@ import { Local } from '../../../models/local';
 export class NovedadFormComponent {
 
   novedad: Novedades = new Novedades();
-  listaAlquileres: Alquiler[] = [];
   listaLocales: Local[] = [];
   listaPropietarios: Propietario[] = [];
 
@@ -33,14 +30,12 @@ export class NovedadFormComponent {
   (
     private activatedRoute: ActivatedRoute,
     private novedadService: NovedadesService,
-    private alquilerService: AlquilerService,
     private localService: LocalService,
     private propietarioService: PropietarioService,
     private router: Router
   )
   {
     //this.iniciarVariable();
-    this.cargarAlquileres();
     this.cargarLocales(this.currentPage);
     this.cargarPropietarios();
   }
@@ -122,22 +117,6 @@ export class NovedadFormComponent {
   iniciarVariable(): void
   {
     this.novedad = new Novedades(); 
-  }
-
-  cargarAlquileres(): void
-  {
-    this.alquilerService.getAlquileres().subscribe
-    (
-      (result) => 
-      {
-        console.log('Alquileres:', result);
-        this.listaAlquileres = result;
-      },
-      (error: any) => 
-      {
-        console.log(error);
-      }
-    );
   }
 
   cargarLocales(page: number): void 

@@ -1,6 +1,9 @@
+import { Propietario } from "./propietario";
+
 export class Local {
     
     _id!: string;
+    propietario: Propietario;
     nombre!: string;
     superficie: number;
     habilitado: boolean;
@@ -9,6 +12,7 @@ export class Local {
     alquilado: boolean;
 
     constructor(){
+        this.propietario = new Propietario();
         this.nombre = "";
         this.superficie = 0;
         this.habilitado = false;

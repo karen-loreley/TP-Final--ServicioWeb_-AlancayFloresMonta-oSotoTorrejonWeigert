@@ -5,9 +5,9 @@
           <form name="form" #productoForm="ngForm">
             <div class="form-group">
               <div class="mb-3">
-                <label for="alquiler" class="form-label">Alquiler</label>
-                <select name="alquiler" id="alquiler" [(ngModel)]="novedad.alquiler._id" class="form-select" required>
-                  <option *ngFor="let l of listaLocales" [ngValue]="l._id">{{ l.nombre }}</option>
+                <label for="local" class="form-label">Local</label>
+                <select name="local" id="local" [(ngModel)]="novedad.local._id" class="form-select" required>
+                  <option *ngFor="let l of listaLocales" [ngValue]="l._id">{{ l.propietario.apellido }} : {{ l.nombre }}</option>
                 </select>
             </div>
             </div>

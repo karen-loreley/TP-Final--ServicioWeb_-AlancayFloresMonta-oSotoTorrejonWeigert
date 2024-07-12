@@ -6,6 +6,14 @@
         <br>
       </div>
       <form class="p-3" #productoForm="ngForm">
+
+        <div class="mb-3">
+          <label for="propietario" class="form-label">Propietario</label>
+          <select name="propietario" id="propietario" [(ngModel)]="local.propietario._id" class="form-select" required>
+            <option *ngFor="let p of listaPropietarios" [ngValue]="p._id">{{ p.nombres }} {{ p.apellido }}</option>
+          </select>
+        </div>
+        
           <div class="form-group">
               <label for="nombre" class="form-label" style="font-weight: bold;">Nombre:</label>
               <input id="nombre" type="text" class="form-control" placeholder="Ingrese Nombre" [(ngModel)]="local.nombre" name="nombre"
@@ -39,7 +47,7 @@
             <input type="file" class="form-control" id="imagenFile" name="imagenFile" (change)="onFileChange($event)">
         </div>
 
-          <div class="form-group">
+          <!--<div class="form-group">
               <label for="imagen" class="form-label" style="font-weight: bold;">Imagen Url:</label>
               <input id="imagen" type="text" class="form-control" placeholder="Ingrese URL de Imagen" [(ngModel)]="local.pathimagen" name="imagen"
                   required #imagen="ngModel">
@@ -49,7 +57,7 @@
                       Url de Imagen es requerido.
                   </div>
               </div>
-          </div>
+          </div>-->
 
           <div class="form-group">
               <label for="precio" class="form-label" style="font-weight: bold;">Precio: </label>

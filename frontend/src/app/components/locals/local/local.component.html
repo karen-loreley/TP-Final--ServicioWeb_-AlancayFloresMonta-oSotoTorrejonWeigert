@@ -20,19 +20,29 @@
       <div class="card mt-5 card-costum" style="width: 22rem;" >
 
         <div class="card-img">
-          <img [src]="l.pathimagen" class="rounded-2 btn" alt="Imagen del local" (click)="obtenerInfo(l._id)">
+          <img [src]="l.pathimagen" class="rounded-2 btn" alt="Imagen del local">
         </div>
 
         <div class="card-title">{{ l.nombre }}</div>
-        <div class="card-subtitle">Superficie: {{ l.superficie }} m2</div>
+        <div class="card-subtitle">
+          <span><strong>Propietario: </strong>{{ l.propietario.nombres }} {{ l.propietario.apellido }}</span>
+        </div>
+        <div class="card-subtitle">
+          <span><strong>Email: </strong>{{ l.propietario.email }}</span>
+        </div>
+        <div class="card-subtitle">
+          <span><strong>Teléfono: </strong>+54 {{ l.propietario.telefono }}</span>
+        </div>
+        <div class="card-subtitle"><strong>Superficie: </strong>{{ l.superficie }} m2</div>
         <div class="card-subtitle">
           <span *ngIf="l.alquilado; else notRented">Alquilado</span>
-          <ng-template #notRented>No se puede Alquilar</ng-template>
+          <ng-template #notRented>Sin Alquilar</ng-template>
         </div>
         <div class="card-subtitle">
-          <span *ngIf="l.habilitado; else notRented">Habilitado</span>
-          <ng-template #notRented>No se encuentra Habilitado</ng-template>
+          <span *ngIf="l.habilitado; else notAble">Habilitado</span>
+          <ng-template #notAble>Deshabilitado</ng-template>
         </div>
+
         <div class="card-footer">
           <div class="card-price">ARS{{ l.costomes | currency }}/Mes</div>
           <button class="card-btn" (click)="realizarPago(l._id)">

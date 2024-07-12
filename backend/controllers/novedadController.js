@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Novedad = require('../models/novedad');
-const Usuario=require('../models/usuario');
 const novedadCtrl = {}
 
 novedadCtrl.getnovedades= async (req, res) => 
@@ -8,12 +7,8 @@ novedadCtrl.getnovedades= async (req, res) =>
     var novedades = await Novedad.find()
     .populate
     ({
-        path: 'alquiler',
-        populate: 
-        [
-            { path: 'local' },
-            { path: 'propietario' }
-        ]
+        path: 'local',
+        populate: [{ path: 'propietario' }]
     });
 
     res.status(200).json(novedades);
@@ -40,27 +35,19 @@ novedadCtrl.getNovedad = async (req, res) => {
     const novedad = await Novedad.findById(req.params.id)
     .populate
     ({
-        path: 'alquiler',
-        populate: 
-        [
-            { path: 'local' },
-            { path: 'propietario' }
-        ]
+        path: 'local',
+        populate: [{ path: 'propietario' }]
     });
 
     res.json(novedad);
 }
 
-novedadCtrl.getNovedadByAlquilerId = async (req, res) => 
+novedadCtrl.getNovedadByLocalId = async (req, res) => 
     {
         try 
         {
-            const novedad = await Novedad.findOne({ alquiler: req.params.alquilerId }).populate('alquiler');
-            /*if (!alquiler) 
-            {
-                return res.status(404).json({ status: '0', msg: 'No se encontró el novedad para este local' });
-            }*/
-                res.json(novedad);
+            const novedad = await Novedad.findOne({ local: req.params.localId }).populate('local');
+            res.json(novedad);
         } 
         catch (error) 
         {
@@ -104,14 +91,10 @@ novedadCtrl.filtraporestado= async(req, res)=>{
         const { estado } = req.params; 
         const novedad = await Novedad.find({ estado: estado})
         .populate
-    ({
-        path: 'alquiler',
-        populate: 
-        [
-            { path: 'local' },
-            { path: 'propietario' }
-        ]
-    });
+        ({
+            path: 'local',
+            populate: [{ path: 'propietario' }]
+        });
     
         res.json(novedad);
     }
