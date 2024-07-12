@@ -34,9 +34,9 @@ app.post('/crear-preferencia', async (req, res) => {
       },
     ],
     back_urls: {
-      success: 'http://localhost:4200/pago-exitoso',
-      failure: 'http://localhost:4200/pago-fallido',
-      pending: 'http://localhost:4200/pago-pendiente',
+      success: 'https://localhost:4200/pago-exitoso',
+      failure: 'https://localhost:4200/pago-fallido',
+      pending: 'https://localhost:4200/pago-pendiente',
     },
     auto_return: 'approved',
   };

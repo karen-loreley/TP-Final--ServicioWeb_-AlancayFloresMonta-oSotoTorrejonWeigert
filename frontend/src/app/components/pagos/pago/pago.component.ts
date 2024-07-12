@@ -146,9 +146,9 @@ export class PagoComponent {
         scales: {
           y: {
             beginAtZero: true,
-            max: 1000, // Cambia el valor máximo a un número más grande
+            max: 20000, // Cambia el valor máximo a un número más grande
             ticks: {
-              stepSize: 100 // Ajusta el tamaño del paso entre las marcas de graduación
+              stepSize: 1000 // Ajusta el tamaño del paso entre las marcas de graduación
             }
 
           }
@@ -193,9 +193,9 @@ export class PagoComponent {
         scales: {
           y: {
             beginAtZero: true,
-            max: 1000, // Cambia el valor máximo a un número más grande
+            max: 20000, // Cambia el valor máximo a un número más grande
             ticks: {
-              stepSize: 100 // Ajusta el tamaño del paso entre las marcas de graduación
+              stepSize: 1000 // Ajusta el tamaño del paso entre las marcas de graduación
             }
           }
         }
