@@ -110,6 +110,6 @@ ngOnInit(): void
 
   cancelar()
   {
-    this.router.navigate(['propietario']);
+    this.router.navigate(['home']);
   }
 }

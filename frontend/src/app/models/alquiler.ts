@@ -5,7 +5,7 @@ import { Propietario } from "./propietario";
 export class Alquiler {
 
     _id!: string;
-    propietario: Propietario;
+    propietario: Propietario | null = null;
     local: Local;
     //novedades: Novedades
     plazomes: number;

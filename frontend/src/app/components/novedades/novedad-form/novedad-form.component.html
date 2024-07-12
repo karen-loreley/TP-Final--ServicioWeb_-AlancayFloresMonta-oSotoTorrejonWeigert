@@ -1,34 +1,45 @@
-<form class="container">
-    <h3 class="mt-5">Gestión de Novedad</h3>
-  
-      <div class="mb-3">
-          <label for="alquiler" class="form-label">Alquiler</label>
-          <select name="alquiler" id="alquiler" [(ngModel)]="novedad.alquiler._id" class="form-select" required>
-            <option *ngFor="let a of listaAlquileres" [ngValue]="a._id">{{ a.propietario.apellido }} : {{ a.local.nombre }}</option>
-          </select>
+    <div class="body">
+      <div class="login">
+          <h1>Gestion de Novedades</h1>
+          
+          <form name="form" #productoForm="ngForm">
+            <div class="form-group">
+              <div class="mb-3">
+                <label for="alquiler" class="form-label">Alquiler</label>
+                <select name="alquiler" id="alquiler" [(ngModel)]="novedad.alquiler._id" class="form-select" required>
+                  <option *ngFor="let l of listaLocales" [ngValue]="l._id">{{ l.nombre }}</option>
+                </select>
+            </div>
+            </div>
+              <div class="form-group">
+                <div class="mb-3">
+                  <label for="descripcionNovedad" class="form-label">Descripcion</label>
+                  <textarea class="form-control" id="descripcionNovedad" name="descripcionNovedad" [(ngModel)]="novedad.descripcion" required></textarea>
+                </div>    
+              </div>
+              <div class="form-group">
+                <div class="mb-3">
+                  <label for="estadoNovedad" class="form-label">Estado</label>
+                  <select name="estadoNovedad" id="estadoNovedad" [(ngModel)]="novedad.estado" class="form-select" required>
+                    <option value="pendiente">Pendiente</option>
+                    <option value="procesado">Procesado</option>
+                  </select>
+                </div>   
+              </div>  
+              <div class="form-group">
+                <div class="mb-3">
+                  <label for="fechaNovedad" class="form-label">Fecha</label>
+                  <input type="date" class="form-control w-auto" id="fechaNovedad" name="fechaNovedad" [(ngModel)]="novedad.fecha" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <button type="button" class="btn btn-primary" *ngIf="accion == 'new'" (click)="agregarNovedad()">Agregar</button>
+                <button type="button" class="btn btn-success" *ngIf="accion == 'update'" (click)="actualizarNovedad()">Actualizar</button>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+          </div>
+            
+          </form>
       </div>
-  
-      <div class="mb-3">
-        <label for="descripcionNovedad" class="form-label">Descripcion</label>
-        <textarea class="form-control" id="descripcionNovedad" name="descripcionNovedad" [(ngModel)]="novedad.descripcion" required></textarea>
-      </div>       
-  
-      <div class="mb-3">
-        <label for="estadoNovedad" class="form-label">Estado</label>
-        <select name="estadoNovedad" id="estadoNovedad" [(ngModel)]="novedad.estado" class="form-select" required>
-          <option value="pendiente">Pendiente</option>
-          <option value="procesado">Procesado</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <label for="fechaNovedad" class="form-label">Fecha</label>
-        <input type="date" class="form-control w-auto" id="fechaNovedad" name="fechaNovedad" [(ngModel)]="novedad.fecha" required>
-      </div>
-  
-      <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary" *ngIf="accion == 'new'" (click)="agregarNovedad()">Agregar</button>
-        <button type="button" class="btn btn-success" *ngIf="accion == 'update'" (click)="actualizarNovedad()">Actualizar</button>
-        <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
-      </div>
-    </form>
+  </div>

@@ -10,4 +10,4 @@ router.get('/:id', promocion.getpromocion);
 router.put('/:id', promocion.editPromocion);
 router.delete('/:id', promocion.deletePromocion);
 //exportamos el modulo de rutas
-module.exports = router;
+module.exports = router;    

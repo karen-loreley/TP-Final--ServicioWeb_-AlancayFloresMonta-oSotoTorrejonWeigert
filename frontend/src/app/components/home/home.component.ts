@@ -4,6 +4,7 @@ import { Local } from '../../models/local';
 import { LocalService } from '../../services/local.service';
 import { Router } from '@angular/router';
 import { LocalComponent } from '../locals/local/local.component';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +15,12 @@ import { LocalComponent } from '../locals/local/local.component';
 })
 export class HomeComponent {
   locales: Array<Local>;
-  constructor(private localService: LocalService, private router:Router){
+
+  constructor(private localService: LocalService, loginService:LoginService, private router:Router){
     this.locales = new Array<Local>();
     this.getLocalesNoAlquilados();
   }
+
 
   getLocalesNoAlquilados(){
     this.localService.getLocalesNoAlquilados().subscribe(

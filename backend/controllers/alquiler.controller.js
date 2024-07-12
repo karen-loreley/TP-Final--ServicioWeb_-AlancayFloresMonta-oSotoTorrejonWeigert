@@ -31,11 +31,36 @@ alquilerCtrl.createAlquiler = async (req, res) =>
     }
 }
 
-alquilerCtrl.getAlquiler = async (req, res) => 
-{
-    const alquiler = await Alquiler.findById(req.params.id).populate('propietario').populate('local');
-    res.json(alquiler);
-}
+alquilerCtrl.getAlquiler = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({
+            status: '0',
+            msg: 'ID inválido'
+        });
+    }
+
+    try {
+        const alquiler = await Alquiler.findById(id).populate('propietario').populate('local');
+        
+        if (!alquiler) {
+            return res.status(404).json({
+                status: '0',
+                msg: 'Alquiler no encontrado'
+            });
+        }
+
+        res.json(alquiler);
+    } catch (error) {
+        console.error('Error al obtener el alquiler:', error);
+        res.status(500).json({
+            status: '0',
+            msg: 'Error interno del servidor'
+        });
+    }
+};
+
 
 alquilerCtrl.getAlquilerByLocalId = async (req, res) => 
 {

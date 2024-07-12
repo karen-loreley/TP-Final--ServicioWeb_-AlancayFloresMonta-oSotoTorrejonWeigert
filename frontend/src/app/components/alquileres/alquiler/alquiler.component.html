@@ -13,15 +13,15 @@
         <div class="col-md-4">
           <div class="info-box" style="color: black;">
             <h4>Datos de Contacto.</h4>
-            <p><strong>Propietario: </strong>{{alquiler.propietario.nombres}} {{ alquiler.propietario.apellido }}</p>
-            <p><strong>Contacto:</strong></p>
-            <p>Correo: {{ alquiler.propietario.email }} </p>
-            <p>Teléfono: +54 {{alquiler.propietario.telefono}}</p>
+            <p><strong>{{ alquiler.propietario?.nombres }} {{ alquiler.propietario?.apellido }}</strong></p>
+            <p>Correo: {{ alquiler.propietario?.email }}</p>
+            <p>Teléfono: +54 {{ alquiler.propietario?.telefono }}</p>
           </div>
         </div>
   
+  
         <div class="col-8">
-          <div class="info-box" style="color: black;">
+          <div class="info-box" style="color: rgb(0, 0, 0);">
             <h4>Descripción</h4>
             <p><strong>Local: </strong>Cuenta con una superficie de {{ alquiler.local.superficie}} Metros Cuadrados
                 y un costo de ARS{{alquiler.local.costomes | currency}} por mes.
@@ -43,15 +43,13 @@
         </div>
 
       </div>
-
     </div>
-    
   </div>
 
   <div class="container">
-    <div *ngIf="!alquiler" class="row mt-5">
+    <div *ngIf="!alquiler.local.alquilado" class="row mt-5">
       <h4 class="col-4">El Alquiler de este Local todavía no existe...</h4>
       <button type="button" class=" col-2 btn btn-success mb-0 mt-3 me-2" (click)="agregarAlquiler()" >Crear Alquiler..</button>
     </div>
-    <button type="button" class="btn btn-danger mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
+    <button type="button" class="btn btn-outline-secondary mb-0 mt-3 me-2" (click)="regresar()">Regresar</button>
   </div>

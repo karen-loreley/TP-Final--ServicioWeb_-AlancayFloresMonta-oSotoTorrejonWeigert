@@ -1,0 +1,53 @@
+.table {
+    width: 100%;
+    border-collapse: collapse; 
+    background-color: #ffffff; 
+    color: #333333; 
+    border-radius: 8px; 
+    overflow: hidden; 
+}
+
+.table thead th {
+    background-color: #d5a65d; 
+    color: #ffffff; 
+    padding: 10px; 
+    text-align: left; 
+    font-weight: bold; 
+}
+
+.table tbody tr {
+    border-bottom: 2px solid #ddd; 
+}
+
+.table td, .table th {
+    padding: 10px; 
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f6f0; 
+}
+
+
+.boton-mercadoPago {
+    background-color: #b88b4a;
+    color: #ffffff;  
+    font-weight: bold; 
+    padding: 10px 11px;
+    border-radius: 5px;
+    border:none;
+    cursor: pointer;
+}
+.boton-mercadoPago:hover {
+    background-color: #7c5e33; /* Color más oscuro para el estado hover */
+}
+.btn-info{
+    background-color: #a04b2d;;
+    color: #ffffff;  
+    padding: 10px 20px;
+    border-radius: 5px;
+    border:none;
+    cursor: pointer;
+}
+.btn-info:hover {
+    background-color: #5a2a19;; /* Color más oscuro para el estado hover */
+}

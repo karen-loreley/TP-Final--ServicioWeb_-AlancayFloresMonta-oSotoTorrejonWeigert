@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 70vh;
+    padding-top: 40px;
     background-size: cover;
     background-position: center;
 }

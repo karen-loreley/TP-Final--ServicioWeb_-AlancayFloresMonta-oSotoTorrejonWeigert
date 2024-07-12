@@ -15,24 +15,26 @@ import { NovedadComponent } from './components/novedades/novedad/novedad.compone
 import { NovedadFormComponent } from './components/novedades/novedad-form/novedad-form.component';
 import { PropietarioComponent } from './components/propietarios/propietario/propietario.component';
 import { PropietarioFormComponent } from './components/propietarios/propietario-form/propietario-form.component';
+import { SuccesComponent } from './components/pagos/succes/succes.component';
+import { CrudPromocinoComponent } from './components/alquileres/crud-promocino/crud-promocino.component';
 
 export const routes: Routes = [
         //inicio/home
-        {path: '', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia
+
         {path: 'home', component: HomeComponent},
-    
+
         //alquileres
         {path: 'alquiler',component: AlquilerComponent},
         {path: 'alquiler/:id', component: AlquilerComponent,},
         {path: 'alquiler-form', component: AlquilerFormComponent,},
         {path: 'alquiler-form/:id', component: AlquilerFormComponent,},
-    
+
         //usuarios
         {path: 'crud-usuarios', component: CrudUsuariosComponent,},
         {path: 'usuario-form', component: UsuarioFormComponent},
         {path: 'usuario-form/:id', component: UsuarioFormComponent},
         {path: 'login', component: LoginComponent},
-    
+
         //local
         {path: 'local', component: LocalComponent},
         {path: 'local-form/:id', component: LocalFormComponent},
@@ -41,7 +43,9 @@ export const routes: Routes = [
         {path: 'pago', component: PagoComponent},
         {path: 'pago-form/:id', component: FormPagoComponent},
         {path: 'pago-form', component: FormPagoComponent},
-
+        { path:'pago-exitoso', component: SuccesComponent },
+        { path:'pago-fallido', component: SuccesComponent },
+        
         //novedades
         {path: 'novedad', component: NovedadComponent},
         {path: 'novedad/:id', component: NovedadComponent},
@@ -51,4 +55,12 @@ export const routes: Routes = [
         //propietarios
         {path: 'propietario', component: PropietarioComponent},
         {path: 'propietario-form/:id', component: PropietarioFormComponent},
+
+        //promociones
+        {path: 'crud-promocion', component: CrudPromocinoComponent},
+
+        //este path siempre tiene que ir al ultimo
+        {path: '**', redirectTo: '/home', pathMatch: 'full' }, //redirecciona directamente al home apenas inicia 
+
+  
 ];

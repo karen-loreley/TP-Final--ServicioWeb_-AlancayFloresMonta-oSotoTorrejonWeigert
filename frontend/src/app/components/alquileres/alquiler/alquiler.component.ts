@@ -25,14 +25,13 @@ export class AlquilerComponent {
               private novedadService: NovedadesService,
               private router: Router) {}
 
-  ngOnInit(): void 
-  {
+  ngOnInit(): void {
     const localId = this.route.snapshot.paramMap.get('id');
     if (localId) 
       {
       this.alquilerService.getAlquilerByLocalId(localId).subscribe
       (
-        (result) => 
+        (result:Alquiler) => 
         {
           this.alquiler = result;
           

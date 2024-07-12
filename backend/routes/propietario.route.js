@@ -10,7 +10,6 @@ router.get('/', propietarioCtrl.getPropietarios);
 router.post('/', propietarioCtrl.createPropietario);
 router.get('/:id', propietarioCtrl.getPropietario);
 router.put('/:id', propietarioCtrl.editPropietario);
-router.delete('/:id', propietarioCtrl.deletePropietario);
-
+router.delete('/:id', propietarioCtrl.deletePropietario)
 //exportamos el modulo de rutas
 module.exports = router;

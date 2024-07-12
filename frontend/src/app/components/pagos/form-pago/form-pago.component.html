@@ -1,24 +1,38 @@
-<div class="card">
-    <div class="card-header">
-        Formulario de Usuarios
+<div class="container">
+  <h3 class="mt-5">Realizar Pago</h3>
+    
+        <div class="card-body">
+            <form class="my-form">
+                <div class="mb-3">
+                    <div class="card card-alquiler mt-5" style="width: 22rem;" >
+                        <div class="card-img">
+                            <img [src]="local.pathimagen" class="rounded-2 btn" alt="Imagen del local" >
+                        </div>
+                        <div class="card-title">{{ local.nombre }}</div>
+                        <div class="card-subtitle">Superficie: {{ local.superficie }} m2</div>
+                        <div class="card-subtitle">
+                            <span *ngIf="local.alquilado; else notRented">Alquilado</span>
+                            <ng-template #notRented>No se puede Alquilar</ng-template>
+                        </div>
+                        <div class="card-subtitle">
+                            <span *ngIf="local.habilitado; else notHabilitado">Habilitado</span>
+                            <ng-template #notHabilitado>No se encuentra Habilitado</ng-template>
+                        </div>
+                        <div class="card-footer">
+                            <div class="card-price">ARS{{ local.costomes | currency }}/Mes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="mesPago" class="form-label">Mes de Pago</label>
+                    <input name="mesPago" type="date" class="form-control" id="mesPago" [(ngModel)]="pago.mes">
+                </div>
+                <div class="d-flex justify-content-between">
+                    
+                        <button type="submit" class="btn btn-primary" (click)="registrarPago()">Registrar Pago</button>
+                        <button type="submit" class="btn btn-secondary" (click)="atras()">Atrás</button>
+                    
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="card-body">
-        <form>
-            <div class="mb-3">
-                <label for="espectador" class="form-label">Locales:</label>
-                <select name="espectador" id="espectador" [(ngModel)]="pago.local" class="form-select" required>
-                  <option *ngFor="let e of listaLocales" [ngValue]="e._id">{{ e.nombre }}</option>
-                </select>
-              </div>
-            <div class="mb-3">
-                <label for="nombreUsuario" class="form-label">Mes</label>
-                <input name="nombreUsuario" type="date" class="form-control" id="nombreUsuario" [(ngModel)]="pago.mes">
-            </div>
-            <div class="row form-group">
-            <button type="button" class="btn btn-primary mb-3" (click)="registrarPago()">Registrar</button>
-            
-            <button type="button" class="btn btn-secondary mb-3" (click)="atras()">Atras</button>
-</div>
-        </form>
-    </div>
-</div>

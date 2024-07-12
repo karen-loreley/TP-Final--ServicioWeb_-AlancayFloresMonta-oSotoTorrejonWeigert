@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../../models/usuario';
-import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from '../../../services/login.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoginResponse } from 'ngx-facebook/public_api';
 
 @Component({
   selector: 'app-login',
@@ -28,29 +29,38 @@ export class LoginComponent implements OnInit{
 
     login() {
       this.loginService.login(this.userform.usuario, this.userform.password).subscribe(
-      (result) => {
-          var usuario = result;
-          if (usuario.status == 1){
-
-          sessionStorage.setItem("user", usuario.username);
-          sessionStorage.setItem("userid", usuario.userid);
-          sessionStorage.setItem("perfil", usuario.perfil);
-
-          this.router.navigateByUrl(this.returnUrl);
+        (result) => {
+          const usuario = result;
+          if (usuario.status === 1) {
+            // Guardar el token y los datos del usuario
+            sessionStorage.setItem("user", result.usuario);
+            sessionStorage.setItem("userid", result._id);
+            sessionStorage.setItem("perfil", result.perfil);
+            sessionStorage.setItem("token", result.token);
+            this.loginService.setLoggedIn(true);
+            console.log('login correcto');
+            if (usuario.perfil === 'propietario') {
+              if (!sessionStorage.getItem('firstLoginPropietario')) {
+                sessionStorage.setItem('firstLoginPropietario', 'true');
+              }
+              this.router.navigate(['propietario-form', 0]);
+            } else {
+              this.router.navigate([this.returnUrl]);
+            }
           } else {
-
-          this.msglogin="Credenciales incorrectas..";
+            this.msglogin = "Credenciales incorrectas..";
           }
-      },
-      error => {
-          alert("Error de conexion");
-          console.log("error en conexion");
+        },
+        error => {
+          alert("Error de conexión");
+          console.log("error en conexión");
           console.log(error);
-          });
+        }
+      );
   }
 
-  formusuario(){
-    this.router.navigate(['usuario-form']);
+  registrarse(){
+    this.router.navigate(['usuario-form',0]);
   }
 
 }

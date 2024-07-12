@@ -15,7 +15,9 @@ import { Local } from '../../../models/local';
   styleUrl: './form-pago.component.css'
 })
 export class FormPagoComponent {
-  pago!: Pago;
+  pago: Pago = new Pago();
+  local: Local = new Local();
+
   pagos!: Array<Pago>;
   accion: string = "new"; //accion tendra los valores de new y update
 
@@ -36,9 +38,28 @@ export class FormPagoComponent {
       this.iniciarVariable();
       }else{
       this.accion = "update";
-  //    this.cargarPago(params['id']);
+      this.cargarLocal(params['id']);
+  //  this.cargarPago(params['id']);
+  this.iniciarVariable();
+        
       }
       });
+    }
+
+    cargarLocal(id: string):void {
+      
+    this.localService.getLocalById(id).subscribe
+    (
+      (result) => 
+      {
+        this.local = result;
+        this.pago.local = this.local ;
+      },
+      (error: any) => 
+      {
+        console.log(error);
+      }
+    );
     }
 
     iniciarVariable(){
@@ -105,6 +126,7 @@ export class FormPagoComponent {
 */
 cargarLocales(page: number): void 
   {
+    
     this.localService.getLocales(page, 6).subscribe
     (
       (result) => 

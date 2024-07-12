@@ -29,7 +29,8 @@ export class UsuarioService {
     }
 
     let body: any = JSON.stringify(usuario);
-
+    console.log("Cuerpo de la solicitud:", body); 
+    console.log("Enviando usuario:", usuario);
     return this._http.post(this.urlBase, body,httpOption);
   }
 
@@ -51,7 +52,7 @@ export class UsuarioService {
       }),
     }
     let body: any = JSON.stringify(usuario);
-    return this._http.put(this.urlBase + usuario._id, body, httpOption);
+    return this._http.put(this.urlBase + '/' + usuario._id, body, httpOption); // Asegúrate de que la URL esté bien formada
   }
 
   getUsuario(_id: string): Observable<any>{

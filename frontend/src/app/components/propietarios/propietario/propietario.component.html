@@ -1,8 +1,8 @@
 <div class="container">
-
-    <h3 class="mt-5">Propietarios cargados.</h3>
-    <button type="button" class="btn btn-primary" (click)="agregarPropietario()">Agregar</button>
-
+    <h3 class="titulo text-center">Listado de Propietarios</h3>
+    <div class="text-center mb-3">
+        <button type="button" class="btn btn-primary" (click)="agregarPropietario()">Agregar</button>
+    </div>
     <div class="mt-4">
         <table class="table">
             <thead>
@@ -11,7 +11,7 @@
                 <th scope="col">DNI</th>
                 <th scope="col">Correo Electronico</th>
                 <th scope="col">Teléfono</th>
-                <th scope="col">Gestionar</th>
+                <th scope="col">  </th>
             </tr>
             </thead>
             <tbody>
@@ -21,30 +21,12 @@
                 <td>{{ p.email }}</td>
                 <td>+54 {{ p.telefono }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger custom-margin" (click)="eliminarPropietario(p._id)">Eliminar</button>
-                    <button type="button" class="btn btn-warning" (click)="modificarPropietario(p._id)">Modificar</button>
+                    <button type="button" class="btn btn-danger custom-margin m-1" (click)="eliminarPropietario(p._id)">Eliminar</button>
+                    <button type="button" class="btn btn-warning m-1" (click)="modificarPropietario(p._id)">Modificar</button>
                 </td>
             </tr>
             </tbody>
         </table>
-
-        <!-- Modal 
-    <div class="modal" [ngClass]="{'show': isModalOpen}" (click)="closeModal($event)">
-        <div class="modal-content small-modal" (click)="$event.stopPropagation()">
-          
-          <h4 class="modal-title" style="font-style: italic; color: aliceblue;">Confirmación</h4>
-          
-          <div class="modal-body">
-            <p style="color: orangered;">{{ modalMessage }}</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" *ngIf="modalAction === 'delete'" (click)="confirmAction()">Eliminar</button>
-            <button type="button" class="btn btn-warning" *ngIf="modalAction === 'modify'" (click)="confirmAction()">Modificar</button>
-            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-          </div>
-        </div>
-    </div>
-       Fin Modal -->
     </div>
 
 </div>
