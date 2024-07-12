@@ -55,7 +55,7 @@
             </svg>
           </button>
         </div>
-        <div class="card-footer">
+        <div class="card-footer" *ngIf="isUserAuthenticated()">
           <button type="button" class="btn btn-danger" (click)="openConfirmModal('delete', l._id)">Eliminar</button>
           <button type="button" class="btn btn-warning" (click)="openConfirmModal('modify', l._id)">Modificar</button>
         </div>
