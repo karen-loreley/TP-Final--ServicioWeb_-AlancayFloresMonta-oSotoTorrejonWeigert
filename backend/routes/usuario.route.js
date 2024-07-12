@@ -8,10 +8,10 @@ const router = express.Router();
 //definimos las rutas para la gestion de agente
 router.get('/', usuarioCtrl.getUsuarios);
 router.post('/', usuarioCtrl.createUsuarios);
-router.get('/buscar/:parametro', usuarioCtrl.getNombreUsuarioOPerfil);
+router.get('/buscar/:parametro',autCtrl.verifyToken, usuarioCtrl.getNombreUsuarioOPerfil);
 router.get('/:id', usuarioCtrl.getUsuario);
 router.put('/:id',autCtrl.verifyToken, usuarioCtrl.editUsuario);
-router.delete('/:id', usuarioCtrl.deleteUsuario);
+router.delete('/:id',autCtrl.verifyToken, usuarioCtrl.deleteUsuario);
 router.post('/login', usuarioCtrl.loginUsuario);
 //exportamos el modulo de rutas
 module.exports = router;
